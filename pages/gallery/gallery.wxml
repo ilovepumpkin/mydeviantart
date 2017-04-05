@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view>
-    <text>Gallery</text>
-  </view>
+	<view wx:for="{{deviations}}" wx:key="{{item.deviationid}}">
+  		<image style="width: 200px; height: 200px; background-color: #eeeeee;" mode="aspectFit" src="{{item.preview.src}}"></image>
+	</view>
 </view>

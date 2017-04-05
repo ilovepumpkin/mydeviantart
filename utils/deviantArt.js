@@ -1,9 +1,26 @@
 var baseUrl = "https://www.deviantart.com"
+var apiBaseUrl = baseUrl + "/api/v1/oauth2"
 var util = require('./util')
 
 var wxRequest = util.wxPromisify(wx.request)
 
-module.exports.fetchAccessToken = function() {
+function basicConfig(path, options) {
+    var access_token = wx.getStorageSync("access_token");
+    let data = {
+        "access_token": access_token,
+        username: "ilovepumpkin2014"
+    };
+    data = Object.assign({}, data, options)
+    return {
+        url: apiBaseUrl + path,
+        data: data,
+        header: {
+            'content-type': 'application/json'
+        }
+    }
+}
+
+function authenticate() {
     return wxRequest({
         url: baseUrl + '/oauth2/token',
         data: {
@@ -15,13 +32,39 @@ module.exports.fetchAccessToken = function() {
             Authorization: "Basic NjAyMTplYWVkZjBhYmI5NDU1Y2Q5Y2Y4MGJjNTg4Yzc5ZDNjMw=="
         }
     }).then((res) => {
-        console.log(res.data)
+        console.log(res.data);
 
-        var accessToken = res.data["access_token"]
-        wx.setStorageSync("accessToken", accessToken)
+        var accessToken = res.data["access_token"];
+        wx.setStorageSync("access_token", accessToken);
     })
 }
 
-module.exports.getFolders = function(){
+function getFolders() {
+    return authenticate().then(function() {
+        return wxRequest(basicConfig("/gallery/folders")).then(function(res) {
+            return res.data["results"];
+        });
+    })
+}
 
+function getAll(options) {
+    return authenticate().then(function() {
+        return wxRequest(basicConfig("/gallery/all", options)).then(function(res) {
+            return res.data["results"];
+        });
+    })
+}
+
+function getComments(deviationid) {
+    return authenticate().then(function() {
+        return wxRequest(basicConfig("/comments/deviation/" + deviationid)).then(function(res) {
+            return res.data["thread"];
+        });
+    })
+}
+
+module.exports = {
+    "authenticate": authenticate,
+    "getAll": getAll,
+    "getComments": getComments
 }
