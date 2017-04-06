@@ -1,0 +1,5 @@
+<!--logs.wxml-->
+<view class="container log-list">
+	{{deviation.title}}
+	<image src="{{deviation.preview.src}}"></image>
+</view>

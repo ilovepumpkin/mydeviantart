@@ -1,6 +1,16 @@
 .img_item {
   width: 48%;
-  margin: 1%;
+  margin:1%;
   display: inline-block;
   vertical-align: top;
+}
+
+.imageScrollView{
+	background-color: #e5e5e5;
+}
+
+.imageWrapper{
+  border-radius:2%; 
+  overflow:hidden;
+  margin-bottom: 5px;
 }

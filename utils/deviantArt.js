@@ -47,6 +47,14 @@ function getFolders() {
     })
 }
 
+function getDeviation(deviationid) {
+    return authenticate().then(function() {
+        return wxRequest(basicConfig(`/deviation/${deviationid}`)).then(function(res) {
+            return res.data;
+        });
+    })
+}
+
 function getAll(options) {
     return authenticate().then(function() {
         return wxRequest(basicConfig("/gallery/all", options)).then(function(res) {
@@ -66,5 +74,6 @@ function getComments(deviationid) {
 module.exports = {
     "authenticate": authenticate,
     "getAll": getAll,
-    "getComments": getComments
+    "getComments": getComments,
+    "getDeviation": getDeviation
 }
