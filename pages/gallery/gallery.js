@@ -5,74 +5,75 @@ var app = getApp()
 var col1H = 0;
 var col2H = 0;
 
+var offset=0;
+
 Page({
     data: {
-        images: [],
-        scrollH: 0,
         imgWidth: 0,
-        loadingCount: 0,
         col1: [],
-        col2: []
+        col2: [],
+        isLoading: false
     },
-    onImageLoad: function(e) {
-        let imageId = e.currentTarget.id;
-        let oImgW = e.detail.width; 
-        let oImgH = e.detail.height;
-        let imgWidth = this.data.imgWidth;
-        let scale = imgWidth / oImgW; 
-        let imgHeight = oImgH * scale; 
-
-        let images = this.data.images;
-        let imageObj = null;
-
-        for (let i = 0; i < images.length; i++) {
-            let img = images[i];
-            if (img.id === imageId) {
-                imageObj = img;
-                break;
-            }
-        }
-
-        imageObj.height = imgHeight;
-
-        let loadingCount = this.data.loadingCount - 1;
+    renderImages: function(images) {
         let col1 = this.data.col1;
         let col2 = this.data.col2;
 
-        if (col1H <= col2H) {
-            col1H += imgHeight;
-            col1.push(imageObj);
-        } else {
-            col2H += imgHeight;
-            col2.push(imageObj);
-        }
+				for (let i = 0; i < images.length; i++) {
+            let imageObj = images[i];
+            
+		        let imageId = imageObj.id;
+		        let oImgW = imageObj.width; 
+		        let oImgH = imageObj.height;
+		        let imgWidth = this.data.imgWidth;
+		        let scale = imgWidth / oImgW; 
+		        let imgHeight = oImgH * scale; 
+
+		        imageObj.height = imgHeight;
+
+
+		        if (col1H <= col2H) {
+		            col1H += imgHeight;
+		            col1.push(imageObj);
+		        } else {
+		            col2H += imgHeight;
+		            col2.push(imageObj);
+		        }
+
+        }    	
 
         let data = {
-            loadingCount: loadingCount,
             col1: col1,
             col2: col2
         };
 
-        if (!loadingCount) {
-            data.images = [];
-        }
-
         this.setData(data);
     },
     loadImages:function(){
-        var self = this
-        dA.getAll({
-            offset: 0
-        }).then(function(deviations) {
-            console.log(deviations);
-            var images = deviations.map(d => {
-                return { "pic": d.preview.src, "id": d.deviationid }
-            });
-            self.setData({
-                images: images,
-                loadingCount: images.length
-            });
-        });
+    		if(offset===null){
+    			console.log("all images are loaded already");
+    			return null;
+    		}
+
+    	  if(!this.data.isLoading){
+	    	  this.setData({isLoading:true});
+	        var self = this
+	        console.log(">>>offset:"+offset)
+	        dA.getAll({
+	            offset: offset
+	        }).then(function(resp) {
+	        	  let deviations=resp["results"]
+	        	  offset=resp["next_offset"]
+	            console.log(deviations);
+	            var images = deviations.map(d => {
+	                return { "pic": d.preview.src, "id": d.deviationid,"width":d.preview.width,"height":d.preview.height}
+	            });
+	            self.renderImages(images)
+
+	            self.setData({isLoading:false});
+	        });
+    	  }else{
+    	  	console.log("still in the process of fetching data ...");
+    	  } 
     },
     onLoad:function(){
         wx.getSystemInfo({

@@ -50,7 +50,7 @@ function getFolders() {
 function getAll(options) {
     return authenticate().then(function() {
         return wxRequest(basicConfig("/gallery/all", options)).then(function(res) {
-            return res.data["results"];
+            return res.data;
         });
     })
 }
