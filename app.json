@@ -8,7 +8,8 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "码农也涂鸦之dA版",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   }
 }

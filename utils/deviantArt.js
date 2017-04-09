@@ -20,22 +20,32 @@ function basicConfig(path, options) {
     }
 }
 
-function authenticate() {
+function placebo() {
     return wxRequest({
-        url: baseUrl + '/oauth2/token',
-        data: {
-            "grant_type": "client_credentials"
-        },
-        method: "POST",
-        header: {
-            'content-type': 'application/x-www-form-urlencoded',
-            Authorization: "Basic NjAyMTplYWVkZjBhYmI5NDU1Y2Q5Y2Y4MGJjNTg4Yzc5ZDNjMw=="
-        }
-    }).then((res) => {
-        console.log(res.data);
+        url: apiBaseUrl + '/placebo'
+    });
+}
 
-        var accessToken = res.data["access_token"];
-        wx.setStorageSync("access_token", accessToken);
+function authenticate() {
+    return placebo().then(function(res) {
+        if (res["status"] !== "success") {
+            return wxRequest({
+                url: baseUrl + '/oauth2/token',
+                data: {
+                    "grant_type": "client_credentials"
+                },
+                method: "POST",
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    Authorization: "Basic NjAyMTplYWVkZjBhYmI5NDU1Y2Q5Y2Y4MGJjNTg4Yzc5ZDNjMw=="
+                }
+            }).then((res) => {
+                console.log(res.data);
+
+                var accessToken = res.data["access_token"];
+                wx.setStorageSync("access_token", accessToken);
+            });
+        }
     })
 }
 

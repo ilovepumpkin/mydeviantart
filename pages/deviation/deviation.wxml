@@ -1,5 +1,12 @@
-<!--logs.wxml-->
-<view class="container log-list">
-	{{deviation.title}}
-	<image src="{{deviation.preview.src}}"></image>
+<view style="margin-top:{{pageMarginTop}}px;">
+	<image src="{{imageSrc}}" style="width: {{imagewidth}}px; height: {{imageheight}}px;" bindload="handleLoadSuccess" binderror="handleLoadError"></image>
+	<view class="infoContainer" hidden="{{!done}}">
+		<text class="title">{{deviation.title}}</text>
+		<view style="display: inline;float:right;margin-right:10px">
+			<image src="../../images/comment.png" class="icon" ></image>
+			<text class="commentCount">{{deviation.stats.comments}}</text>
+			<image src="../../images/favestar.png" class="icon"></image>
+			<text class="favCount">{{deviation.stats.favourites}}</text>
+		</view>
+	</view>
 </view>

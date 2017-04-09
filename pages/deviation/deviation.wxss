@@ -1,0 +1,31 @@
+.title{
+	font-weight: bold;
+	font-size: 16px;
+	color: white;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+
+.commentCount{
+	color: white;
+	margin-right: 20px;
+	vertical-align: middle;
+}
+
+.favCount{
+	color: white;
+	margin-right: 20px;
+	vertical-align: middle;
+}
+
+.icon{
+	width:20px;
+	height:20px;
+	vertical-align: middle;
+}
+
+.infoContainer{
+	width:100%;
+	flex-direction:row;
+	height:30px;
+}

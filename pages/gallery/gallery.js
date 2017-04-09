@@ -59,7 +59,6 @@ Page({
                 isLoading: true
             });
             var self = this
-            console.log(">>>offset:" + offset)
             dA.getAll({
                 offset: offset
             }).then(function(resp) {
@@ -68,11 +67,17 @@ Page({
                 console.log(deviations);
                 var images = deviations.map(d => {
                     let img = d.thumbs[1]
+                    let title = d.title
+                    if (title.length > 15) {
+                        title = title.substr(0, 15) + "..."
+                    }
                     return {
                         "pic": img.src,
                         "id": d.deviationid,
                         "width": img.width,
-                        "height": img.height
+                        "height": img.height,
+                        title: title,
+                        stats: d.stats
                     }
                 });
                 self.renderImages(images)
@@ -85,7 +90,38 @@ Page({
             console.log("still in the process of fetching data ...");
         }
     },
+    onPullDownRefresh: function() {
+        wx.stopPullDownRefresh()
+        this.initLoadImages()
+    },
     onLoad: function() {
+        this.initLoadImages();
+        // let self = this;
+        // wx.getNetworkType({
+        //     success: function(res) {
+        //         // 返回网络类型, 有效值：
+        //         // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        //         var networkType = res.networkType
+        //         if (networkType !== "wifi") {
+        //             wx.showModal({
+        //                 title: "提示",
+        //                 content: "该应用有可能产生较大网络流量，建议在Wifi环境下使用。您确定要继续吗？",
+        //                 showCancel: true,
+        //                 success: function(res) {
+        //                     if (res.confirm) {
+        //                         self.initLoadImages();
+        //                     } else {
+
+        //                     }
+        //                 }
+        //             })
+        //         } else {
+        //             self.initLoadImages();
+        //         }
+        //     }
+        // })
+    },
+    initLoadImages: function() {
         wx.getSystemInfo({
             success: (res) => {
                 let ww = res.windowWidth;
@@ -100,7 +136,7 @@ Page({
 
                 this.loadImages();
             }
-        })
+        });
     },
     showBigView: function(e) {
         let deviationid = e.target.id;

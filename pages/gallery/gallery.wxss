@@ -6,11 +6,44 @@
 }
 
 .imageScrollView{
-	background-color: #e5e5e5;
+	background-color: #333333;
 }
 
 .imageWrapper{
   border-radius:2%; 
   overflow:hidden;
   margin-bottom: 5px;
+  background-color: white;
+}
+
+.title{
+	font-weight: bold;
+	font-size: 12px;
+	color: #191919;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+
+.commentCount{
+	color: #191919;
+	margin-right: 10px;
+	vertical-align: middle;
+	font-size:12px;
+}
+
+.favCount{
+	color: #191919;
+	vertical-align: middle;
+	font-size:12px;
+}
+
+.icon{
+	width:15px;
+	height:15px;
+	vertical-align: middle;
+}
+
+.infoContainer{
+	width:100%;
+	flex-direction:row;
 }
