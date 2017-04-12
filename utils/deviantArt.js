@@ -5,7 +5,7 @@ var util = require('./util')
 var wxRequest = util.wxPromisify(wx.request)
 
 function basicConfig(path, options) {
-    var access_token = wx.getStorageSync("access_token");
+    var access_token = wx.getStorageSync("access_token")["token"];
     let data = {
         "access_token": access_token,
         username: "ilovepumpkin2014"
@@ -27,26 +27,40 @@ function placebo() {
 }
 
 function authenticate() {
-    return placebo().then(function(res) {
-        if (res["status"] !== "success") {
-            return wxRequest({
-                url: baseUrl + '/oauth2/token',
-                data: {
-                    "grant_type": "client_credentials"
-                },
-                method: "POST",
-                header: {
-                    'content-type': 'application/x-www-form-urlencoded',
-                    Authorization: "Basic NjAyMTplYWVkZjBhYmI5NDU1Y2Q5Y2Y4MGJjNTg4Yzc5ZDNjMw=="
-                }
-            }).then((res) => {
-                console.log(res.data);
+    var access_token = wx.getStorageSync("access_token");
+    var now = Date.now()
+    var expiresTime = access_token["expires_time"]
+    console.log("Checking if the access token is expired or not: now - " + now + ", expiresTime - " + expiresTime);
+    if (now > expiresTime) {
+        console.log("The access_token is expired, retrieve it again.");
+        return wxRequest({
+            url: baseUrl + '/oauth2/token',
+            data: {
+                "grant_type": "client_credentials"
+            },
+            method: "POST",
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                Authorization: "Basic NjAyMTplYWVkZjBhYmI5NDU1Y2Q5Y2Y4MGJjNTg4Yzc5ZDNjMw=="
+            }
+        }).then((res) => {
+            console.log(res.data);
 
-                var accessToken = res.data["access_token"];
-                wx.setStorageSync("access_token", accessToken);
-            });
-        }
-    })
+            var accessToken = res.data["access_token"];
+            let expires_time = Date.now() + res.data["expires_in"] * 1000;
+            let tokenObj = {
+                "token": accessToken,
+                "expires_time": expires_time
+            }
+            console.log(tokenObj);
+            wx.setStorageSync("access_token", tokenObj);
+        });
+    } else {
+        console.log("The access_token is not expired.");
+        return new Promise((resolve, reject) => {
+            resolve();
+        })
+    }
 }
 
 function getFolders() {
