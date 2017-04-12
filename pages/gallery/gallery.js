@@ -51,6 +51,10 @@ Page({
     loadImages: function() {
         if (offset === null) {
             console.log("all images are loaded already");
+            wx.showToast({
+                title: '已经到最后了噢！',
+                duration: 2000
+            })
             return null;
         }
 
@@ -112,14 +116,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-        //                     }
-        //                 }
-        //             })
-        //         } else {
-        //             self.initLoadImages();
-        //         }
-        //     }
-        // })
+    //                     }
+    //                 }
+    //             })
+    //         } else {
+    //             self.initLoadImages();
+    //         }
+    //     }
+    // })
     },
     initLoadImages: function() {
         wx.getSystemInfo({
