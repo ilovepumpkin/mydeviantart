@@ -4,8 +4,10 @@ var util = require('./util')
 
 var wxRequest = util.wxPromisify(wx.request)
 
+const KEY_ACCESS_TOKEN = "access_token"
+
 function basicConfig(path, options) {
-    var access_token = wx.getStorageSync("access_token")["token"];
+    var access_token = wx.getStorageSync(KEY_ACCESS_TOKEN)["token"];
     let data = {
         "access_token": access_token,
         username: "ilovepumpkin2014"
@@ -27,11 +29,11 @@ function placebo() {
 }
 
 function authenticate() {
-    var access_token = wx.getStorageSync("access_token");
+    var access_token = wx.getStorageSync(KEY_ACCESS_TOKEN);
     var now = Date.now()
     var expiresTime = access_token["expires_time"]
     console.log("Checking if the access token is expired or not: now - " + now + ", expiresTime - " + expiresTime);
-    if (now > expiresTime) {
+    if (!expiresTime || now > expiresTime) {
         console.log("The access_token is expired, retrieve it again.");
         return wxRequest({
             url: baseUrl + '/oauth2/token',
@@ -53,7 +55,7 @@ function authenticate() {
                 "expires_time": expires_time
             }
             console.log(tokenObj);
-            wx.setStorageSync("access_token", tokenObj);
+            wx.setStorageSync(KEY_ACCESS_TOKEN, tokenObj);
         });
     } else {
         console.log("The access_token is not expired.");
