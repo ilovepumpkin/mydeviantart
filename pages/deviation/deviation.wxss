@@ -29,3 +29,68 @@
 	flex-direction:row;
 	height:30px;
 }
+
+.userIcon{
+	width:30px;
+	height:30px;
+	vertical-align: top;
+	margin:5px;
+}
+
+.userName{
+	color:#00baba;
+	font-size: 14px;
+	margin-right: 20px;
+	vertical-align: bottom;
+	font-weight: bold;
+	display: inline-flex;
+}
+
+.titleComments{
+	font-weight: bold;
+	font-size: 16px;
+	color: white;
+	margin-top:5px;
+	margin-bottom:5px;
+	margin-left:5px;
+	color:#00ba00;
+}
+
+.commentTime{
+	color:white;
+	font-size: 14px;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.commentBody{
+	color:white;
+	font-size: 14px;
+	width:100%;
+}
+
+.commentInfoContainer{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.commentArea{
+	display: inline-block;
+	margin-top:5px;
+	white-space: nowrap;
+}
+
+.commentInfo{
+	display: inline-block;
+	vertical-align: top;
+	border:1px dotted white;
+	border-width: 0 0 1px 0;
+}
+
+.commentView{
+	margin-right: 10px;
+	margin-bottom: 5px;
+	flex-direction: row;
+	width:100%;
+	display: inline-block;
+}

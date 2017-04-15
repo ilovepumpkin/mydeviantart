@@ -89,9 +89,9 @@ function getAll(options) {
     })
 }
 
-function getComments(deviationid) {
+function getComments(deviationid, options) {
     return authenticate().then(function() {
-        return wxRequest(basicConfig("/comments/deviation/" + deviationid)).then(function(res) {
+        return wxRequest(basicConfig("/comments/deviation/" + deviationid, options)).then(function(res) {
             return res.data["thread"];
         });
     })

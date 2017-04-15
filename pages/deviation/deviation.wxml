@@ -2,11 +2,33 @@
 	<image src="{{imageSrc}}" style="width: {{imagewidth}}px; height: {{imageheight}}px;" bindload="handleLoadSuccess" binderror="handleLoadError"></image>
 	<view class="infoContainer" hidden="{{!done}}">
 		<text class="title">{{deviation.title}}</text>
-		<view style="display: inline;float:right;margin-right:10px">
+		<view style="display: inline;float:right;margin-right:10px;">
 			<image src="../../images/comment.png" class="icon" ></image>
 			<text class="commentCount">{{deviation.stats.comments}}</text>
 			<image src="../../images/favestar.png" class="icon"></image>
 			<text class="favCount">{{deviation.stats.favourites}}</text>
 		</view>
 	</view>
+</view>
+<view class="titleComments">
+	评论:
+</view>
+<view>
+	<scroll-view scroll-y="true" bindscrolltolower="loadComments" >
+		<view style="margin-left:10px;margin-right:10px;width:100%;height:100px">
+			<view wx:for="{{comments}}" wx:key="commentid" class="commentView">	
+				<view class="commentArea">
+					<image src="{{item.user.usericon}}" class="userIcon"></image>
+					<view class="commentInfoContainer">
+						<view class="commentInfo">
+							<view class="userName">{{item.user.username}}</view>
+							<view class="commentTime">{{item.formattedDate}}</view>
+						</view>
+						<view class="commentBody">{{item.body}}</view>
+					</view>
+				</view>	
+				
+			</view>
+		</view>
+	</scroll-view>
 </view>
