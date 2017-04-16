@@ -92,7 +92,7 @@ function getAll(options) {
 function getComments(deviationid, options) {
     return authenticate().then(function() {
         return wxRequest(basicConfig("/comments/deviation/" + deviationid, options)).then(function(res) {
-            return res.data["thread"];
+            return res;
         });
     })
 }

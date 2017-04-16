@@ -1,3 +1,5 @@
+@import "../../wxParse/wxParse.wxss";
+
 .title{
 	font-weight: bold;
 	font-size: 16px;
@@ -14,7 +16,7 @@
 
 .favCount{
 	color: white;
-	margin-right: 20px;
+	margin-right: 10px;
 	vertical-align: middle;
 }
 
@@ -52,32 +54,69 @@
 	color: white;
 	margin-top:5px;
 	margin-bottom:5px;
-	margin-left:5px;
 	color:#00ba00;
+	border:1px solid #00ba00;
+	border-width: 0 0 1px 0;
+}
+
+.deviationInfoArea{
+	margin: 10px 5px 10px 5px;
+}
+
+.commmentInfoArea{
+	margin: 10px 5px 10px 5px;
+}
+
+.deviationInfoTitle{
+	font-weight: bold;
+	font-size: 16px;
+	color: white;
+	margin-top:5px;
+	margin-bottom:5px;
+	color:#00ba00;
+	border:1px solid #00ba00;
+	border-width: 0 0 1px 0;
+}
+
+.detailLine{
+	white-space: nowrap;
+	width:100%;
+}
+
+.fieldName{
+	display: inline;
+	color: #7f7f7f;
+	font-size: 14px;
+	width:300px;
+}
+
+.fieldValue{
+	display: inline;
+	color: white;
+	font-size: 14px;
 }
 
 .commentTime{
-	color:white;
 	font-size: 14px;
 	display: inline-block;
 	vertical-align: bottom;
+	color: #7f7f7f;
 }
 
 .commentBody{
 	color:white;
-	font-size: 14px;
-	width:100%;
+	font-size: 16px;
+	white-space:normal;
+    word-break:break-all;
+    word-wrap:break-word; 
+    overflow: auto;
+    margin-top:5px;
 }
 
 .commentInfoContainer{
 	display: inline-block;
 	vertical-align: top;
-}
-
-.commentArea{
-	display: inline-block;
-	margin-top:5px;
-	white-space: nowrap;
+	width:88%;
 }
 
 .commentInfo{
