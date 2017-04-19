@@ -1,0 +1,41 @@
+
+.menuBar{
+	height:50px;
+	width:100%;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+}
+
+.menuBarItem{
+	flex-grow:1;
+	text-align: center;
+	margin:5px;
+}
+
+.menuBarItem-hover{
+	flex-grow:1;
+	text-align: center;
+	background-color: #cccccc;
+}
+
+.menuBarItemText{
+	font-size: 12px;
+	color: white;
+}
+
+.menuBarItemText-hover{
+	font-size: 12px;
+	color: black;
+}
+
+.menuBarItemImage{
+	width:20px;
+	height:20px;
+}
+
+.highlightBar{
+	background-color: #00ba00;
+	width:100%;
+	height:2px;
+}

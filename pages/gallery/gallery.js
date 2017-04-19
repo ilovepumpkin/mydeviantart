@@ -12,7 +12,8 @@ Page({
         imgWidth: 0,
         col1: [],
         col2: [],
-        isLoading: false
+        isLoading: false,
+        scrollTop: 0
     },
     renderImages: function(images) {
         let col1 = this.data.col1;
@@ -30,12 +31,13 @@ Page({
 
             imageObj.height = imgHeight;
 
+            const infoContainerHeight = 30;
 
             if (col1H <= col2H) {
-                col1H += imgHeight;
+                col1H += imgHeight + infoContainerHeight;
                 col1.push(imageObj);
             } else {
-                col2H += imgHeight;
+                col2H += imgHeight + infoContainerHeight;
                 col2.push(imageObj);
             }
 
@@ -47,6 +49,11 @@ Page({
         };
 
         this.setData(data);
+    },
+    scroll: function(event) {
+        this.setData({
+            scrollTop: event.detail.scrollTop
+        });
     },
     loadImages: function() {
         if (offset === null) {
@@ -126,6 +133,14 @@ Page({
     // })
     },
     initLoadImages: function() {
+        offset = 0;
+        this.setData(
+            {
+                col1: [],
+                col2: []
+            }
+        )
+
         wx.getSystemInfo({
             success: (res) => {
                 let ww = res.windowWidth;
@@ -134,7 +149,7 @@ Page({
                 let scrollH = wh;
 
                 this.setData({
-                    scrollH: scrollH,
+                    scrollH: scrollH - 50,
                     imgWidth: imgWidth
                 });
 

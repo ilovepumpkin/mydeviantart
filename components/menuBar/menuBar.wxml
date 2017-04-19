@@ -1,0 +1,21 @@
+<template name="menuBar">
+  <view class="menuBar">
+    <view class="menuBarItem" hover-class="menuBarItem-hover" bindtap="switchPageTo('../gallery/gallery')">
+      <image src="../../images/favestar.png" class="menuBarItemImage"/>
+      <view class="menuBarItemText">浏览</view>
+      <view class="highlightBar" />
+    </view>
+    <view class="menuBarItem" hover-class="menuBarItem-hover" bindtap="switchPageTo('../search/search')">
+      <image src="../../images/favestar.png" class="menuBarItemImage"/>
+      <view class="menuBarItemText">搜索</view>
+    </view>
+    <view class="menuBarItem" hover-class="menuBarItem-hover">
+      <image src="../../images/favestar.png" class="menuBarItemImage"/>
+      <view class="menuBarItemText">收藏夹</view>
+    </view>
+    <view class="menuBarItem" hover-class="menuBarItem-hover">
+      <image src="../../images/favestar.png" class="menuBarItemImage"/>
+      <view class="menuBarItemText">他</view>
+    </view>
+  </view>
+</template>
