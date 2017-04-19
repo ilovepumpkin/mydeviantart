@@ -131,17 +131,11 @@ Page({
         newComments.map(item => {
           let d = new Date(item["posted"])
           item["formattedDate"] = util.formatTime(d);
+          item["parsedComment"]=wxParse.wxParse('content','html',item.body,self);
         })
 
         let comments = self.data.comments;
         comments = comments.concat(newComments);
-
-        for (let i = 0; i < comments.length; i++) {
-          wxParse.wxParse('comment' + i, 'html', comments[i].body, self);
-          if (i === comments.length - 1) {
-            wxParse.wxParseTemArray("commentTemArray", 'comment', comments.length, self)
-          }
-        }
 
         self.setData({
           comments,

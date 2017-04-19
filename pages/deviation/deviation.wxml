@@ -34,7 +34,7 @@
     	<view style="text-align:center" hidden="{{!viewCommentsButtonVisible}}">
     		<button type="primary" size="mini" bindtap="loadComments"> 查看评论 </button>
     	</view>
-    	<view class="commmentInfoArea" hidden="{{viewCommentsButtonVisible}}">
+    	<view class="commmentInfoArea" hidden="{{comments.length===0}}">
 			<view class="titleComments">
 				评论
 			</view>
@@ -49,7 +49,7 @@
 										<view class="commentTime">{{item.formattedDate}}</view>
 									</view>
 									<view class="commentBody">
-										<template is="wxParse" data="{{wxParseData:commentTemArray[index]}}"/>
+										<template is="wxParse" data="{{wxParseData:item.parsedComment.nodes}}"/>
 									</view>
 								</view>							
 						</view>
