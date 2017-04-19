@@ -1,4 +1,5 @@
 var dA = require('../../utils/deviantArt.js')
+var menuBar = require('../../components/menuBar/menuBar')
 
 var app = getApp()
 
@@ -13,7 +14,8 @@ Page({
         col1: [],
         col2: [],
         isLoading: false,
-        scrollTop: 0
+        scrollTop: 0,
+        currentPage: 'gallery'
     },
     renderImages: function(images) {
         let col1 = this.data.col1;
@@ -106,6 +108,11 @@ Page({
         this.initLoadImages()
     },
     onLoad: function() {
+
+        for (let funcName in menuBar) {
+            this[[funcName]] = menuBar[funcName]
+        }
+
         this.initLoadImages();
         // let self = this;
         // wx.getNetworkType({
@@ -123,23 +130,21 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-    //                     }
-    //                 }
-    //             })
-    //         } else {
-    //             self.initLoadImages();
-    //         }
-    //     }
-    // })
+        //                     }
+        //                 }
+        //             })
+        //         } else {
+        //             self.initLoadImages();
+        //         }
+        //     }
+        // })
     },
     initLoadImages: function() {
         offset = 0;
-        this.setData(
-            {
-                col1: [],
-                col2: []
-            }
-        )
+        this.setData({
+            col1: [],
+            col2: []
+        })
 
         wx.getSystemInfo({
             success: (res) => {

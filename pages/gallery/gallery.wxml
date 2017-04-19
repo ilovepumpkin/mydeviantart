@@ -33,4 +33,4 @@
   </view>
 </scroll-view>
 <loading hidden="{{!isLoading}}">加载中...</loading>
-<template is="menuBar" data=""/>
+<template is="menuBar" data="{{currentPage}}"/>

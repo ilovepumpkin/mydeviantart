@@ -5,6 +5,20 @@ App({
         var logs = wx.getStorageSync('logs') || []
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs)
+
+
+        var that = this
+        wx.getSystemInfo({
+            success: (res) => {
+                let ww = res.windowWidth;
+                let wh = res.windowHeight;
+                let imgWidth = ww * 0.48;
+                let scrollH = wh;
+
+                that.globalData.scrollH = scrollH - 50;
+                that.globalData.imgWidth = imgWidth;
+            }
+        });
     },
     getUserInfo: function(cb) {
         var that = this
@@ -25,6 +39,8 @@ App({
         }
     },
     globalData: {
-        userInfo: null
+        userInfo: null,
+        scrollH: 0,
+        imgWidth: 0
     }
 })

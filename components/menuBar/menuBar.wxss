@@ -5,6 +5,7 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
+	background-color: #f4f4f4;
 }
 
 .menuBarItem{
@@ -16,7 +17,7 @@
 .menuBarItem-hover{
 	flex-grow:1;
 	text-align: center;
-	background-color: #cccccc;
+	margin:5px;
 }
 
 .menuBarItemText{
@@ -30,8 +31,8 @@
 }
 
 .menuBarItemImage{
-	width:20px;
-	height:20px;
+	width:30px;
+	height:30px;
 }
 
 .highlightBar{

@@ -1,7 +1,15 @@
+var menuBar = require('../../components/menuBar/menuBar')
+
 var app = getApp()
 Page({
-    data: {
+	data: {
+		currentPage: 'search'
+	},
+	onLoad: function() {
+		for (let funcName in menuBar) {
+			this[[funcName]] = menuBar[funcName]
+		}
 
-    },
-    onLoad: function() {}
+		this.setData(app.globalData)
+	}
 })
