@@ -109,9 +109,7 @@ Page({
     },
     onLoad: function() {
 
-        for (let funcName in menuBar) {
-            this[[funcName]] = menuBar[funcName]
-        }
+        menuBar.init(this);
 
         this.initLoadImages();
         // let self = this;

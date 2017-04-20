@@ -1,4 +1,5 @@
 @import "./components/menuBar/menuBar.wxss";
+@import "./components/menuItem/menuItem.wxss";
 
 /**app.wxss**/
 .container {

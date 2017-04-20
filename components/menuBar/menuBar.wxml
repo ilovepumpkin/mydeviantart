@@ -1,25 +1,10 @@
+<import src="../../components/menuItem/menuItem.wxml"/>
+
 <template name="menuBar">
   <view class="menuBar">
-    <view class="menuBarItem" hover-class="menuBarItem-hover" bindtap="switchPageTo" data-url="../search/search">
-      <image src="../../images/search.png" class="menuBarItemImage"/>
-      <view class="menuBarItemText">搜索
-      </view>
-      <view class="highlightBar" hidden="{{currentPage !== 'search'}}"/>
-    </view>
-    <view class="menuBarItem" hover-class="menuBarItem-hover" bindtap="switchPageTo" data-url="../gallery/gallery">
-      <image src="../../images/browse.png" class="menuBarItemImage"/>
-      <view class="menuBarItemText">浏览</view>
-      <view class="highlightBar" hidden="{{currentPage !== 'gallery'}}"/>
-    </view>
-    <view class="menuBarItem" hover-class="menuBarItem-hover" bindtap="switchPageTo" data-url="../favorite/favorite">
-      <image src="../../images/favorite.png" class="menuBarItemImage"/>
-      <view class="menuBarItemText">收藏夹</view>
-      <view class="highlightBar" hidden="{{currentPage !== 'favorite'}}"/>
-    </view>
-    <view class="menuBarItem" hover-class="menuBarItem-hover" bindtap="switchPageTo" data-url="../him/him">
-      <image src="../../images/him.png" class="menuBarItemImage"/>
-      <view class="menuBarItemText">他</view>
-      <view class="highlightBar" hidden="{{currentPage !== 'him'}}"/>
-    </view>
+      <template is="menuItem" data="{{keyword:'search',menuItemText:'搜索',currentPage}}"/>
+      <template is="menuItem" data="{{keyword:'gallery',menuItemText:'浏览',currentPage}}"/>
+      <template is="menuItem" data="{{keyword:'favorite',menuItemText:'收藏夹',currentPage}}"/>
+      <template is="menuItem" data="{{keyword:'him',menuItemText:'他',currentPage}}"/>
   </view>
 </template>

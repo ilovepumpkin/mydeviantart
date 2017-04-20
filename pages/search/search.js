@@ -6,9 +6,7 @@ Page({
 		currentPage: 'search'
 	},
 	onLoad: function() {
-		for (let funcName in menuBar) {
-			this[[funcName]] = menuBar[funcName]
-		}
+		menuBar.init(this);
 
 		this.setData(app.globalData)
 	}

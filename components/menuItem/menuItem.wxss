@@ -1,0 +1,41 @@
+
+.highlightBar{
+	background-color: #00ba00;
+	width:50%;
+	height:2px;
+	clear: both; 
+	display: block; 
+	margin:auto; 
+}
+
+.menuBarItem{
+	flex-grow:1;
+	text-align: center;
+	margin:5px;
+	display: inline-block;
+}
+
+.menuBarItem-hover{
+	flex-grow:1;
+	text-align: center;
+	margin:5px;
+}
+
+.menuBarItemText{
+	font-size: 11px;
+	color: white;
+	padding: 0px;
+}
+
+.menuBarItemText-hover{
+	font-size: 11px;
+	color: #00ba00;
+}
+
+.menuBarItemImage{
+	width:25px;
+	height:25px;
+	clear: both; 
+	display: block; 
+	margin:auto; 
+}

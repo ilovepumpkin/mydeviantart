@@ -1,0 +1,9 @@
+<template name="menuItem">
+	<navigator class="menuBarItem" hover-class="menuBarItem-hover" url="/pages/{{keyword}}/{{keyword}}" open-type="switchTab">
+      <image wx:if="{{currentPage !== keyword}}" src="../../images/{{keyword}}.png" class="menuBarItemImage"/>
+      <image wx:else src="../../images/{{keyword}}_focus.png" class="menuBarItemImage"/>
+      <view class="{{currentPage !== keyword?'menuBarItemText':'menuBarItemText-hover'}}">{{menuItemText}}
+      </view>
+      <view class="highlightBar" hidden="{{currentPage !== keyword}}"/>
+    </navigator>
+</template>

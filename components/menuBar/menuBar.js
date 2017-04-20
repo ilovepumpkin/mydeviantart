@@ -6,13 +6,13 @@ function switchPageTo(e) {
 	});
 }
 
-function isCurrentPage(e) {
-	const url = e.currentTarget.dataset.url
-	const pages = wx.getCurrentPages()
-
+function init(that) {
+	for (let funcName in this) {
+		that[[funcName]] = this[funcName]
+	}
 }
 
 module.exports = {
 	switchPageTo,
-	isCurrentPage
+	init
 }

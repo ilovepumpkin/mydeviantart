@@ -6,8 +6,6 @@ Page({
 		currentPage: 'favorite'
 	},
 	onLoad: function() {
-		for (let funcName in menuBar) {
-			this[[funcName]] = menuBar[funcName]
-		}
+		menuBar.init(this);
 	}
 })
