@@ -5,13 +5,14 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-	background-color: #f4f4f4;
+	background-color:#333333;
 }
 
 .menuBarItem{
 	flex-grow:1;
 	text-align: center;
 	margin:5px;
+	display: inline-block;
 }
 
 .menuBarItem-hover{
@@ -21,22 +22,29 @@
 }
 
 .menuBarItemText{
-	font-size: 12px;
+	font-size: 11px;
 	color: white;
+	padding: 0px;
 }
 
 .menuBarItemText-hover{
-	font-size: 12px;
+	font-size: 11px;
 	color: black;
 }
 
 .menuBarItemImage{
-	width:30px;
-	height:30px;
+	width:25px;
+	height:25px;
+	clear: both; 
+	display: block; 
+	margin:auto; 
 }
 
 .highlightBar{
 	background-color: #00ba00;
-	width:100%;
+	width:50%;
 	height:2px;
+		clear: both; 
+	display: block; 
+	margin:auto; 
 }
