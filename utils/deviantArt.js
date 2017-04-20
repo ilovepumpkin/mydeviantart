@@ -65,6 +65,14 @@ function authenticate() {
     }
 }
 
+function whoami() {
+    return authenticate().then(function() {
+        return wxRequest(basicConfig("/user/profile/ilovepumpkin2014?expand=user.stats,user.details,user.geo")).then(function(res) {
+            return res.data;
+        });
+    })
+}
+
 function getFolders() {
     return authenticate().then(function() {
         return wxRequest(basicConfig("/gallery/folders")).then(function(res) {
@@ -101,5 +109,6 @@ module.exports = {
     "authenticate": authenticate,
     "getAll": getAll,
     "getComments": getComments,
-    "getDeviation": getDeviation
+    "getDeviation": getDeviation,
+    "whoami": whoami
 }

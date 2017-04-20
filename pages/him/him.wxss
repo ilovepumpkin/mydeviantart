@@ -1,0 +1,63 @@
+.usericon{
+	width:150px;
+	height:150px;
+	display: inline-block;
+}
+
+.authorInfoArea{
+	margin: 10px 5px 10px 5px;
+}
+
+.authorInfoTitle{
+	font-weight: bold;
+	font-size: 16px;
+	color: white;
+	margin-top:5px;
+	margin-bottom:5px;
+	color:#00ba00;
+	border:1px solid #00ba00;
+	border-width: 0 0 1px 0;
+}
+
+.detailLine{
+	white-space: nowrap;
+	width:100%;
+}
+
+.fieldName{
+	display: inline;
+	color: #7f7f7f;
+	font-size: 14px;
+	width:300px;
+}
+
+.fieldValue{
+	display: inline;
+	color: white;
+	font-size: 14px;
+}
+
+.authorInfoContainer{
+	white-space: nowrap;
+}
+
+.authorDetailContainer{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 10px;
+}
+
+.desc{
+	color: white;
+	font-size: 16px;
+	margin:20px;
+	margin-top: 40px;
+}
+
+.gongzhonghao{
+	width:158px;
+	height:158px;
+	clear: both; 
+	display: block; 
+	margin:auto; 
+}

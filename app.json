@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/him/him",
     "pages/search/search",
     "pages/gallery/gallery",
     "pages/deviation/deviation",
     "pages/favorite/favorite",
-    "pages/him/him",
     "pages/index/index",
     "pages/logs/logs"
   ],
@@ -16,29 +16,29 @@
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "backgroundColor":"#333333",
-    "color": "white",  
-    "selectedColor": "#00ba00",  
-    "borderStyle": "black" ,
+    "backgroundColor": "#333333",
+    "color": "white",
+    "selectedColor": "#00ba00",
+    "borderStyle": "black",
     "list": [{
       "pagePath": "pages/search/search",
       "text": "搜索",
-      "selectedIconPath": "images/search_focus.png",  
+      "selectedIconPath": "images/search_focus.png",
       "iconPath": "images/search.png"
-    },{
+    }, {
       "pagePath": "pages/gallery/gallery",
       "text": "浏览",
-      "selectedIconPath": "images/gallery_focus.png",  
+      "selectedIconPath": "images/gallery_focus.png",
       "iconPath": "images/gallery.png"
-    },{
+    }, {
       "pagePath": "pages/favorite/favorite",
       "text": "收藏夹",
-      "selectedIconPath": "images/favorite_focus.png",  
+      "selectedIconPath": "images/favorite_focus.png",
       "iconPath": "images/favorite.png"
-    },{
+    }, {
       "pagePath": "pages/him/him",
       "text": "他",
-      "selectedIconPath": "images/him_focus.png",  
+      "selectedIconPath": "images/him_focus.png",
       "iconPath": "images/him.png"
     }]
   }

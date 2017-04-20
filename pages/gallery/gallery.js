@@ -1,5 +1,4 @@
 var dA = require('../../utils/deviantArt.js')
-var menuBar = require('../../components/menuBar/menuBar')
 
 var app = getApp()
 
@@ -14,8 +13,7 @@ Page({
         col1: [],
         col2: [],
         isLoading: false,
-        scrollTop: 0,
-        currentPage: 'gallery'
+        scrollTop: 0
     },
     renderImages: function(images) {
         let col1 = this.data.col1;
@@ -109,8 +107,6 @@ Page({
     },
     onLoad: function() {
 
-        menuBar.init(this);
-
         this.initLoadImages();
         // let self = this;
         // wx.getNetworkType({
@@ -152,7 +148,7 @@ Page({
                 let scrollH = wh;
 
                 this.setData({
-                    scrollH: scrollH - 50,
+                    scrollH: scrollH,
                     imgWidth: imgWidth
                 });
 

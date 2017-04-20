@@ -1,5 +1,3 @@
-@import "../../components/menuBar/menuBar.wxss";
-
 .img_item {
   width: 48%;
   margin:1%;

@@ -1,5 +1,3 @@
-<import src="../../components/menuBar/menuBar.wxml"/>
-
 <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" bindscrolltoupper="initLoadImages">
   <view style="width:100%">
     <view class="img_item">
@@ -33,4 +31,3 @@
   </view>
 </scroll-view>
 <loading hidden="{{!isLoading}}">加载中...</loading>
-<template is="menuBar" data="{{currentPage}}"/>

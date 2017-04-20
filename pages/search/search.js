@@ -1,13 +1,7 @@
-var menuBar = require('../../components/menuBar/menuBar')
-
 var app = getApp()
 Page({
-	data: {
-		currentPage: 'search'
-	},
+	data: {},
 	onLoad: function() {
-		menuBar.init(this);
-
 		this.setData(app.globalData)
 	}
 })
