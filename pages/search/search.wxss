@@ -1,0 +1,28 @@
+@import '../../components/imageCardColumn/imageCardColumn.wxss'
+
+.searchInputContainer{
+	border:1px solid #00ba00;
+	border-width: 0 0 1px 0;
+	white-space: nowrap;
+	display: flex;
+	margin: 5px
+}
+
+.searchInput{
+	display: inline;
+	color: white;
+}
+
+.searchIcon{
+	display: inline;
+	margin-right: 10px;
+}
+
+.instruction{
+	color:white;
+	vertical-align: middle;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+}

@@ -1,0 +1,16 @@
+<template name="imageCard">
+	<image id="{{item.id}}" src="{{item.pic}}" class="thumbImage" style="height:{{item.height}}px"/>
+	<view class="infoContainer">
+		<text class="title">{{item.title}}</text>
+		<view class="statsArea">
+			<view hidden="{{item.commentCount===undefined||item.commentCount===null}}" class="statItemContainer">
+				<image class="icon" src="../../images/comment.png"/>
+				<text class="commentCount">{{item.commentCount}}</text>
+			</view>
+			<view hidden="{{item.favouriteCount===undefined||item.favouriteCount===null}}" class="statItemContainer">
+				<image class="icon" src="../../images/favestar.png"/>
+				<text class="favCount">{{item.favouriteCount}}</text>
+			</view>
+		</view>
+	</view>
+</template>

@@ -89,9 +89,9 @@ function getDeviation(deviationid) {
     })
 }
 
-function getAll(options) {
+function getFolderDeviations(folderid, options) {
     return authenticate().then(function() {
-        return wxRequest(basicConfig("/gallery/all", options)).then(function(res) {
+        return wxRequest(basicConfig("/gallery/" + folderid, options)).then(function(res) {
             return res.data;
         });
     })
@@ -105,10 +105,24 @@ function getComments(deviationid, options) {
     })
 }
 
+function search(keyword) {
+    let url = "https://backend.deviantart.com/rss.xml?type=deviation&q=by:ilovepumpkin2014 sort:time meta:all " + keyword;
+    return wxRequest({
+        url,
+        dataType: "xml",
+        header: {
+            'content-type': 'application/x-www-form-urlencoded'
+        }
+    }).then(function(res) {
+        return res.data;
+    });
+}
+
 module.exports = {
-    "authenticate": authenticate,
-    "getAll": getAll,
-    "getComments": getComments,
-    "getDeviation": getDeviation,
-    "whoami": whoami
+    authenticate,
+    getFolderDeviations,
+    getComments,
+    getDeviation,
+    whoami,
+    search
 }

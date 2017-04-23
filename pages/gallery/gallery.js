@@ -1,4 +1,5 @@
 var dA = require('../../utils/deviantArt.js')
+var util = require('../../utils/util')
 
 var app = getApp()
 
@@ -10,45 +11,16 @@ var offset = 0;
 Page({
     data: {
         imgWidth: 0,
-        col1: [],
-        col2: [],
+        col1: {
+            colH: 0,
+            data: []
+        },
+        col2: {
+            colH: 0,
+            data: []
+        },
         isLoading: false,
         scrollTop: 0
-    },
-    renderImages: function(images) {
-        let col1 = this.data.col1;
-        let col2 = this.data.col2;
-
-        for (let i = 0; i < images.length; i++) {
-            let imageObj = images[i];
-
-            let imageId = imageObj.id;
-            let oImgW = imageObj.width;
-            let oImgH = imageObj.height;
-            let imgWidth = this.data.imgWidth;
-            let scale = imgWidth / oImgW;
-            let imgHeight = oImgH * scale;
-
-            imageObj.height = imgHeight;
-
-            const infoContainerHeight = 30;
-
-            if (col1H <= col2H) {
-                col1H += imgHeight + infoContainerHeight;
-                col1.push(imageObj);
-            } else {
-                col2H += imgHeight + infoContainerHeight;
-                col2.push(imageObj);
-            }
-
-        }
-
-        let data = {
-            col1: col1,
-            col2: col2
-        };
-
-        this.setData(data);
     },
     scroll: function(event) {
         this.setData({
@@ -70,7 +42,7 @@ Page({
                 isLoading: true
             });
             var self = this
-            dA.getAll({
+            dA.getFolderDeviations("1713A913-31B1-5B0D-2538-94BF1B6B7CC7", {
                 offset: offset
             }).then(function(resp) {
                 let deviations = resp["results"]
@@ -88,10 +60,11 @@ Page({
                         "width": img.width,
                         "height": img.height,
                         title: title,
-                        stats: d.stats
+                        commentCount: d.stats.comments,
+                        favouriteCount: d.stats.favourites
                     }
                 });
-                self.renderImages(images)
+                self.setData(util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2))
 
                 self.setData({
                     isLoading: false
@@ -136,8 +109,14 @@ Page({
     initLoadImages: function() {
         offset = 0;
         this.setData({
-            col1: [],
-            col2: []
+            col1: {
+                colH: 0,
+                data: []
+            },
+            col2: {
+                colH: 0,
+                data: []
+            }
         })
 
         wx.getSystemInfo({
