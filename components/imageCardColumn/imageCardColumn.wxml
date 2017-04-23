@@ -2,8 +2,8 @@
 
 <template name="imageCardColumn">
 	<view class="img_item">
-      <view wx:for="{{columnData}}" wx:key="id" class="imageWrapper" style="width:100%;height:{{item.height+30}}px" bindtap="showBigView">
-        <template is="imageCard" data="{{item}}"/>
+      <view wx:for="{{columnData}}" wx:key="id" class="imageWrapper" style="width:100%;height:{{item.height+30}}px">
+	     <template is="imageCard" data="{{item}}"/>
       </view>
     </view>
 </template>

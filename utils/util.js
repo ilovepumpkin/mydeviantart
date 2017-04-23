@@ -127,11 +127,11 @@ function decideColumns(images, imgWidth, col1, col2) {
     }
 
     col1.colH = col1H
-    col1.colH = col2H
+    col2.colH = col2H
 
     let data = {
-        col1: col1,
-        col2: col2
+        col1,
+        col2
     };
 
     return data;

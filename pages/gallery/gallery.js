@@ -135,10 +135,16 @@ Page({
             }
         });
     },
-    showBigView: function(e) {
-        let deviationid = e.target.id;
-        wx.navigateTo({
-            url: "../deviation/deviation?deviationid=" + deviationid
-        });
+    onShareAppMessage: function() {
+        return {
+            title: '码农也涂鸦之dA版',
+            path: '/pages/gallery/gallery',
+            success: function(res) {
+                // 分享成功
+            },
+            fail: function(res) {
+                // 分享失败
+            }
+        }
     }
 })

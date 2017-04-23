@@ -11,6 +11,10 @@ Page({
 		}
 	},
 	onLoad: function() {
+		wx.showLoading({
+			title: "加载中..."
+		})
+
 		const self = this;
 		dA.whoami().then(resp => {
 			console.log(resp)
@@ -40,6 +44,8 @@ Page({
 				profile_url,
 				usericon
 			})
+
+			wx.hideLoading();
 		})
 	}
 })

@@ -20,6 +20,19 @@ Page({
     viewCommentsButtonVisible: false,
     isCommentLoading: false
   },
+  onShareAppMessage: function() {
+    const dev = this.data.deviation;
+    return {
+      title: dev.title,
+      path: '/pages/deviation/deviation?deviationid=' + dev.deviationid,
+      success: function(res) {
+        // 分享成功
+      },
+      fail: function(res) {
+        // 分享失败
+      }
+    }
+  },
   buildDetails: function(dev) {
     let details = []
     details.push({
@@ -65,6 +78,7 @@ Page({
         let wh = res.windowHeight;
 
         dA.getDeviation(deviationid).then(function(res) {
+
           var image = res.preview
           var imageSize = util.resizeImage(image.width, image.height);
 
@@ -131,7 +145,7 @@ Page({
         newComments.map(item => {
           let d = new Date(item["posted"])
           item["formattedDate"] = util.formatTime(d);
-          item["parsedComment"]=wxParse.wxParse('content','html',item.body,self);
+          item["parsedComment"] = wxParse.wxParse('content', 'html', item.body, self);
         })
 
         let comments = self.data.comments;
@@ -165,5 +179,29 @@ Page({
     wx.showToast({
       title: "图片加载失败，请稍后再试"
     });
+  },
+  showActionSheet: function() {
+    const self = this;
+    wx.showActionSheet({
+      itemList: ['转发', '收藏', '下载'],
+      success: function(res) {
+        console.log(res.tapIndex)
+        switch (res.tapIndex) {
+          case 0:
+            wx.showShareMenu()
+            break;
+          case 1:
+            break;
+          case 2:
+            wx.downloadFile({
+              url: self.data.deviation.content.src
+            })
+            break;
+        }
+      },
+      fail: function(res) {
+        console.log(res.errMsg)
+      }
+    })
   }
 })

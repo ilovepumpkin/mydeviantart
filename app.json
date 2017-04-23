@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/search/search",
     "pages/gallery/gallery",
+    "pages/search/search",
     "pages/him/him",
     "pages/deviation/deviation",
     "pages/favorite/favorite",
