@@ -4,7 +4,7 @@
     		作者信息
     	</view>
     	<view class="authorInfoContainer">
-    		<image src="{{usericon}}" class="usericon" />
+    		<image src="{{usericon}}" class="usericon" bindload="onUserIconLoaded" binderror="onUserIconLoaded"/>
     		<view class="authorDetailContainer">
 	    		<view wx:for="{{details}}" wx:key="{{name}}" class="detailLine">
 	    			<view class="fieldName">

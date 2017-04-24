@@ -1,11 +1,12 @@
 {
   "pages": [
+    "pages/intro/intro",
+    "pages/index/index",
     "pages/gallery/gallery",
     "pages/search/search",
     "pages/him/him",
     "pages/deviation/deviation",
     "pages/favorite/favorite",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
@@ -21,6 +22,17 @@
     "selectedColor": "#00ba00",
     "borderStyle": "black",
     "list": [{
+      "pagePath": "pages/gallery/gallery",
+      "text": "浏览",
+      "selectedIconPath": "images/gallery_focus.png",
+      "iconPath": "images/gallery.png"
+    }, {
+      "pagePath": "pages/him/him",
+      "text": "他",
+      "selectedIconPath": "images/him_focus.png",
+      "iconPath": "images/him.png"
+    }],
+    "baklist": [{
       "pagePath": "pages/search/search",
       "text": "搜索",
       "selectedIconPath": "images/search_focus.png",

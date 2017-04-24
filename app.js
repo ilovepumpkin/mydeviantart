@@ -17,6 +17,7 @@ App({
 
                 that.globalData.scrollH = scrollH - 50;
                 that.globalData.imgWidth = imgWidth;
+                that.globalData.winHeight = wh;
             }
         });
     },
@@ -41,6 +42,7 @@ App({
     globalData: {
         userInfo: null,
         scrollH: 0,
-        imgWidth: 0
+        imgWidth: 0,
+        winHeight: 0
     }
 })

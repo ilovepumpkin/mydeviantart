@@ -10,6 +10,9 @@ Page({
 			value
 		}
 	},
+	onUserIconLoaded: function() {
+		wx.hideLoading();
+	},
 	onLoad: function() {
 		wx.showLoading({
 			title: "加载中..."
@@ -45,7 +48,7 @@ Page({
 				usericon
 			})
 
-			wx.hideLoading();
+
 		})
 	}
 })

@@ -1,0 +1,20 @@
+.buttonContainer{
+	text-align: center
+}
+
+.introImage{
+	width: 300px; 
+	height: 480px;
+}
+
+.swiperItem{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.introText{
+	color: white;
+	font-size: 14px;
+}
