@@ -1,6 +1,6 @@
 <import src="../../wxParse/wxParse.wxml"/>
 
-<swiper style="height:{{winHeight}}px">
+<swiper style="height:{{winHeight}}px" current="{{currentSwipperItemIndex}}" circular="true">
     <swiper-item>
       	<view style="margin-top:{{pageMarginTop}}px;">
 			<image src="{{imageSrc}}" style="width: {{imagewidth}}px; height: {{imageheight}}px;" bindlongtap="showActionSheet" bindload="handleLoadSuccess" binderror="handleLoadError"></image>
