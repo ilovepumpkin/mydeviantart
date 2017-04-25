@@ -1,11 +1,10 @@
 <import src="../../wxParse/wxParse.wxml"/>
 
 <swiper style="height:{{winHeight}}px" current="{{currentSwipperItemIndex}}" circular="true">
-    <swiper-item>
-      	<view style="margin-top:{{pageMarginTop}}px;">
+    <swiper-item class="imageContainer">
 			<image src="{{imageSrc}}" style="width: {{imagewidth}}px; height: {{imageheight}}px;" bindlongtap="showActionSheet" bindload="handleLoadSuccess" binderror="handleLoadError"></image>
 			<view class="infoContainer" hidden="{{!done}}">
-				<text class="title">{{deviation.title}}</text>
+				<text class="title" style="width:{{winWidth-110}}px">{{deviation.title}}</text>
 				<view style="display: inline;float:right;">
 					<image src="../../images/comment.png" class="icon" ></image>
 					<text class="commentCount">{{deviation.stats.comments}}</text>
@@ -13,7 +12,6 @@
 					<text class="favCount">{{deviation.stats.favourites}}</text>
 				</view>
 			</view>
-		</view>
     </swiper-item>
     <swiper-item>
     	<view class="deviationInfoArea">

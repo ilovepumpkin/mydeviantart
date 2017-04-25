@@ -1,0 +1,1 @@
+export const KEY_INTRO_READ = "v0.8_read"

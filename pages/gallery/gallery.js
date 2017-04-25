@@ -48,20 +48,20 @@ Page({
                 let deviations = resp["results"]
                 offset = resp["next_offset"]
                 console.log(deviations);
+
+                const titleWidth = self.data.imgWidth - 85
+
                 var images = deviations.map(d => {
                     let img = d.thumbs[1]
-                    let title = d.title
-                    if (title.length > 15) {
-                        title = title.substr(0, 15) + "..."
-                    }
                     return {
                         "pic": img.src,
                         "id": d.deviationid,
                         "width": img.width,
                         "height": img.height,
-                        title: title,
+                        title: d.title,
                         commentCount: d.stats.comments,
-                        favouriteCount: d.stats.favourites
+                        favouriteCount: d.stats.favourites,
+                        titleWidth
                     }
                 });
                 self.setData(util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2))
@@ -97,14 +97,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-        //                     }
-        //                 }
-        //             })
-        //         } else {
-        //             self.initLoadImages();
-        //         }
-        //     }
-        // })
+    //                     }
+    //                 }
+    //             })
+    //         } else {
+    //             self.initLoadImages();
+    //         }
+    //     }
+    // })
     },
     initLoadImages: function() {
         offset = 0;

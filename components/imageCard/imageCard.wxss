@@ -5,6 +5,14 @@
 	color: #191919;
 	vertical-align: middle;
 	margin-left:5px;
+
+	overflow:hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+	display:inline-block;
+	clear:both;
+
+	flex-grow: 2;
 }
 
 .commentCount{
@@ -29,7 +37,7 @@
 }
 
 .statsArea{
-	flex-grow: 2;
+	width:80px;
 	margin-right:5px;
 }
 

@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
   <view>
-  	{{message}}
+  	
   </view>
 </view>

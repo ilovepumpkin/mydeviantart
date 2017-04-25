@@ -36,27 +36,24 @@ function wxPromisify(fn) {
     }
 }
 
-function resizeImage(originalWidth, originalHeight) {
-    var imageSize = {};
-    var originalScale = originalHeight / originalWidth; //图片高宽比 
-    wx.getSystemInfo({
-        success: function(res) {
-            var windowWidth = res.windowWidth;
-            var windowHeight = res.windowHeight;
-            var windowscale = windowHeight / windowWidth; //屏幕高宽比 
-            if (originalScale < windowscale) { //图片高宽比小于屏幕高宽比 
-                //图片缩放后的宽为屏幕宽 
-                imageSize.imageWidth = windowWidth;
-                imageSize.imageHeight = (windowWidth * originalHeight) / originalWidth;
-            } else { //图片高宽比大于屏幕高宽比 
-                //图片缩放后的高为屏幕高 
-                imageSize.imageHeight = windowHeight;
-                imageSize.imageWidth = (windowHeight * originalWidth) / originalHeight;
-            }
-
+function calImageSize(origImgWidth, origImgHeight, maxWidth, maxHeight) {
+    let [newImgWidth, newImgHeight] = [origImgWidth, origImgHeight]
+    if (origImgWidth > maxWidth) {
+        newImgWidth = maxWidth;
+        newImgHeight = newImgWidth * origImgHeight / origImgWidth;
+    } else {
+        if (origImgHeight > maxHeight) {
+            newImgHeight = maxHeight;
+            newImgWidth = newImgHeight * origImgWidth / origImgHeight;
         }
-    })
-    return imageSize;
+    }
+
+    if (newImgHeight > maxHeight) {
+        newImgHeight = maxHeight;
+        newImgWidth = newImgHeight * origImgWidth / origImgHeight;
+    }
+
+    return [newImgWidth, newImgHeight]
 }
 
 function parseSearchResult(xml) {
@@ -140,7 +137,7 @@ function decideColumns(images, imgWidth, col1, col2) {
 module.exports = {
     formatTime,
     wxPromisify,
-    resizeImage,
     parseSearchResult,
-    decideColumns
+    decideColumns,
+    calImageSize
 }

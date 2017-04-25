@@ -1,6 +1,4 @@
 .usericon{
-	width:150px;
-	height:150px;
 	display: inline-block;
 }
 
@@ -32,7 +30,7 @@
 }
 
 .fieldValue{
-	display: inline;
+	display: inline-block;
 	color: white;
 	font-size: 14px;
 }
@@ -49,9 +47,10 @@
 
 .desc{
 	color: white;
-	font-size: 16px;
-	margin:20px;
+	font-size: 14px;
 	margin-top: 40px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .gongzhonghao{

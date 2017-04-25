@@ -3,7 +3,7 @@
 		<image id="{{item.id}}" src="{{item.pic}}" class="thumbImage" style="height:{{item.height}}px" />
 	</navigator>
 	<view class="infoContainer">
-		<text class="title">{{item.title}}</text>
+		<text class="title" style="width:{{item.titleWidth}}px">{{item.title}}</text>
 		<view class="statsArea">
 			<view hidden="{{item.favouriteCount===undefined||item.favouriteCount===null}}" class="statItemContainer">
 				<image class="icon" src="../../images/favestar.png"/>

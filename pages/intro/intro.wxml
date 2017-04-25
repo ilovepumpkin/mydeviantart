@@ -1,7 +1,7 @@
 
 <swiper style="height:{{winHeight-50}}px" >
     <swiper-item class="swiperItem" wx:for="{{slides}}" wx:key="{{index}}">
-    	<image src="/images/intro/{{item.image}}" class="introImage"/>
+    	<image src="/images/intro/{{item.image}}" class="introImage" style="width:{{imgWidth}}px;height:{{imgHeight}}px"/>
     	<view class="introText">{{item.text}}</view>
     </swiper-item>
 </swiper>

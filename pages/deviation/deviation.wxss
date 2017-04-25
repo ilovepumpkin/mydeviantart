@@ -1,11 +1,23 @@
 @import "../../wxParse/wxParse.wxss";
 
+.imageContainer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
 .title{
 	font-weight: bold;
 	font-size: 16px;
 	color: white;
 	margin-left: 10px;
 	vertical-align: middle;
+	overflow:hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+	display:inline-block;
+	clear:both;
 }
 
 .commentCount{

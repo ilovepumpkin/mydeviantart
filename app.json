@@ -1,13 +1,12 @@
 {
   "pages": [
-    "pages/intro/intro",
     "pages/index/index",
+    "pages/intro/intro",
     "pages/gallery/gallery",
     "pages/search/search",
     "pages/him/him",
     "pages/deviation/deviation",
-    "pages/favorite/favorite",
-    "pages/logs/logs"
+    "pages/favorite/favorite"
   ],
   "window": {
     "backgroundTextStyle": "light",
