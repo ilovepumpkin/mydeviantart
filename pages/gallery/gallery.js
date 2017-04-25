@@ -49,7 +49,7 @@ Page({
                 offset = resp["next_offset"]
                 console.log(deviations);
 
-                const titleWidth = self.data.imgWidth - 85
+                const titleWidth = self.data.imgWidth - 130
 
                 var images = deviations.map(d => {
                     let img = d.thumbs[1]
@@ -97,14 +97,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-    //                     }
-    //                 }
-    //             })
-    //         } else {
-    //             self.initLoadImages();
-    //         }
-    //     }
-    // })
+        //                     }
+        //                 }
+        //             })
+        //         } else {
+        //             self.initLoadImages();
+        //         }
+        //     }
+        // })
     },
     initLoadImages: function() {
         offset = 0;
