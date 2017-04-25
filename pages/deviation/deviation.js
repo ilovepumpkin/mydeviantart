@@ -188,8 +188,8 @@ Page({
   },
   showActionSheet: function() {
     const self = this;
-    let itemList = ['转发', '收藏', '下载原图']
-    itemList = ['查看详情']
+    let itemList = ['转发', '收藏']
+    itemList = ['查看详情', '下载原图']
     wx.showActionSheet({
       itemList: itemList,
       success: function(res) {
@@ -202,6 +202,7 @@ Page({
             break;
           case 1:
             const url = self.data.deviation.content.src.replace("http://", "https://").replace(/orig\d+/, "orig01").replace(/img\d+/, "img01")
+
             wx.downloadFile({
               url,
               success: function(res) {
