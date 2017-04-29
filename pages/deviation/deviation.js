@@ -188,8 +188,8 @@ Page({
   },
   showActionSheet: function() {
     const self = this;
-    let itemList = ['转发', '收藏']
-    itemList = ['查看详情', '下载原图']
+    let itemList = ['转发', '收藏', '下载原图']
+    itemList = ['查看详情']
     wx.showActionSheet({
       itemList: itemList,
       success: function(res) {

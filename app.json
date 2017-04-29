@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/settings/settings",
     "pages/index/index",
     "pages/intro/intro",
     "pages/gallery/gallery",
@@ -30,6 +31,11 @@
       "text": "他",
       "selectedIconPath": "images/him_focus.png",
       "iconPath": "images/him.png"
+    }, {
+      "pagePath": "pages/settings/settings",
+      "text": "设置",
+      "selectedIconPath": "images/settings_focus.png",
+      "iconPath": "images/settings.png"
     }],
     "baklist": [{
       "pagePath": "pages/search/search",

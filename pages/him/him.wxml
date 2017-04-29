@@ -20,11 +20,7 @@
     		<view class="fieldName">主页: </view><text class="fieldValue" selectable="true">{{profile_url}}</text>
     	</view>
 	</view>
-	<view class="desc">
-		<text style="display:block">关注公众号“码农也涂鸦”</text>
-		<text style="display:block">与作者进行互动和交流</text>
-	</view>
-	<view>
+	<view style="height:{{winHeight-180}}px" class="qrcodeArea">
 		<image src="../../images/GongZhongHao.jpg" class="gongzhonghao"/>
 	</view>
 </view>

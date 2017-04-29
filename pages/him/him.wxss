@@ -55,8 +55,14 @@
 
 .gongzhonghao{
 	width:158px;
-	height:158px;
+	height:200px;
 	clear: both; 
 	display: block; 
 	margin:auto; 
+}
+
+.qrcodeArea{
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
