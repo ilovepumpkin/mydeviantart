@@ -1,1 +1,13 @@
-<view>Favorite Page</view>
+<import src="../../components/imageCardColumn/imageCardColumn.wxml"/>
+<!-- <view class="searchInputContainer">
+	<icon type="search" size="20" class="searchIcon"/>
+	<input placeholder="" confirm-type="search" bindconfirm="doSearch" class="searchInput" auto-focus/>
+</view> -->
+<view wx:if="{{totalCount===0}}" style="height:{{scrollH}}px" class="instruction">{{message}}</view>
+<scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadBookmarks" bindscrolltoupper="initLoadBookmarks" wx:else>
+  <view style="width:100%">
+    <template is="imageCardColumn" data="{{columnData:col1.data}}"/>
+    <template is="imageCardColumn" data="{{columnData:col2.data}}"/>
+  </view>
+</scroll-view>
+<loading hidden="{{!isLoading}}">加载中...</loading>

@@ -1,6 +1,9 @@
 var dA = require('../../utils/deviantArt.js')
 var util = require('../../utils/util.js')
 var wxParse = require('../../wxParse/wxParse.js');
+import {
+  addBookmark
+} from '../../utils/bookmark.js'
 
 var offset = 0;
 
@@ -122,7 +125,7 @@ Page({
     if (!offset && offset !== 0) {
       console.log("all comments are loaded already");
       wx.showToast({
-        title: '已经到最后了噢！',
+        title: '别拉了，已经到头啦！',
         duration: 2000
       })
       return null;
@@ -181,15 +184,15 @@ Page({
   handleLoadError: function() {
     wx.hideLoading();
     wx.showToast({
-      title: "图片加载失败，请稍后再试"
+      title: "哎呦！图片加载失败了，:(，稍后再试吧！"
     });
 
     wx.hideNavigationBarLoading()
   },
   showActionSheet: function() {
     const self = this;
-    let itemList = ['转发', '收藏', '下载原图']
-    itemList = ['查看详情']
+    let itemList = ['转发', '下载原图']
+    itemList = ['查看详情', '收藏']
     wx.showActionSheet({
       itemList: itemList,
       success: function(res) {
@@ -198,6 +201,31 @@ Page({
           case 0:
             self.setData({
               currentSwipperItemIndex: 1
+            })
+            break;
+          case 1:
+            const dev = self.data.deviation;
+            const thumb = dev.thumbs[1];
+            const result = addBookmark(dev.deviationid, dev.title, thumb.src, thumb.width, thumb.height);
+            if (result) {
+              wx.showToast({
+                title: "收藏成功啦！",
+                icon: "success",
+                duration: 1500
+              })
+            } else {
+              wx.showToast({
+                title: "哎呦，收藏出错了！",
+                duration: 1500
+              })
+            }
+            break;
+          case 2:
+            /* a bug here - this API can not pop up the Share menu */
+            wx.showShareMenu({
+              success: function() {},
+              fail: function() {},
+              complete: function() {}
             })
             break;
           case 1:
@@ -223,17 +251,6 @@ Page({
 
               }
             })
-            break;
-          case 2:
-            /* a bug here - this API can not pop up the Share menu */
-            wx.showShareMenu({
-              success: function() {},
-              fail: function() {},
-              complete: function() {}
-            })
-            break;
-          case 3:
-
             break;
         }
       },

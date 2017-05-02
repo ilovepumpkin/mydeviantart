@@ -13,6 +13,9 @@
 				<image class="icon" src="../../images/comment.png"/>
 				<text class="commentCount">{{item.commentCount}}</text>
 			</view>
+			<view hidden="{{item.bookmarkDate===undefined||item.bookmarkDate===null}}" class="statItemContainer">
+				<text class="commentCount">{{item.bookmarkDate}}</text>
+			</view>
 		</view>
 	</view>
 </template>
