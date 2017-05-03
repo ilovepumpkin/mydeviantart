@@ -10,4 +10,3 @@
     <template is="imageCardColumn" data="{{columnData:col2.data}}"/>
   </view>
 </scroll-view>
-<loading hidden="{{!isLoading}}">加载中...</loading>

@@ -1,7 +1,5 @@
 <template name="imageCard">
-	<navigator url="/pages/deviation/deviation?deviationid={{item.id}}">
-		<image id="{{item.id}}" src="{{item.pic}}" class="thumbImage" style="height:{{item.height}}px" />
-	</navigator>
+	<image id="{{item.id}}" src="{{item.pic}}" class="thumbImage" style="height:{{item.height}}px" bindtouchend="onTouchEnd" bindtouchstart="onTouchStart" bindtap="onTouchTap" data-src="{{item.pic}}" data-title="{{item.title}}" data-width="{{item.width}}" data-height="{{item.height}}"/>
 	<view class="infoContainer">
 		<text class="title" style="width:{{item.titleWidth}}px">{{item.title}}</text>
 		<view class="statsArea">

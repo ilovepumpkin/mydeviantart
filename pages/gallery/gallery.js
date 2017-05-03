@@ -1,5 +1,6 @@
 var dA = require('../../utils/deviantArt.js')
 var util = require('../../utils/util')
+import imageCard from '../../components/imageCard/imageCard'
 
 var app = getApp()
 
@@ -80,6 +81,13 @@ Page({
     },
     onLoad: function() {
 
+        for (let func in imageCard) {
+            this[[func]] = imageCard[func]
+        }
+        let features = {}
+        features[this.MI_ADD_BOOKMARK] = true
+        imageCard.init(features);
+
         this.initLoadImages();
         // let self = this;
         // wx.getNetworkType({
@@ -97,14 +105,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-        //                     }
-        //                 }
-        //             })
-        //         } else {
-        //             self.initLoadImages();
-        //         }
-        //     }
-        // })
+    //                     }
+    //                 }
+    //             })
+    //         } else {
+    //             self.initLoadImages();
+    //         }
+    //     }
+    // })
     },
     initLoadImages: function() {
         offset = 0;
