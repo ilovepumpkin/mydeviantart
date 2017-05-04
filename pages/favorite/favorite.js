@@ -16,12 +16,9 @@ Page({
     onLoad: function() {
         this.setData(Object.assign({}, this.data, app.globalData))
 
-        for (let func in imageCard) {
-            this[[func]] = imageCard[func]
-        }
-        let features = {}
-        features[this.MI_DELETE_BOOKMARK] = true;
-        imageCard.init(features, this.postDeleteBookmark);
+        imageCard.init(this, {
+            [imageCard.MI_DELETE_BOOKMARK]: true
+        }, this.postDeleteBookmark);
 
         this.initLoadBookmarks();
     },

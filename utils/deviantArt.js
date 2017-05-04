@@ -105,17 +105,12 @@ function getComments(deviationid, options) {
     })
 }
 
-function search(keyword) {
-    let url = "https://backend.deviantart.com/rss.xml?type=deviation&q=by:ilovepumpkin2014 sort:time meta:all " + keyword;
-    return wxRequest({
-        url,
-        dataType: "xml",
-        header: {
-            'content-type': 'application/x-www-form-urlencoded'
-        }
-    }).then(function(res) {
-        return res.data;
-    });
+function search(keyword, options) {
+    return authenticate().then(function() {
+        return wxRequest(basicConfig("/browse/newest?q=by:ilovepumpkin2014 " + keyword, options)).then(function(res) {
+            return res.data;
+        });
+    })
 }
 
 module.exports = {

@@ -57,7 +57,11 @@ function showActionSheet(deviationid, title, thumbSrc, thumbWidth, thumbHeight) 
     })
 }
 
-function init(userFeatures, deleteBookmarkCB) {
+function init(that, userFeatures, deleteBookmarkCB) {
+    for (let func in this) {
+        that[[func]] = this[func]
+    }
+
     if (deleteBookmarkCB) {
         deleteBookmarkCallback = deleteBookmarkCB
     }

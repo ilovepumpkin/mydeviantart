@@ -33,7 +33,7 @@ Page({
             console.log("all images are loaded already");
             wx.showToast({
                 title: '已经到最后了噢！',
-                duration: 2000
+                duration: 1500
             })
             return null;
         }
@@ -81,12 +81,9 @@ Page({
     },
     onLoad: function() {
 
-        for (let func in imageCard) {
-            this[[func]] = imageCard[func]
-        }
-        let features = {}
-        features[this.MI_ADD_BOOKMARK] = true
-        imageCard.init(features);
+        imageCard.init(this, {
+            [imageCard.MI_ADD_BOOKMARK]: true
+        });
 
         this.initLoadImages();
         // let self = this;
