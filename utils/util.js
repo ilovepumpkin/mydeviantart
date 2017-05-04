@@ -110,6 +110,9 @@ function decideColumns(images, imgWidth, col1, col2) {
         let scale = imgWidth / oImgW;
         let imgHeight = oImgH * scale;
 
+        imageObj.origImgHeight = oImgH;
+        imageObj.origImgWidth = oImgW;
+
         imageObj.height = imgHeight;
 
         const infoContainerHeight = 30;
@@ -134,10 +137,30 @@ function decideColumns(images, imgWidth, col1, col2) {
     return data;
 }
 
+function formImages(deviations, imgWidth) {
+    const titleWidth = imgWidth - 130
+
+    var images = deviations.map(d => {
+        let img = d.thumbs[1]
+        return {
+            "pic": img.src,
+            "id": d.deviationid,
+            "width": img.width,
+            "height": img.height,
+            title: d.title,
+            commentCount: d.stats.comments,
+            favouriteCount: d.stats.favourites,
+            titleWidth
+        }
+    });
+    return images;
+}
+
 module.exports = {
     formatTime,
     wxPromisify,
     parseSearchResult,
     decideColumns,
-    calImageSize
+    calImageSize,
+    formImages
 }

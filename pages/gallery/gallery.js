@@ -50,26 +50,11 @@ Page({
                 offset = resp["next_offset"]
                 console.log(deviations);
 
-                const titleWidth = self.data.imgWidth - 130
-
-                var images = deviations.map(d => {
-                    let img = d.thumbs[1]
-                    return {
-                        "pic": img.src,
-                        "id": d.deviationid,
-                        "width": img.width,
-                        "height": img.height,
-                        title: d.title,
-                        commentCount: d.stats.comments,
-                        favouriteCount: d.stats.favourites,
-                        titleWidth
-                    }
-                });
-                self.setData(util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2))
-
-                self.setData({
+                var images = util.formImages(deviations, self.data.imgWidth)
+                let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
+                self.setData(Object.assign({}, colData, {
                     isLoading: false
-                });
+                }))
             });
         } else {
             console.log("still in the process of fetching data ...");
@@ -79,11 +64,17 @@ Page({
         wx.stopPullDownRefresh()
         this.initLoadImages()
     },
-    onLoad: function() {
-
+    initImageCard: function() {
         imageCard.init(this, {
             [imageCard.MI_ADD_BOOKMARK]: true
         });
+    },
+    onShow: function() {
+        this.initImageCard();
+    },
+    onLoad: function() {
+
+        this.initImageCard();
 
         this.initLoadImages();
         // let self = this;
@@ -102,14 +93,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-    //                     }
-    //                 }
-    //             })
-    //         } else {
-    //             self.initLoadImages();
-    //         }
-    //     }
-    // })
+        //                     }
+        //                 }
+        //             })
+        //         } else {
+        //             self.initLoadImages();
+        //         }
+        //     }
+        // })
     },
     initLoadImages: function() {
         offset = 0;
@@ -129,7 +120,7 @@ Page({
                 let ww = res.windowWidth;
                 let wh = res.windowHeight;
                 let imgWidth = ww * 0.48;
-                let scrollH = wh;
+                let scrollH = wh - 30;
 
                 this.setData({
                     scrollH: scrollH,

@@ -1,5 +1,5 @@
 <import src="../../components/imageCardColumn/imageCardColumn.wxml"/>
-
+<view class="resultCount" hidden="{{col1.data.length+col2.data.length<=0}}">已加载 {{col1.data.length+col2.data.length}} 幅作品</view>
 <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" bindscrolltoupper="initLoadImages">
   <view style="width:100%">
     <template is="imageCardColumn" data="{{columnData:col1.data}}"/>

@@ -106,8 +106,9 @@ function getComments(deviationid, options) {
 }
 
 function search(keyword, options) {
+    options["q"] = "by:ilovepumpkin2014 " + keyword
     return authenticate().then(function() {
-        return wxRequest(basicConfig("/browse/newest?q=by:ilovepumpkin2014 " + keyword, options)).then(function(res) {
+        return wxRequest(basicConfig("/browse/newest", options)).then(function(res) {
             return res.data;
         });
     })

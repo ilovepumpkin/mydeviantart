@@ -26,3 +26,13 @@
 	justify-content: center;
 	font-size: 14px;
 }
+
+.resultCount{
+	height:25px;
+	color:white;
+	text-align: center;
+	margin: 0px 10px 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

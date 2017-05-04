@@ -17,11 +17,22 @@ Page({
         this.resetData()
         this.setData(Object.assign({}, this.data, app.globalData))
 
+        this.initImageCard();
+    },
+    initImageCard: function() {
         imageCard.init(this, {
             [imageCard.MI_ADD_BOOKMARK]: true
         });
     },
+    onShow: function() {
+        this.initImageCard();
+        var isLoading = false;
+        wx.hideLoading();
+    },
     resetData: function() {
+        offset = 0;
+        keyword = null;
+        isLoading = false;
         this.setData({
             totalCount: 0,
             col1: {
@@ -35,10 +46,10 @@ Page({
         })
     },
     doSearch: function(e) {
+        this.resetData();
         keyword = e.detail.value
         console.log("keyword:" + keyword)
 
-        this.resetData();
 
         const self = this;
         self.setData({
@@ -66,30 +77,24 @@ Page({
             dA.search(keyword, {
                 offset: offset
             }).then(function(resp) {
+                console.log("resp:", resp);
                 let deviations = resp["results"]
                 offset = resp["next_offset"]
                 console.log(deviations);
 
-                self.setData({
-                    totalCount: resp.estimated_total
-                })
+                const totalCount = resp.estimated_total
+                if (totalCount === 0) {
+                    self.setData({
+                        message: "很抱歉，未搜索到任何相关作品"
+                    })
+                } else {
+                    var images = util.formImages(deviations, self.data.imgWidth)
+                    let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
+                    self.setData(Object.assign({}, colData, {
+                        totalCount
+                    }))
+                }
 
-                const titleWidth = self.data.imgWidth - 130
-
-                var images = deviations.map(d => {
-                    let img = d.thumbs[1]
-                    return {
-                        "pic": img.src,
-                        "id": d.deviationid,
-                        "width": img.width,
-                        "height": img.height,
-                        title: d.title,
-                        commentCount: d.stats.comments,
-                        favouriteCount: d.stats.favourites,
-                        titleWidth
-                    }
-                });
-                self.setData(util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2))
 
                 isLoading = false;
                 wx.hideLoading();

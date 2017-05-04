@@ -1,12 +1,14 @@
-import { deleteBookmark, addBookmark } from '../../utils/bookmark'
+import {
+    deleteBookmark,
+    addBookmark
+} from '../../utils/bookmark'
 
 var touchStart = 0;
 var touchEnd = 0
 
 var menuItems = [];
 
-var deleteBookmarkCallback = () => {
-};
+var deleteBookmarkCallback = () => {};
 
 const MI_ADD_BOOKMARK = "add_bookmark"
 const MI_DELETE_BOOKMARK = "delete_bookmark"
@@ -47,7 +49,7 @@ function showActionSheet(deviationid, title, thumbSrc, thumbWidth, thumbHeight) 
         itemList: itemList,
         success: function(res) {
             console.log(res.tapIndex)
-            if (res.tapIndex) {
+            if (res.tapIndex !== null && res.tapIndex !== undefined) {
                 menuItems[res.tapIndex].handler(deviationid, title, thumbSrc, thumbWidth, thumbHeight)
             }
         },
@@ -62,15 +64,12 @@ function init(that, userFeatures, deleteBookmarkCB) {
         that[[func]] = this[func]
     }
 
-    if (deleteBookmarkCB) {
-        deleteBookmarkCallback = deleteBookmarkCB
-    }
+    deleteBookmarkCallback = deleteBookmarkCB ? deleteBookmarkCB : null
 
     if (userFeatures) {
         initMenuItems(userFeatures)
     }
-}
-;
+};
 
 function handleAddBookmark(deviationid, title, thumbSrc, thumbWidth, thumbHeight) {
     const result2 = addBookmark(deviationid, title, thumbSrc, thumbWidth, thumbHeight);

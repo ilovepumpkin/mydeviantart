@@ -1,12 +1,15 @@
 <import src="../../components/imageCardColumn/imageCardColumn.wxml"/>
 <view class="searchInputContainer">
 	<icon type="search" size="20" class="searchIcon"/>
-	<input placeholder="" confirm-type="search" bindconfirm="doSearch" class="searchInput" auto-focus/>
+	<input placeholder="" confirm-type="search" bindconfirm="doSearch" class="searchInput" />
 </view>
 <view wx:if="{{totalCount===0}}" style="height:{{scrollH}}px" class="instruction">{{message}}</view>
-<scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="searchMore" wx:else>
-  <view style="width:100%">
-    <template is="imageCardColumn" data="{{columnData:col1.data}}"/>
-    <template is="imageCardColumn" data="{{columnData:col2.data}}"/>
-  </view>
-</scroll-view>
+<view wx:else>
+<view class="resultCount" >共搜索到 {{totalCount}} 幅作品</view>	
+ <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="searchMore" >
+	  <view style="width:100%">
+	    <template is="imageCardColumn" data="{{columnData:col1.data}}"/>
+	    <template is="imageCardColumn" data="{{columnData:col2.data}}"/>
+	  </view>
+  </scroll-view>
+</view>
