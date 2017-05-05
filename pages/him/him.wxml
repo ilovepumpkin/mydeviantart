@@ -1,4 +1,4 @@
-<view>
+<view hidden="{{!done}}">
     <view class="authorInfoArea">
 		<view class="authorInfoTitle">
     		作者信息
@@ -13,6 +13,9 @@
 	    			<view class="fieldValue">
 	    				{{item.value}}
 	    			</view>
+	    			<view class="{{item.deltaClassName}}" hidden="{{item.delta===0}}">
+	    				{{item.deltaText}}
+	    			</view>
 	    		</view>
     		</view>
     	</view>
@@ -20,7 +23,10 @@
     		<view class="fieldName">主页: </view><text class="fieldValue" selectable="true">{{profile_url}}</text>
     	</view>
 	</view>
-	<view style="height:{{winHeight-180}}px" class="qrcodeArea">
+	<view style="height:{{winHeight-180-70}}px" class="qrcodeArea">
 		<image src="../../images/GongZhongHao.jpg" class="gongzhonghao"/>
+	</view>
+	<view class="supportText">
+		如有任何问题或建议，请通过公众号反馈作者
 	</view>
 </view>

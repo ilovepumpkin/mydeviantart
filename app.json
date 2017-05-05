@@ -1,20 +1,19 @@
 {
   "pages": [
     "pages/search/search",
+    "pages/him/him",
     "pages/favorite/favorite",
     "pages/gallery/gallery",
     "pages/settings/settings",
     "pages/index/index",
     "pages/intro/intro",
-    "pages/him/him",
     "pages/deviation/deviation"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "码农也涂鸦之dA版",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#333333",

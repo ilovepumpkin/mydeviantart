@@ -11,6 +11,7 @@ var offset = 0;
 
 Page({
     data: {
+        totalCount: 0,
         imgWidth: 0,
         col1: {
             colH: 0,
@@ -52,8 +53,10 @@ Page({
 
                 var images = util.formImages(deviations, self.data.imgWidth)
                 let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
+                let totalCount = colData.col1.data.length + colData.col2.data.length;
                 self.setData(Object.assign({}, colData, {
-                    isLoading: false
+                    isLoading: false,
+                    totalCount
                 }))
             });
         } else {
@@ -93,14 +96,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-        //                     }
-        //                 }
-        //             })
-        //         } else {
-        //             self.initLoadImages();
-        //         }
-        //     }
-        // })
+    //                     }
+    //                 }
+    //             })
+    //         } else {
+    //             self.initLoadImages();
+    //         }
+    //     }
+    // })
     },
     initLoadImages: function() {
         offset = 0;

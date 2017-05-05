@@ -66,3 +66,23 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.supportText{
+	height:30px;
+	/*color:#6cd4c0;*/
+	color:orange;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.deltaGreen{
+	color:#00ba00;
+	margin-left: 5px;
+	display: inline;
+}
+
+.deltaRed{
+	color:red;
+	margin-left: 5px;
+	display: inline;
+}
