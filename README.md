@@ -6,3 +6,9 @@
 
 ![image](https://github.com/ilovepumpkin/myimages/blob/master/mydeviantart/qrcode_for_gh_1e26528fc01c_258.jpg)
 
+预览：
+
+![image](https://github.com/ilovepumpkin/myimages/blob/master/mydeviantart/screenshots/search.jpg)
+![image](https://github.com/ilovepumpkin/myimages/blob/master/mydeviantart/screenshots/faviorites.jpg)
+![image](https://github.com/ilovepumpkin/myimages/blob/master/mydeviantart/screenshots/him.jpg)
+
