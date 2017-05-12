@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/language-javascript-orange.svg?style=plastic)
+![](https://img.shields.io/badge/language-javascript-brightgreen.svg?style=plastic)
 
 微信小程序：码农也涂鸦之dA版
 
