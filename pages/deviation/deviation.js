@@ -70,9 +70,8 @@ Page({
     return details;
   },
   onLoad: function(option) {
-    wx.showLoading({
-      title: "加载中..."
-    });
+    this.setData({isLoading:true})
+
     wx.showNavigationBarLoading()
 
     var deviationid = option.deviationid
@@ -174,15 +173,16 @@ Page({
 
   },
   handleLoadSuccess: function() {
-    wx.hideLoading();
+    // wx.hideLoading();
     this.setData({
-      done: true
+      done: true,
+      isLoading:false
     })
 
     wx.hideNavigationBarLoading()
   },
   handleLoadError: function() {
-    wx.hideLoading();
+    this.setData({isLoading:false})
     wx.showToast({
       title: "哎呦！图片加载失败了，:(，稍后再试吧！"
     });

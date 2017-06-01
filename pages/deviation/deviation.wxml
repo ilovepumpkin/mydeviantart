@@ -58,6 +58,7 @@
     </swiper-item>
 </swiper>
 <loading hidden="{{!isCommentLoading}}">评论加载中...</loading>
+<loading hidden="{{!isLoading}}">加载中...</loading>
 
 
 

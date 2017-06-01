@@ -76,9 +76,8 @@ Page({
         this.initImageCard();
     },
     onLoad: function() {
-
+        this.setData(Object.assign({}, this.data, app.globalData))
         this.initImageCard();
-
         this.initLoadImages();
         // let self = this;
         // wx.getNetworkType({
@@ -96,14 +95,14 @@ Page({
         //                         self.initLoadImages();
         //                     } else {
 
-    //                     }
-    //                 }
-    //             })
-    //         } else {
-    //             self.initLoadImages();
-    //         }
-    //     }
-    // })
+        //                     }
+        //                 }
+        //             })
+        //         } else {
+        //             self.initLoadImages();
+        //         }
+        //     }
+        // })
     },
     initLoadImages: function() {
         offset = 0;
@@ -118,21 +117,7 @@ Page({
             }
         })
 
-        wx.getSystemInfo({
-            success: (res) => {
-                let ww = res.windowWidth;
-                let wh = res.windowHeight;
-                let imgWidth = ww * 0.48;
-                let scrollH = wh - 30;
-
-                this.setData({
-                    scrollH: scrollH,
-                    imgWidth: imgWidth
-                });
-
-                this.loadImages();
-            }
-        });
+        this.loadImages();
     },
     onShareAppMessage: function() {
         return {

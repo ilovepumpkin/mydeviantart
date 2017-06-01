@@ -101,7 +101,7 @@ Page({
 				let ww = res.windowWidth;
 				let wh = res.windowHeight;
 				let imgWidth = ww * 0.48;
-				let scrollH = wh - 30;
+				let scrollH = wh;
 
 				this.setData({
 					scrollH: scrollH,

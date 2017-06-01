@@ -6,7 +6,8 @@ const KEY_STATS_INFO = "stats_info"
 var app = getApp()
 Page({
     data: {
-        done: false
+        done: false,
+        isLoading:false
     },
     item: function(name, value, delta) {
         let deltaText;
@@ -24,7 +25,8 @@ Page({
         }
     },
     onUserIconLoaded: function() {
-        wx.hideLoading();
+        // wx.hideLoading();
+        this.setData({isLoading:false})
     },
     saveStatsInfo: function(user_deviations, watchers, user_favourites) {
         wx.setStorageSync(KEY_STATS_INFO, {
@@ -58,9 +60,7 @@ Page({
     onLoad: function() {
         this.setData(Object.assign({}, this.data, app.globalData))
 
-        wx.showLoading({
-            title: "加载中..."
-        })
+        this.setData({isLoading:true})
 
         const self = this;
         dA.whoami().then(resp => {

@@ -30,3 +30,4 @@
 		如有任何问题或建议，请通过公众号反馈作者
 	</view>
 </view>
+<loading hidden="{{!isLoading}}">加载中...</loading>

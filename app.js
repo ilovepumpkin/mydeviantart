@@ -9,7 +9,6 @@ App({
                 let imgWidth = ww * 0.48;
                 let scrollH = wh;
 
-                that.globalData.scrollH = scrollH - 50;
                 that.globalData.imgWidth = imgWidth;
                 that.globalData.winHeight = wh;
                 that.globalData.winWidth = ww;

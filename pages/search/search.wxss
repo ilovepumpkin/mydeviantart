@@ -1,11 +1,16 @@
 @import '../../components/imageCardColumn/imageCardColumn.wxss'
 
+.searchBar{
+	height:30px;
+	padding: 10px 10px 0 10px;
+}
+
 .searchInputContainer{
 	border:1px solid #00ba00;
 	border-width: 0 0 1px 0;
 	white-space: nowrap;
 	display: flex;
-	margin: 10px 10px 0 10px;
+
 }
 
 .searchInput{
