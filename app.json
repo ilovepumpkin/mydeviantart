@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/gallery/gallery",
     "pages/search/search",
     "pages/him/him",
     "pages/favorite/favorite",
-    "pages/gallery/gallery",
     "pages/settings/settings",
     "pages/index/index",
     "pages/intro/intro",
@@ -25,7 +25,7 @@
       "text": "搜索",
       "selectedIconPath": "images/search_focus.png",
       "iconPath": "images/search.png"
-    },{
+    }, {
       "pagePath": "pages/gallery/gallery",
       "text": "浏览",
       "selectedIconPath": "images/gallery_focus.png",
