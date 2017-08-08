@@ -1,9 +1,7 @@
 var dA = require('../../utils/deviantArt.js')
 var util = require('../../utils/util.js')
 var wxParse = require('../../wxParse/wxParse.js');
-import {
-  addBookmark
-} from '../../utils/bookmark.js'
+import { addBookmark } from '../../utils/bookmark.js'
 
 var offset = 0;
 
@@ -70,7 +68,9 @@ Page({
     return details;
   },
   onLoad: function(option) {
-    this.setData({isLoading:true})
+    this.setData({
+      isLoading: true
+    })
 
     wx.showNavigationBarLoading()
 
@@ -176,13 +176,15 @@ Page({
     // wx.hideLoading();
     this.setData({
       done: true,
-      isLoading:false
+      isLoading: false
     })
 
     wx.hideNavigationBarLoading()
   },
   handleLoadError: function() {
-    this.setData({isLoading:false})
+    this.setData({
+      isLoading: false
+    })
     wx.showToast({
       title: "哎呦！图片加载失败了，:(，稍后再试吧！"
     });
@@ -192,66 +194,89 @@ Page({
   showActionSheet: function() {
     const self = this;
     let itemList = ['转发', '下载原图']
-    itemList = ['查看详情', '收藏']
+    itemList = ['查看详情', '收藏', '保存到相册']
     wx.showActionSheet({
       itemList: itemList,
       success: function(res) {
         console.log(res.tapIndex)
         switch (res.tapIndex) {
-          case 0:
-            self.setData({
-              currentSwipperItemIndex: 1
+        case 0:
+          self.setData({
+            currentSwipperItemIndex: 1
+          })
+          break;
+        case 1:
+          const dev = self.data.deviation;
+          const thumb = dev.thumbs[1];
+          const result = addBookmark(dev.deviationid, dev.title, thumb.src, thumb.width, thumb.height);
+          if (result) {
+            wx.showToast({
+              title: "收藏成功啦！",
+              icon: "success",
+              duration: 1500
             })
-            break;
-          case 1:
-            const dev = self.data.deviation;
-            const thumb = dev.thumbs[1];
-            const result = addBookmark(dev.deviationid, dev.title, thumb.src, thumb.width, thumb.height);
-            if (result) {
-              wx.showToast({
-                title: "收藏成功啦！",
-                icon: "success",
-                duration: 1500
-              })
-            } else {
-              wx.showToast({
-                title: "哎呦，收藏出错了！",
-                duration: 1500
-              })
-            }
-            break;
-          case 2:
-            /* a bug here - this API can not pop up the Share menu */
-            wx.showShareMenu({
-              success: function() {},
-              fail: function() {},
-              complete: function() {}
+          } else {
+            wx.showToast({
+              title: "哎呦，收藏出错了！",
+              duration: 1500
             })
-            break;
-          case 1:
-            const url = self.data.deviation.content.src.replace("http://", "https://").replace(/orig\d+/, "orig01").replace(/img\d+/, "img01")
+          }
+          break;
+        case 2:
+          const url = self.data.deviation.content.src.replace("http://", "https://").replace(/orig\d+/, "orig01").replace(/img\d+/, "img01")
 
-            wx.downloadFile({
-              url,
-              success: function(res) {
-                wx.saveFile({
-                  tempFilePath: res.tempFilePath,
-                  success: function(res) {
-                    const savedFilePath = res.savedFilePath;
-                    console.log(savedFilePath)
-                  },
-                  fail: function() {},
-                  complete: function() {}
+          const saveToAlbum = (savedFilePath) => {
+            wx.saveImageToPhotosAlbum({
+              filePath: savedFilePath,
+              success(res) {
+                wx.showToast({
+                  title: "保存成功啦！",
+                  icon: "success",
+                  duration: 1500
                 })
               },
-              fail: function() {
-
+              fail() {
+                wx.showToast({
+                  title: "哎呦，保存出错了！",
+                  duration: 1500
+                })
               },
-              complete: function() {
-
-              }
+              complete() {}
             })
-            break;
+          }
+
+          wx.downloadFile({
+            url,
+            success: function(res) {
+              wx.saveFile({
+                tempFilePath: res.tempFilePath,
+                success: function(res) {
+                  const savedFilePath = res.savedFilePath;
+                  console.log(savedFilePath)
+
+                  wx.getSetting({
+                    success(res) {
+                      if (!res.authSetting['scope.writePhotosAlbum']) {
+                        wx.authorize({
+                          scope: 'scope.writePhotosAlbum',
+                          success() {
+                            saveToAlbum(savedFilePath)
+                          }
+                        })
+                      } else {
+                        saveToAlbum(savedFilePath)
+                      }
+                    }
+                  })
+                },
+                fail: function() {},
+                complete: function() {}
+              })
+            },
+            fail: function() {},
+            complete: function() {}
+          })
+          break;
         }
       },
       fail: function(res) {
