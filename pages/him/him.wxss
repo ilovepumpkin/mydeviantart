@@ -86,3 +86,30 @@
 	margin-left: 5px;
 	display: inline;
 }
+
+.switchUser{
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.inputField{
+	background-color: lightgrey;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.editUser{
+	margin-top: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.saveButton{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

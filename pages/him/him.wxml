@@ -23,11 +23,19 @@
     		<view class="fieldName">主页: </view><text class="fieldValue" selectable="true">{{profile_url}}</text>
     	</view>
 	</view>
-	<view style="height:{{winHeight-180-70}}px" class="qrcodeArea">
-		<image src="../../images/GongZhongHao.jpg" class="gongzhonghao"/>
+	<view class="switchUser" hidden="{{isEdit}}">
+		<button type="primary" size="mini" bindtap="startEdit">切换账号</button>
 	</view>
-	<view class="supportText">
-		如有任何问题或建议，请通过公众号反馈作者
+	<view class="editUser" hidden="{{!isEdit}}">
+		<input class="inputField" value="{{username}}" bindinput="onUsernameInput"/>
+
 	</view>
+	<view class="saveButton" hidden="{{!isEdit}}">
+		<view style="width:150px" class="saveButton">
+		<button size="mini" bindtap="cancelChangeUser">取消</button>
+		<button type="primary" size="mini" bindtap="saveUser">保存</button>
+		</view>
+	</view>
+
 </view>
 <loading hidden="{{!isLoading}}">加载中...</loading>

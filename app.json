@@ -37,7 +37,7 @@
       "iconPath": "images/favorite.png"
     }, {
       "pagePath": "pages/him/him",
-      "text": "他",
+      "text": "作者",
       "selectedIconPath": "images/him_focus.png",
       "iconPath": "images/him.png"
     }],
