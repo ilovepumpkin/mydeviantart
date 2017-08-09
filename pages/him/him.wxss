@@ -113,3 +113,31 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.contact{
+	position: absolute;
+	bottom: 20px;
+	display: flex;
+	justify-content: center;
+	width:100%;
+}
+
+.contactContent{
+	display:flex;
+}
+
+.contactContentLeft{
+	background-color: orange;
+	padding:5px;
+	border-radius:5px 0 0 5px; 
+	text-shadow:1px 1px 1px #fff;
+	color:#000;
+}
+
+.contactContentRight{
+	background-color: #00ba00;
+	padding:5px;
+	border-radius:0 5px 5px 0;
+	text-shadow:1px 1px 1px #000;
+	color:#fff;
+}

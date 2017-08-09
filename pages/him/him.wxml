@@ -36,6 +36,12 @@
 		<button type="primary" size="mini" bindtap="saveUser">保存</button>
 		</view>
 	</view>
+	<view class="contact">
+		<view class="contactContent">
+			<view class="contactContentLeft">技术支持</view>
+			<view class="contactContentRight">公众号『码农也涂鸦』</view>
+		</view>
+	</view>
 
 </view>
 <loading hidden="{{!isLoading}}">加载中...</loading>
