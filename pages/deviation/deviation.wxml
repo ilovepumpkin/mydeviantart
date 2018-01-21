@@ -1,7 +1,7 @@
 <import src="../../wxParse/wxParse.wxml"/>
 
 <swiper style="height:{{winHeight}}px" current="{{currentSwipperItemIndex}}" circular="true">
-    <swiper-item class="imageContainer">
+    <!-- <swiper-item class="imageContainer">
 			<image src="{{imageSrc}}" style="width: {{imagewidth}}px; height: {{imageheight}}px;" bindlongtap="showActionSheet" bindload="handleLoadSuccess" binderror="handleLoadError"></image>
 			<view class="infoContainer" hidden="{{!done}}">
 				<text class="title" style="width:{{winWidth-150}}px">{{deviation.title}}</text>
@@ -12,7 +12,7 @@
 					<text class="favCount">{{deviation.stats.favourites}}</text>
 				</view>
 			</view>
-    </swiper-item>
+    </swiper-item> -->
     <swiper-item>
     	<view class="deviationInfoArea">
 			<view class="deviationInfoTitle">
@@ -29,9 +29,9 @@
 	    		</view>
 	    	</view>
     	</view>
-    	<view style="text-align:center" hidden="{{!viewCommentsButtonVisible}}">
+    	<!-- <view style="text-align:center" hidden="{{!viewCommentsButtonVisible}}">
     		<button type="primary" size="mini" bindtap="loadComments"> 查看评论 </button>
-    	</view>
+    	</view> -->
     	<view class="commmentInfoArea" hidden="{{comments.length===0}}">
 			<view class="titleComments">
 				评论

@@ -152,7 +152,8 @@ function formImages(deviations, imgWidth) {
       title: d.title,
       commentCount: d.stats.comments,
       favouriteCount: d.stats.favourites,
-      titleWidth
+      titleWidth,
+      "fullSizeUrl":d.content.src
     }
   });
   return images;

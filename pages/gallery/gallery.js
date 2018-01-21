@@ -131,7 +131,7 @@ Page({
   },
   onShareAppMessage: function() {
     return {
-      title: '码农也涂鸦之dA版',
+      title: '码农也涂鸦',
       path: '/pages/gallery/gallery',
       success: function(res) {
         // 分享成功

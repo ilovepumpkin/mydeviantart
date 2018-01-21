@@ -115,6 +115,9 @@ Page({
           //reset offset value to zero
           offset = 0;
 
+          if(viewCommentsButtonVisible){
+            self.loadComments();
+          }
         });
       }
     });
@@ -132,9 +135,9 @@ Page({
 
     if (!this.data.isCommentLoading) {
 
-      this.setData({
-        isCommentLoading: true
-      });
+      // this.setData({
+      //   isCommentLoading: true
+      // });
 
       const self = this;
       dA.getComments(this.data.deviationid, {
@@ -160,9 +163,12 @@ Page({
           viewCommentsButtonVisible: false
         })
 
-        this.setData({
-          isCommentLoading: false
-        });
+        // this.setData({
+        //   isCommentLoading: false
+        // });
+
+        self.handleLoadSuccess();
+
       })
 
     } else {

@@ -8,7 +8,7 @@ var touchEnd = 0
 
 var menuItems = [];
 
-var deleteBookmarkCallback = () => {};
+var deleteBookmarkCallback = () => { };
 
 const MI_ADD_BOOKMARK = "add_bookmark"
 const MI_DELETE_BOOKMARK = "delete_bookmark"
@@ -35,9 +35,13 @@ function onTouchTap(e) {
         showActionSheet(deviationid, dataset.title, dataset.src, dataset.width, dataset.height);
     } else {
         // tap
-        const url = "/pages/deviation/deviation?deviationid=" + deviationid
-        wx.navigateTo({
-            url
+        // const url = "/pages/deviation/deviation?deviationid=" + deviationid
+        // wx.navigateTo({
+        //     url
+        // })
+        wx.previewImage({
+            current: dataset.fullsizeurl, 
+            urls: [dataset.fullsizeurl] 
         })
     }
 }
@@ -47,13 +51,13 @@ function showActionSheet(deviationid, title, thumbSrc, thumbWidth, thumbHeight) 
     const itemList = menuItems.map((mi) => mi.text);
     wx.showActionSheet({
         itemList: itemList,
-        success: function(res) {
+        success: function (res) {
             console.log(res.tapIndex)
             if (res.tapIndex !== null && res.tapIndex !== undefined) {
                 menuItems[res.tapIndex].handler(deviationid, title, thumbSrc, thumbWidth, thumbHeight)
             }
         },
-        fail: function(res) {
+        fail: function (res) {
             console.log(res.errMsg)
         }
     })
@@ -104,12 +108,23 @@ function handleDeleteBookmark(deviationid) {
     }
 }
 
+function handleViewDetails(deviationid, title, thumbSrc, thumbWidth, thumbHeight) {
+    const url = "/pages/deviation/deviation?deviationid=" + deviationid
+    wx.navigateTo({
+        url
+    })
+}
+
 function initMenuItems(features) {
     let items = []
     if (features[MI_ADD_BOOKMARK]) {
         items.push({
             text: "收藏",
-            handler: handleAddBookmark
+            handler: handleAddBookmark,
+        })
+        items.push({
+            text: "详细信息",
+            handler: handleViewDetails,
         })
     }
     if (features[MI_DELETE_BOOKMARK]) {
