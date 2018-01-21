@@ -117,6 +117,8 @@ Page({
 
           if(viewCommentsButtonVisible){
             self.loadComments();
+          }else{
+            self.handleLoadSuccess();
           }
         });
       }

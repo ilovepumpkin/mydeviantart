@@ -118,10 +118,10 @@ function handleViewDetails(deviationid, title, thumbSrc, thumbWidth, thumbHeight
 function initMenuItems(features) {
     let items = []
     if (features[MI_ADD_BOOKMARK]) {
-        items.push({
-            text: "收藏",
-            handler: handleAddBookmark,
-        })
+        // items.push({
+        //     text: "收藏",
+        //     handler: handleAddBookmark,
+        // })
         items.push({
             text: "详细信息",
             handler: handleViewDetails,

@@ -30,12 +30,7 @@
       "text": "浏览",
       "selectedIconPath": "images/gallery_focus.png",
       "iconPath": "images/gallery.png"
-    }, {
-      "pagePath": "pages/favorite/favorite",
-      "text": "收藏夹",
-      "selectedIconPath": "images/favorite_focus.png",
-      "iconPath": "images/favorite.png"
-    }, {
+    },{
       "pagePath": "pages/him/him",
       "text": "作者",
       "selectedIconPath": "images/him_focus.png",

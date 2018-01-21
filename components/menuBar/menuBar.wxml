@@ -4,7 +4,7 @@
   <view class="menuBar">
       <template is="menuItem" data="{{keyword:'search',menuItemText:'搜索',currentPage}}"/>
       <template is="menuItem" data="{{keyword:'gallery',menuItemText:'浏览',currentPage}}"/>
-      <template is="menuItem" data="{{keyword:'favorite',menuItemText:'收藏夹',currentPage}}"/>
+      <!-- <template is="menuItem" data="{{keyword:'favorite',menuItemText:'收藏夹',currentPage}}"/> -->
       <template is="menuItem" data="{{keyword:'him',menuItemText:'作者',currentPage}}"/>
   </view>
 </template>
