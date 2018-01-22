@@ -24,7 +24,7 @@
     	</view>
 	</view>
 	<view class="switchUser" hidden="{{isEdit}}">
-		<button type="primary" size="mini" bindtap="startEdit">切换账号</button>
+		<button type="primary" size="mini" bindtap="startEdit">管理账号</button>
 	</view>
 	<view class="editUser" hidden="{{!isEdit}}">
 		<input class="inputField" value="{{username}}" bindinput="onUsernameInput"/>

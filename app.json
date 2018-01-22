@@ -7,7 +7,8 @@
     "pages/settings/settings",
     "pages/index/index",
     "pages/intro/intro",
-    "pages/deviation/deviation"
+    "pages/deviation/deviation",
+    "pages/author/author"
   ],
   "window": {
     "backgroundTextStyle": "light",

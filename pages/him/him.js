@@ -65,8 +65,11 @@ Page({
     }
   },
   startEdit: function() {
-    this.setData({
-      isEdit: true
+    // this.setData({
+    //   isEdit: true
+    // })
+    wx.navigateTo({
+      url:"/pages/author/author"
     })
   },
   cancelChangeUser: function() {
@@ -128,6 +131,7 @@ Page({
       const watchers = resp.user.stats.watchers
       const usericon = (resp.profile_pic && resp.profile_pic.thumbs[0].src) || resp.user.usericon
       const username = resp.user.username
+      
 
       const item = self.item;
 
