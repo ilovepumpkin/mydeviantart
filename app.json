@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/author/author",
     "pages/gallery/gallery",
     "pages/search/search",
     "pages/him/him",
@@ -7,8 +8,7 @@
     "pages/settings/settings",
     "pages/index/index",
     "pages/intro/intro",
-    "pages/deviation/deviation",
-    "pages/author/author"
+    "pages/deviation/deviation"
   ],
   "window": {
     "backgroundTextStyle": "light",

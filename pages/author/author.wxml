@@ -1,10 +1,14 @@
 <view>
     <view>
-        <view>当前:</view>
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindPickerChange">
-            <picker-view-column>
-                <view wx:for="{{authors}}" style="line-height: 50px">{{item.userId}}</view>
-            </picker-view-column>
-        </picker-view>
+        <scroll-view scroll-y style="height: 200px;" >
+            <view wx:key="{{item.username}}" wx:for="{{authors}}" class="author">
+                <image src="{{item.usericon}}" class="photo"/>
+                <view class="info">
+                    <view class="realName">{{item.real_name}}</view>
+                    <view class="userName">{{item.username}}</view>
+                </view>
+                <image src="../../images/bin.png"/>
+            </view>
+        </scroll-view>
     </view>
 </view>

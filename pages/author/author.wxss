@@ -1,143 +1,25 @@
-.usericon{
-	display: inline-block;
-}
-
-.authorInfoArea{
-	margin: 10px 5px 10px 5px;
-}
-
-.authorInfoTitle{
+.realName{
+	color: #ffffff;
 	font-weight: bold;
-	font-size: 16px;
-	color: white;
-	margin-top:5px;
-	margin-bottom:5px;
-	color:#00ba00;
-	border:1px solid #00ba00;
-	border-width: 0 0 1px 0;
 }
 
-.detailLine{
-	white-space: nowrap;
-	width:100%;
-}
-
-.fieldName{
-	display: inline;
-	color: #7f7f7f;
-	font-size: 14px;
-	width:300px;
-}
-
-.fieldValue{
-	display: inline-block;
-	color: white;
-	font-size: 14px;
-}
-
-.authorInfoContainer{
-	white-space: nowrap;
-}
-
-.authorDetailContainer{
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 10px;
-}
-
-.desc{
-	color: white;
-	font-size: 14px;
-	margin-top: 40px;
-	margin-bottom: 20px;
-	text-align: center;
-}
-
-.gongzhonghao{
-	width:158px;
-	height:200px;
-	clear: both; 
-	display: block; 
-	margin:auto; 
-}
-
-.qrcodeArea{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.supportText{
-	height:30px;
-	/*color:#6cd4c0;*/
+.userName{
 	color:orange;
-	text-align: center;
-	text-decoration: underline;
 }
 
-.deltaGreen{
-	color:#00ba00;
-	margin-left: 5px;
-	display: inline;
-}
-
-.deltaRed{
-	color:red;
-	margin-left: 5px;
-	display: inline;
-}
-
-.switchUser{
-	margin-top: 40px;
+.author{
 	display: flex;
-	justify-content: center;
-	align-items: center;
+
 }
 
-.inputField{
-	background-color: lightgrey;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	text-align: center;
+.photo{
+	width:50px;
+	height:50px;
+	margin: 10px;
 }
 
-.editUser{
-	margin-top: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.saveButton{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.contact{
-	position: absolute;
-	bottom: 20px;
-	display: flex;
-	justify-content: center;
-	width:100%;
-}
-
-.contactContent{
+.info{
 	display:flex;
-}
-
-.contactContentLeft{
-	background-color: orange;
-	padding:5px;
-	border-radius:5px 0 0 5px; 
-	text-shadow:1px 1px 1px #fff;
-	color:#000;
-}
-
-.contactContentRight{
-	background-color: #00ba00;
-	padding:5px;
-	border-radius:0 5px 5px 0;
-	text-shadow:1px 1px 1px #000;
-	color:#fff;
+flex-direction:column;
+justify-content:center;
 }
