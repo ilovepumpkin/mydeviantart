@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/author/author",
     "pages/gallery/gallery",
+    "pages/author/author",
     "pages/search/search",
     "pages/him/him",
     "pages/favorite/favorite",
@@ -32,8 +32,8 @@
       "selectedIconPath": "images/gallery_focus.png",
       "iconPath": "images/gallery.png"
     },{
-      "pagePath": "pages/him/him",
-      "text": "作者",
+      "pagePath": "pages/author/author",
+      "text": "艺术家",
       "selectedIconPath": "images/him_focus.png",
       "iconPath": "images/him.png"
     }],

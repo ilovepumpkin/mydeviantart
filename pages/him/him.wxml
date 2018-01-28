@@ -1,7 +1,7 @@
 <view hidden="{{!done}}">
     <view class="authorInfoArea">
 		<view class="authorInfoTitle">
-    		作者信息
+    		艺术家信息
     	</view>
     	<view class="authorInfoContainer">
     		<image src="{{usericon}}" class="usericon" bindload="onUserIconLoaded" binderror="onUserIconLoaded" style="width:{{imgWidth}}px;height:{{imgHeight}}px"/>
@@ -28,7 +28,6 @@
 	</view>
 	<view class="editUser" hidden="{{!isEdit}}">
 		<input class="inputField" value="{{username}}" bindinput="onUsernameInput"/>
-
 	</view>
 	<view class="saveButton" hidden="{{!isEdit}}">
 		<view style="width:150px" class="saveButton">

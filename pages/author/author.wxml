@@ -1,7 +1,7 @@
 <view>
     <view>
-        <scroll-view scroll-y="true" class="scrollView" >
-            <view class="authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" >
+        <scroll-view scroll-y="true" class="scrollView" style="height:{{winHeight-100}}px;width:100%;">
+            <view class="authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" bindtap="switchAuthor">
                 <view class="author">
                         <image src="{{item.usericon}}" class="photo"/>
                         <view class="info">
@@ -9,8 +9,8 @@
                             <view class="userName">{{item.username}}</view>
                         </view>
                 </view>
-                <view class="delete">
-                    <image src="../../images/bin.png" class="deleteIcon"/>
+                <view class="delete" data-username="{{item.username}}" bindtap="onDeleteAuthor">
+                    <image src="../../images/bin.png" class="deleteIcon" hidden="{{item.username==currentUser}}"/>
                 </view>
             </view>
         </scroll-view>

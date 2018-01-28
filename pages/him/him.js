@@ -1,6 +1,8 @@
 var dA = require('../../utils/deviantArt.js')
 var util = require('../../utils/util.js')
 
+import {saveStatsInfo,loadStatsInfo,clearStatsInfo} from '../../utils/authors.js'
+
 const KEY_STATS_INFO = "stats_info"
 const KEY_USERNAME = "da_user"
 
@@ -32,21 +34,8 @@ Page({
       isLoading: false
     })
   },
-  saveStatsInfo: function(user_deviations, watchers, user_favourites) {
-    wx.setStorageSync(KEY_STATS_INFO, {
-      user_deviations,
-      watchers,
-      user_favourites
-    })
-  },
-  loadStatsInfo: function() {
-    return wx.getStorageSync(KEY_STATS_INFO)
-  },
-  clearStatsInfo: function() {
-    return wx.removeStorageSync(KEY_STATS_INFO)
-  },
   computeDelta: function(user_deviations, watchers, user_favourites) {
-    const oldData = this.loadStatsInfo();
+    const oldData = loadStatsInfo();
     let user_deviations_delta,
       watchers_delta,
       user_favourites_delta
@@ -56,7 +45,7 @@ Page({
       user_favourites_delta = user_favourites - oldData.user_favourites
     }
 
-    this.saveStatsInfo(user_deviations, watchers, user_favourites)
+    saveStatsInfo(user_deviations, watchers, user_favourites)
 
     return {
       user_deviations_delta,
@@ -94,7 +83,7 @@ Page({
         })
       } else {
         util.changeCurrentUser(username)
-        this.clearStatsInfo()
+        clearStatsInfo()
         this.onLoad()
         this.setData({
           isEdit: false
