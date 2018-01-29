@@ -1,8 +1,8 @@
 <view hidden="{{!done}}">
     <view class="authorInfoArea">
-		<view class="authorInfoTitle">
+		<!-- <view class="authorInfoTitle">
     		艺术家信息
-    	</view>
+    	</view> -->
     	<view class="authorInfoContainer">
     		<image src="{{usericon}}" class="usericon" bindload="onUserIconLoaded" binderror="onUserIconLoaded" style="width:{{imgWidth}}px;height:{{imgHeight}}px"/>
     		<view class="authorDetailContainer">
@@ -13,9 +13,9 @@
 	    			<view class="fieldValue">
 	    				{{item.value}}
 	    			</view>
-	    			<view class="{{item.deltaClassName}}" hidden="{{item.delta===0}}">
+	    			<!-- <view class="{{item.deltaClassName}}" hidden="{{item.delta===0}}">
 	    				{{item.deltaText}}
-	    			</view>
+	    			</view> -->
 	    		</view>
     		</view>
     	</view>
@@ -23,7 +23,7 @@
     		<view class="fieldName">主页: </view><text class="fieldValue" selectable="true">{{profile_url}}</text>
     	</view>
 	</view>
-	<view class="switchUser" hidden="{{isEdit}}">
+	<!-- <view class="switchUser" hidden="{{isEdit}}">
 		<button type="primary" size="mini" bindtap="startEdit">管理账号</button>
 	</view>
 	<view class="editUser" hidden="{{!isEdit}}">
@@ -34,7 +34,7 @@
 		<button size="mini" bindtap="cancelChangeUser">取消</button>
 		<button type="primary" size="mini" bindtap="saveUser">保存</button>
 		</view>
-	</view>
+	</view> -->
 	<view class="contact">
 		<view class="contactContent">
 			<view class="contactContentLeft">技术支持</view>

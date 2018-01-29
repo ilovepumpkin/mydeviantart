@@ -4,13 +4,15 @@ var util = require('../../utils/util.js')
 import {getAuthors,addAuthor,deleteAuthor} from '../../utils/authors.js'
 import {saveStatsInfo,loadStatsInfo,clearStatsInfo} from '../../utils/authors.js'
 
+var touchStart = 0;
+var touchEnd = 0;
+
 var app = getApp()
 Page({
   data: {
     done: false,
     isLoading: false,
-    isEdit: false,
-    currentUser:util.getCurrentUser()
+    isEdit: false
   },
   bindPickerChange:function(e){
 
@@ -34,14 +36,18 @@ Page({
     //   })
     //   return;
     // }
+    wx.showLoading({
+			title: "操作中..."
+		})
     dA.whoami(username).then(resp => {
       if (resp.error_description === "user not found." || resp.real_name === "") {
         wx.showToast({
-          title: "账号[" + username + "]不存在！",
-          duration: 1500
+          title: "艺术家[" + username + "]不存在！",
+          duration: 2000
         })
       } else {
         addAuthor(username,resp.real_name,resp.user.usericon)
+        wx.hideLoading();
         this.onLoad()
         this.setData({
           isEdit: false
@@ -49,8 +55,33 @@ Page({
       }
     })
   },
-  switchAuthor:function(e){
+  onTouchStart:function (e) {
+    touchStart = e.timeStamp;
+    console.log("touchStart:" + touchStart);
+  },
+  onTouchEnd:function (e) {
+    touchEnd = e.timeStamp;
+    console.log("touchStart:" + touchStart);
+  },
+  onTouchTap:function (e) {
+    const touchTime = touchEnd - touchStart;
+    console.log("touchTime:" + touchTime);
+
     const username=e.currentTarget.dataset.username;
+
+    if (touchTime > 350) {
+        /*long tap*/
+        wx.navigateTo({
+          url: "/pages/him/him?username="+username
+        });
+    } else {
+        this.switchAuthor(username)
+    }
+  },
+  onShow: function() {
+    this.onLoad();
+  },
+  switchAuthor:function(username){
     util.changeCurrentUser(username)
     clearStatsInfo() 
     wx.reLaunch({
@@ -77,7 +108,8 @@ Page({
     this.setData(Object.assign({}, this.data, app.globalData))
 
     this.setData({
-      authors
+      authors,
+      currentUser:util.getCurrentUser()
     })
 
   }

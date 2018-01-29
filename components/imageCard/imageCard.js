@@ -4,7 +4,7 @@ import {
 } from '../../utils/bookmark'
 
 var touchStart = 0;
-var touchEnd = 0
+var touchEnd = 0;
 
 var menuItems = [];
 

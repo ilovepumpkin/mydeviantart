@@ -97,7 +97,9 @@ Page({
       username
     })
   },
-  onLoad: function() {
+  onLoad: function(option) {
+    const username=option.username;
+
     this.setData(Object.assign({}, this.data, app.globalData))
 
     this.setData({
@@ -105,7 +107,7 @@ Page({
     })
 
     const self = this;
-    dA.whoami().then(resp => {
+    dA.whoami(username).then(resp => {
       console.log(resp)
 
       const profile_url = resp.profile_url
@@ -118,10 +120,21 @@ Page({
       const joindate = resp.user.details.joindate
       const friends = resp.user.stats.friends
       const watchers = resp.user.stats.watchers
-      const usericon = (resp.profile_pic && resp.profile_pic.thumbs[0].src) || resp.user.usericon
+      // const usericon = (resp.profile_pic && resp.profile_pic.thumbs[0].src) || resp.user.usericon
+
+      let usericon,usericonWidth=55,usericonHeight=55;
+      if(resp.profile_pic){
+        const thumb=resp.profile_pic.thumbs[0];
+        usericon = thumb.src
+        usericonWidth=thumb.width
+        usericonHeight=thumb.height
+      }else{
+        usericon = resp.user.usericon
+      }
+
+      // const usericon = resp.user.usericon
       const username = resp.user.username
       
-
       const item = self.item;
 
       const delta = this.computeDelta(user_deviations, watchers, user_favourites)
@@ -134,7 +147,7 @@ Page({
         item("粉丝数", watchers, delta.watchers_delta)
       ]
 
-      const [imgWidth, imgHeight] = util.calImageSize(150, 150, self.data.winWidth - 220, 150)
+      const [imgWidth, imgHeight] = util.calImageSize(usericonWidth, usericonHeight, self.data.winWidth - 220, 150)
 
       self.setData({
         username,

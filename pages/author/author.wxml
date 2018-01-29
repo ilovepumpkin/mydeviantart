@@ -1,7 +1,7 @@
 <view>
     <view>
-        <scroll-view scroll-y="true" class="scrollView" style="height:{{winHeight-100}}px;width:100%;">
-            <view class="authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" bindtap="switchAuthor">
+        <scroll-view scroll-y="true" class="scrollView" style="height:{{winHeight-150}}px;width:100%;">
+            <view class="{{item.username==currentUser?'current':'notCurrent'}} authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" bindtouchend="onTouchEnd" bindtouchstart="onTouchStart" bindtap="onTouchTap" >
                 <view class="author">
                         <image src="{{item.usericon}}" class="photo"/>
                         <view class="info">
@@ -16,15 +16,15 @@
         </scroll-view>
         <view class="editArea">
             <view class="buttonsPanel" hidden="{{isEdit}}">
-		    <button type="primary" size="mini" bindtap="startEdit">添加</button>
+		    <button class="btn" type="primary" size="mini" bindtap="startEdit">添加</button>
             </view>
             <view class="editUser" hidden="{{!isEdit}}">
                 <input class="inputField" value="{{username}}" bindinput="onUsernameInput"/>
             </view>
             <view class="saveButton" hidden="{{!isEdit}}">
                 <view style="width:150px" class="saveButton">
-                <button size="mini" bindtap="cancelChangeUser">取消</button>
-                <button type="primary" size="mini" bindtap="saveUser">保存</button>
+                <button class="btn,btn-secondary" size="mini" bindtap="cancelChangeUser">取消</button>
+                <button class="btn" type="primary" size="mini" bindtap="saveUser">保存</button>
                 </view>
             </view>
         </view>
