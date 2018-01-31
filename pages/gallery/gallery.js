@@ -54,13 +54,25 @@ Page({
         offset = resp["next_offset"]
         console.log(deviations);
 
-        var images = util.formImages(deviations, self.data.imgWidth)
-        let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
-        let totalCount = colData.col1.data.length + colData.col2.data.length;
-        self.setData(Object.assign({}, colData, {
-          isLoading: false,
-          totalCount
-        }))
+        deviations = null
+
+        if (deviations) {
+          var images = util.formImages(deviations, self.data.imgWidth)
+          let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
+          let totalCount = colData.col1.data.length + colData.col2.data.length;
+          self.setData(Object.assign({}, colData, {
+            isLoading: false,
+            totalCount
+          }))
+        } else {
+          wx.showToast({
+            title: '服务器忙，请稍后再试',
+            duration: 2000
+          })
+          self.setData({
+            isLoading: false
+          });
+        }
       });
     } else {
       console.log("still in the process of fetching data ...");
