@@ -54,8 +54,6 @@ Page({
         offset = resp["next_offset"]
         console.log(deviations);
 
-        deviations = null
-
         if (deviations) {
           var images = util.formImages(deviations, self.data.imgWidth)
           let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
