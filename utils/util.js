@@ -163,8 +163,8 @@ function getCurrentUser() {
   return wx.getStorageSync(KEY_USERNAME) || "ilovepumpkin2014"
 }
 
-function changeCurrentUser(newUsername) {
-  return wx.setStorageSync(KEY_USERNAME, newUsername)
+function changeCurrentUser(newUser) {
+  return wx.setStorageSync(KEY_USERNAME, newUser)
 }
 
 module.exports = {

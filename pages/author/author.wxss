@@ -4,7 +4,8 @@
 }
 
 .userName{
-	color:green;
+	color:gray;
+	margin-top: 3px;
 }
 
 .author{
@@ -12,7 +13,7 @@
 	justify-content: flex-start;
 	position: absolute;
 	width:100%;
-	background-color: lightgray;
+	background-color: #ffffff;
 	height:60px;
 }
 
@@ -20,12 +21,15 @@
 	width:50px;
 	height:50px;
 	margin: 5px;
+	border-radius: 25px;
+	border:1px solid gray;
 }
 
 .info{
 	display:flex;
 flex-direction:column;
 justify-content:center;
+	margin-left: 10px;
 }
 
 .deleteIcon{
@@ -35,20 +39,19 @@ justify-content:center;
 
 .authorLine{
 	position: relative;
-	background-color:lightgray;
-	margin-top: 2px; 
 	display: flex;
 	justify-content: flex-end;
+	border-style:solid;
+	border-width:0 0 1px 5px;
+	border-bottom-color: gray;
 }
 
 .current{
-	border:5px solid orange;
-	border-width:0 0 0 5px;
+	border-left-color: #00ba00;
 }
 
 .notCurrent{
-	border:5px solid lightgray;
-	border-width:0 0 0 5px;
+	border-left-color:#ffffff;
 }
 
 .delete{
@@ -71,13 +74,13 @@ justify-content:center;
 	color:#fff;
 }
 
-.scrollView{
-	
-}
-
 .editArea{
-	margin-top: 20px;
-	margin-bottom: 20px;
+	position: fixed;
+	width:100%;
+	background-color: #333333;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	bottom:0px;
 }
 
 .buttonsPanel{
@@ -110,4 +113,23 @@ justify-content:center;
 
 .btn-secondary{
 	color: #00ba00;
+}
+
+.add{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height:40px;
+	width:40px;
+	background-color: #00ba00;
+	border-radius: 30px;
+	position: fixed;
+	right:20px;
+	bottom: 20px;
+	filter:drop-shadow(5px 5px 10px gray)
+}
+
+.addIcon{
+	height:30px;
+	width:30px;
 }

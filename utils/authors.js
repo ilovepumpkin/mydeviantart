@@ -19,6 +19,10 @@ export const getAuthors = () => {
     return authors;
 }
 
+export const findAuthor=(username)=>{
+    return getAuthors().find(author=>author.username===username)
+}
+
 export const deleteAuthor = (userId) => {
     let authors = wx.getStorageSync(KEY_AUTHORS)
     const userIndex=authors.findIndex(author=>author.userId===userId)

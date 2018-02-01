@@ -13,7 +13,7 @@ function basicConfig(path, options) {
   var access_token = wx.getStorageSync(KEY_ACCESS_TOKEN)["token"];
   let data = {
     "access_token": access_token,
-    username: util.getCurrentUser()
+    username: util.getCurrentUser()["username"]
   };
   data = Object.assign({}, data, options)
   return {
@@ -69,7 +69,7 @@ function authenticate() {
 }
 
 function whoami(username) {
-  const user = username || util.getCurrentUser()
+  const user = username || util.getCurrentUser()["username"]
   return authenticate().then(function() {
     return wxRequest(basicConfig("/user/profile/" + user + "?expand=user.stats,user.details,user.geo")).then(function(res) {
       return res.data;
@@ -110,7 +110,7 @@ function getComments(deviationid, options) {
 }
 
 function search(keyword, options) {
-  options["q"] = "by:" + util.getCurrentUser() + " " + keyword
+  options["q"] = "by:" + util.getCurrentUser()["username"] + " " + keyword
   return authenticate().then(function() {
     return wxRequest(basicConfig("/browse/newest", options)).then(function(res) {
       return res.data;

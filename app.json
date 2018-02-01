@@ -28,7 +28,7 @@
       "iconPath": "images/search.png"
     }, {
       "pagePath": "pages/gallery/gallery",
-      "text": "浏览",
+      "text": "图库",
       "selectedIconPath": "images/gallery_focus.png",
       "iconPath": "images/gallery.png"
     },{
@@ -44,7 +44,7 @@
       "iconPath": "images/search.png"
     }, {
       "pagePath": "pages/gallery/gallery",
-      "text": "浏览",
+      "text": "图库",
       "selectedIconPath": "images/gallery_focus.png",
       "iconPath": "images/gallery.png"
     }, {

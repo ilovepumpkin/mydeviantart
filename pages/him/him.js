@@ -53,50 +53,6 @@ Page({
       user_favourites_delta
     }
   },
-  startEdit: function() {
-    // this.setData({
-    //   isEdit: true
-    // })
-    wx.navigateTo({
-      url:"/pages/author/author"
-    })
-  },
-  cancelChangeUser: function() {
-    this.setData({
-      username: util.getCurrentUser(),
-      isEdit: false
-    })
-  },
-  saveUser: function() {
-    const username = this.data.username
-    if (username === util.getCurrentUser()) {
-      this.setData({
-        isEdit: false
-      })
-      return;
-    }
-    dA.whoami(username).then(resp => {
-      if (resp.error_description === "user not found." || resp.real_name === "") {
-        wx.showToast({
-          title: "账号[" + username + "]不存在！",
-          duration: 1500
-        })
-      } else {
-        util.changeCurrentUser(username)
-        clearStatsInfo()
-        this.onLoad()
-        this.setData({
-          isEdit: false
-        })
-      }
-    })
-  },
-  onUsernameInput: function(e) {
-    const username = e.detail.value
-    this.setData({
-      username
-    })
-  },
   onLoad: function(option) {
     const username=option.username;
 

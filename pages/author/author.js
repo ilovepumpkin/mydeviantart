@@ -1,7 +1,7 @@
 var dA = require("../../utils/deviantArt.js");
 var util = require("../../utils/util.js");
 
-import { getAuthors, addAuthor, deleteAuthor } from "../../utils/authors.js";
+import { findAuthor,getAuthors, addAuthor, deleteAuthor } from "../../utils/authors.js";
 import {
   saveStatsInfo,
   loadStatsInfo,
@@ -52,7 +52,14 @@ Page({
           duration: 2000
         });
       } else {
-        addAuthor(username, resp.real_name, resp.user.usericon);
+        if(findAuthor(username)){
+          wx.showToast({
+            title: "艺术家[" + username + "]已存在！"
+          });
+        }else{
+          addAuthor(username, resp.real_name, resp.user.usericon);
+        }
+        
         wx.hideLoading();
         this.onLoad();
         this.setData({
@@ -73,7 +80,9 @@ Page({
     //     url: "/pages/him/him?username=" + username
     //   });
     // } else {
-      this.switchAuthor(username);
+
+    const newAuthor=this.data.authors.find(author=>author.username===username)
+    this.switchAuthor(newAuthor);
     // }
   },
   gotoAuthorDetail:function(e){
@@ -85,8 +94,8 @@ Page({
   onShow: function() {
     this.onLoad();
   },
-  switchAuthor: function(username) {
-    util.changeCurrentUser(username);
+  switchAuthor: function(author) {
+    util.changeCurrentUser(author);
     clearStatsInfo();
     wx.reLaunch({
       url: "/pages/gallery/gallery"
@@ -131,7 +140,7 @@ Page({
 
     this.setData({
       authors,
-      currentUser: util.getCurrentUser()
+      currentUser: util.getCurrentUser()["username"]
     });
   },
   touchS: function(e) {

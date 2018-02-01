@@ -90,7 +90,7 @@ Page({
     const newCurrentUser = util.getCurrentUser();
     if (!currentUser) {
       currentUser = newCurrentUser;
-    } else if (currentUser !== newCurrentUser) {
+    } else if (currentUser["username"] !== newCurrentUser["username"]) {
       this.initLoadImages();
       currentUser = newCurrentUser;
     }
