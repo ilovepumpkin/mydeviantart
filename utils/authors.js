@@ -7,8 +7,10 @@ export const addAuthor = (username,real_name,usericon) => {
     if(authors===""){
         authors=[]
     }
-    authors.push({username,real_name,usericon})
+    const author={username,real_name,usericon}
+    authors.push(author)
     wx.setStorageSync(KEY_AUTHORS, authors)
+    return author;
 }
 
 export const getAuthors = () => {
