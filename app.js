@@ -20,6 +20,7 @@ App({
         scrollH: 0,
         imgWidth: 0,
         winHeight: 0,
-        winWidth: 0
+        winWidth: 0,
+        imageUrls:[]
     }
 })

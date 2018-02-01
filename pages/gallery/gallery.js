@@ -55,6 +55,8 @@ Page({
         console.log(deviations);
 
         if (deviations) {
+          getApp().globalData.imageUrls=deviations.map(d=>d.content.src)
+
           var images = util.formImages(deviations, self.data.imgWidth)
           let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
           let totalCount = colData.col1.data.length + colData.col2.data.length;

@@ -41,7 +41,7 @@ function onTouchTap(e) {
         // })
         wx.previewImage({
             current: dataset.fullsizeurl, 
-            urls: [dataset.fullsizeurl] 
+            urls: getApp().globalData.imageUrls
         })
     }
 }
