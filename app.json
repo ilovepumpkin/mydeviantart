@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/author/author",
     "pages/gallery/gallery",
+    "pages/author/author",
     "pages/search/search",
     "pages/him/him",
     "pages/favorite/favorite",
@@ -22,11 +22,6 @@
     "selectedColor": "#00ba00",
     "borderStyle": "black",
     "list": [{
-      "pagePath": "pages/search/search",
-      "text": "搜索",
-      "selectedIconPath": "images/search_focus.png",
-      "iconPath": "images/search.png"
-    }, {
       "pagePath": "pages/gallery/gallery",
       "text": "图库",
       "selectedIconPath": "images/gallery_focus.png",

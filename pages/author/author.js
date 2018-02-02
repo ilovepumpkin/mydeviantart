@@ -1,5 +1,6 @@
 var dA = require("../../utils/deviantArt.js");
 var util = require("../../utils/util.js");
+import searchBar from '../../components/searchBar/searchBar'
 
 import {
   findAuthor,
@@ -16,27 +17,44 @@ import {
 var touchStart = 0;
 var touchEnd = 0;
 
+let authorsBak;
+
 var app = getApp();
 Page({
   data: {
     done: false,
     isLoading: false,
     isEdit: false,
-    delBtnWidth: 120
+    delBtnWidth: 120,
+    search: {
+      searchValue: '',
+      showClearBtn: false
+    }
   },
-  bindPickerChange: function(e) {},
-  startEdit: function() {
+  doSearch: function (val) {
+    const filteredAuthors=authorsBak.filter(author=>author.username.toLowerCase().includes(val)||author.real_name.toLowerCase().includes(val))
+    this.setData({
+      authors:filteredAuthors
+    })
+  },
+  doSearchClear: function () {
+    this.setData({
+      authors:authorsBak
+    })
+  },
+  bindPickerChange: function (e) { },
+  startEdit: function () {
     this.setData({
       isEdit: true
     });
   },
-  cancelChangeUser: function() {
+  cancelChangeUser: function () {
     this.setData({
       username: "",
       isEdit: false
     });
   },
-  saveUser: function() {
+  saveUser: function () {
     const username = this.data.username;
     // if (username === util.getCurrentUser()) {
     //   this.setData({
@@ -62,9 +80,10 @@ Page({
             title: "艺术家[" + username + "]已存在！"
           });
         } else {
-          const author=addAuthor(username, resp.real_name, resp.user.usericon);
-          const authors=this.data.authors
+          const author = addAuthor(username, resp.real_name, resp.user.usericon);
+          const authors = this.data.authors
           authors.push(author)
+          authorsBak=authors;
           this.setData({
             authors
           });
@@ -77,7 +96,7 @@ Page({
       }
     });
   },
-  onTouchTap: function(e) {
+  onTouchTap: function (e) {
     const touchTime = touchEnd - touchStart;
     console.log("touchTime:" + touchTime);
 
@@ -96,26 +115,26 @@ Page({
     this.switchAuthor(newAuthor);
     // }
   },
-  gotoAuthorDetail: function(e) {
+  gotoAuthorDetail: function (e) {
     const username = e.currentTarget.dataset.username;
     wx.navigateTo({
       url: "/pages/him/him?username=" + username
     });
   },
-  onShow: function() {
+  onShow: function () {
     this.onLoad();
   },
-  switchAuthor: function(author) {
+  switchAuthor: function (author) {
     util.changeCurrentUser(author);
     clearStatsInfo();
     wx.reLaunch({
       url: "/pages/gallery/gallery"
     });
   },
-  onDeleteAuthor: function(e) {
+  onDeleteAuthor: function (e) {
     const username = e.currentTarget.dataset.username;
 
-    if (username === this.data.currentUser) {
+    if (username === this.data.currentUser["username"]) {
       wx.showToast({
         title: "不能删除当前用户！"
       });
@@ -128,20 +147,23 @@ Page({
       });
     } else {
       deleteAuthor(username);
-      const authors=this.data.authors
-      authors.splice(authors.findIndex(author=>author.username===username),1)
+      const authors = this.data.authors
+      authors.splice(authors.findIndex(author => author.username === username), 1)
+      authorsBak=authors;
       this.setData({
         authors
       });
     }
   },
-  onUsernameInput: function(e) {
+  onUsernameInput: function (e) {
     const username = e.detail.value;
     this.setData({
       username
     });
   },
-  onLoad: function() {
+  onLoad: function () {
+    searchBar.init(this)
+
     let authors = getAuthors();
     if (authors.length === 0) {
       addAuthor(
@@ -149,16 +171,18 @@ Page({
         "Rui",
         "https://a.deviantart.net/avatars/i/l/ilovepumpkin2014.jpg"
       );
+      authors=getAuthors();
     }
+    authorsBak=authors;
 
     this.setData(Object.assign({}, this.data, app.globalData));
 
     this.setData({
       authors,
-      currentUser: util.getCurrentUser()["username"]
+      currentUser: util.getCurrentUser()
     });
   },
-  touchS: function(e) {
+  touchS: function (e) {
     console.log("touchS" + e);
 
     touchStart = e.timeStamp;
@@ -174,7 +198,7 @@ Page({
     }
   },
   //触摸时触发，手指在屏幕上每移动一次，触发一次
-  touchM: function(e) {
+  touchM: function (e) {
     console.log("touchM:" + e);
     var that = this;
     if (e.touches.length == 1) {
@@ -212,7 +236,7 @@ Page({
       }
     }
   },
-  touchE: function(e) {
+  touchE: function (e) {
     console.log("touchE" + e);
 
     touchEnd = e.timeStamp;
@@ -227,7 +251,7 @@ Page({
       var delBtnWidth = that.data.delBtnWidth;
       //如果距离小于删除按钮的1/2，不显示删除按钮
       var txtStyle =
-        disX > delBtnWidth*0.75 ? "left:-" + delBtnWidth + "px" : "left:0px";
+        disX > delBtnWidth * 0.75 ? "left:-" + delBtnWidth + "px" : "left:0px";
       //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
       var list = that.data.authors;

@@ -1,3 +1,5 @@
+@import '../../components/searchBar/searchBar.wxss'
+
 .realName{
 	color: #000000;
 	font-weight: bold;
@@ -146,4 +148,10 @@ justify-content:center;
 	background-color: #333333;
 	opacity: 0.5;
 	z-index: 8000;
+}
+
+
+.scrollView{
+	position: fixed;
+	top:50px;
 }

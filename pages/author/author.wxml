@@ -1,3 +1,5 @@
+<import src="../../components/searchBar/searchBar"/>
+
 <view class="mask" hidden="{{!isEdit}}">
 </view>
 <view class="editArea" hidden="{{!isEdit}}">
@@ -14,8 +16,10 @@
 <view class="add" bindtap="startEdit" hidden="{{isEdit}}">
     <image src="/images/add.png" class="addIcon"/>  
 </view>
-<scroll-view scroll-y="true" style="height:{{winHeight-25}}px;width:100%;">
-    <view class="{{item.username==currentUser?'current':'notCurrent'}} authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" >
+
+<template is="searchBar" data="{{search,authorPhotoUrl:currentUser['usericon']}}" />
+<scroll-view scroll-y="true" style="height:{{winHeight-30-50}}px;width:100%;" class="scrollView">
+    <view class="{{item.username==currentUser['username']?'current':'notCurrent'}} authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" >
         <view class="author" style="{{item.txtStyle}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}" data-username="{{item.username}}" bindtap="onTouchTap">
                 <image src="{{item.usericon}}" class="photo"/>
                 <view class="info">

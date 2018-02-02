@@ -1,0 +1,45 @@
+.search__top{
+	background-color:#333333;
+	display: flex;
+    align-items: center;
+    flex-grow: 2;
+}
+
+.search__icon{
+	position: absolute;
+	top:10px;
+	left:15px;
+}
+
+.search__input{
+	margin-left: 40px;
+}
+
+.search__form{
+	width:90%;
+	height:30px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	border: 1px solid gray;
+	position: relative;
+	display: flex;
+    align-items: center;
+}
+
+
+.authorPhoto{
+	width:30px;
+	height:30px;
+	margin: 5px;
+	border-radius: 15px;
+	border:1px solid gray;
+}
+
+.toolBar{
+	display: flex;
+	justify-content: space-around;
+    align-items: center;
+    height:50px;
+    width:100%;
+    margin-left: 10px;
+}
