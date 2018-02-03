@@ -1,6 +1,5 @@
 <template name="searchBar">
 <view class="toolBar">
-    <image class="authorPhoto" src="{{authorPhotoUrl}}" />
     <view class="search__top">
             <form class="search__form" bindsubmit="searchSubmit">
                 <input value="{{search.searchValue}}" placeholder="搜索" class="search__input"  bindinput="searchActiveChangeinput"  confirm-type="search" bindconfirm="handleEnterSearch" />
@@ -11,6 +10,7 @@
                 <icon type="clear" size="19" color="#aaa" style="position:absolute;right:15rpx;top:10rpx;z-index:3;"></icon>
                 </button>
             </form>
-        </view>
+    </view>
+    <image class="authorPhoto" src="{{authorPhotoUrl}}" />
     </view>
 </template>

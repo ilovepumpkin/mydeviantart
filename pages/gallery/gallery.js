@@ -114,7 +114,7 @@ Page({
   },
   doSearchClear: function () {
     this.resetData();
-    this.loadImages();
+    this.initLoadImages()
   },
   initComponents: function () {
     imageCard.init(this, {
@@ -204,9 +204,7 @@ Page({
       col2: {
         colH: 0,
         data: []
-      },
-      scrollViewHeight: this.data.winHeight - 40,
-      isLoading: false
+      }
     })
   },
   searchMore: function () {
@@ -229,9 +227,14 @@ Page({
         offset = resp["next_offset"]
         console.log(deviations);
 
+        getApp().globalData.imageUrls = deviations.map(d => d.content.src)
+
         const totalCount = resp.estimated_total
         if (totalCount === 0) {
           const scrollViewHeight = self.data.winHeight - 40
+          wx.showToast({
+            title:"未搜索到任何相关作品"
+          })
           self.setData({
             message: "很抱歉，未搜索到任何相关作品",
             scrollViewHeight

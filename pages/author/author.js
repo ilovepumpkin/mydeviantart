@@ -165,14 +165,6 @@ Page({
     searchBar.init(this)
 
     let authors = getAuthors();
-    if (authors.length === 0) {
-      addAuthor(
-        "ilovepumpkin2014",
-        "Rui",
-        "https://a.deviantart.net/avatars/i/l/ilovepumpkin2014.jpg"
-      );
-      authors=getAuthors();
-    }
     authorsBak=authors;
 
     this.setData(Object.assign({}, this.data, app.globalData));

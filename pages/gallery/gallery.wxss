@@ -2,7 +2,8 @@
 @import '../../components/searchBar/searchBar.wxss'
 
 .imageScrollView{
-	background-color: #333333;
+	position: fixed;
+	top:50px;
 }
 
 .resultCount{

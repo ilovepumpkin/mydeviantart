@@ -1,3 +1,6 @@
+import {addAuthor,getAuthors} from './utils/authors'
+const util = require('./utils/util.js')
+
 //app.js
 App({
     onLaunch: function() {
@@ -14,6 +17,16 @@ App({
                 that.globalData.winWidth = ww;
             }
         });
+
+        let authors = getAuthors();
+        if (authors.length === 0) {
+          const author=addAuthor(
+            "ilovepumpkin2014",
+            "Rui",
+            "https://a.deviantart.net/avatars/i/l/ilovepumpkin2014.jpg"
+          );
+          util.changeCurrentUser(author)
+        }
     },
     globalData: {
         userInfo: null,

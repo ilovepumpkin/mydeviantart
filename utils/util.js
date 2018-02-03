@@ -160,7 +160,7 @@ function formImages(deviations, imgWidth) {
 }
 
 function getCurrentUser() {
-  return wx.getStorageSync(KEY_USERNAME) || "ilovepumpkin2014"
+  return wx.getStorageSync(KEY_USERNAME)
 }
 
 function changeCurrentUser(newUser) {
