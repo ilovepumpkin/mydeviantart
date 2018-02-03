@@ -1,8 +1,3 @@
-import {
-    deleteBookmark,
-    addBookmark
-} from '../../utils/bookmark'
-
 var touchStart = 0;
 var touchEnd = 0;
 

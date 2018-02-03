@@ -1,7 +1,6 @@
 var dA = require('../../utils/deviantArt.js')
 var util = require('../../utils/util.js')
 var wxParse = require('../../wxParse/wxParse.js');
-import { addBookmark } from '../../utils/bookmark.js'
 
 var offset = 0;
 
