@@ -12,6 +12,11 @@ App({
                 let imgWidth = ww * 0.48;
                 let scrollH = wh;
 
+                console.log("windowWidth:",res.windowWidth)
+                console.log("screenWidth:",res.screenWidth)
+                console.log("windowHeight:",res.windowHeight)
+                console.log("screenHeight:",res.screenHeight)
+
                 that.globalData.imgWidth = imgWidth;
                 that.globalData.winHeight = wh;
                 that.globalData.winWidth = ww;

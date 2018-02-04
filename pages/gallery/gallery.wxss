@@ -1,19 +1,9 @@
 @import '../../components/imageCardColumn/imageCardColumn.wxss'
 @import '../../components/searchBar/searchBar.wxss'
 
-.imageScrollView{
+.scrollView{
 	position: fixed;
-	top:50px;
-}
-
-.resultCount{
-	height:25px;
-	color:white;
-	text-align: center;
-	margin: 0px 10px 0 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	top:80rpx;
 }
 
 

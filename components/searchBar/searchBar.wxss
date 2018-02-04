@@ -1,41 +1,39 @@
-
-
 .search__icon{
 	position: absolute;
-	top:10px;
-	left:15px;
+	top:15rpx;
+	left:20rpx;
+	width:50rpx;
 }
 
 .search__input{
-	margin-left: 40px;
+	margin-left: 60rpx;
 }
 
 .search__form{
 	width:100%;
-	height:30px;
+	height:50rpx;
 	background-color: #ffffff;
-	border-radius: 5px;
-	border: 1px solid gray;
+	border-radius: 10rpx;
+	border: 1rpx solid gray;
 	position: relative;
 	display: flex;
 	align-items: center;
-	margin-left: 10px;
+	margin-left: 10rpx;
 }
 
-
 .authorPhoto{
-	width:40px;
-	height:40px;
-	margin: 5px 10px 5px 10px;
-	border-radius: 20px;
-	border:1px solid gray;
+	width:60rpx;
+	height:60rpx;
+	margin: 5rpx 10rpx 5rpx 10rpx;
+	border-radius: 30rpx;
+	border:1rpx solid gray;
 }
 
 .toolBar{
 	display: flex;
 	justify-content: center;
     align-items: center;
-    height:50px;
+    height:80rpx;
 	width:100%;
 }
 

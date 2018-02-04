@@ -31,7 +31,8 @@ Page({
     search: {
       searchValue: '',
       showClearBtn: false
-    }
+    },
+    scrollViewHeight:app.globalData["winHeight"]-(80+80)*app.globalData["winWidth"]/750
   },
   scroll: function (event) {
     this.setData({

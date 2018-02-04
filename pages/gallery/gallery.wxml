@@ -3,7 +3,7 @@
 
 <!-- <view class="resultCount" hidden="{{totalCount===0}}">已加载 {{totalCount}} 幅作品</view> -->
 <template is="searchBar" data="{{search,authorPhotoUrl}}" />
-<scroll-view scroll-y="true" style="height:{{winHeight-50-50}}px;width:100%;" bindscrolltolower="loadMore" bindscrolltoupper="reload">
+<scroll-view class="scrollView" scroll-y="true" style="height:{{scrollViewHeight}}px;width:100%;" bindscrolltolower="loadMore" bindscrolltoupper="reload">
     <template is="imageCardColumn" data="{{columnData:col1.data}}"/>
     <template is="imageCardColumn" data="{{columnData:col2.data}}"/>
 </scroll-view>

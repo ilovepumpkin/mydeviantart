@@ -29,7 +29,10 @@ Page({
     search: {
       searchValue: '',
       showClearBtn: false
-    }
+    },
+    scrollViewHeight:app.globalData["winHeight"]-(80+80)*app.globalData["winWidth"]/750,
+    addIconY:app.globalData["winHeight"]-(80+80)*app.globalData["winWidth"]/750-80,
+    addIconX:app.globalData["winWidth"]-80,
   },
   doSearch: function (val) {
     const filteredAuthors=authorsBak.filter(author=>author.username.toLowerCase().includes(val)||author.real_name.toLowerCase().includes(val))

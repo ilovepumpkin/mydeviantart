@@ -127,9 +127,6 @@ justify-content:center;
 	width:40px;
 	background-color: #00ba00;
 	border-radius: 30px;
-	position: fixed;
-	right:20px;
-	bottom: 20px;
 	filter:drop-shadow(5px 5px 10px gray);
 	z-index: 9999;
 }
@@ -150,8 +147,14 @@ justify-content:center;
 	z-index: 8000;
 }
 
-
 .scrollView{
-	position: fixed;
-	top:50px;
+	position: absolute;
+	top:80rpx;
 }
+
+.movableArea{
+	position: absolute;
+	top:80rpx;
+}
+
+
