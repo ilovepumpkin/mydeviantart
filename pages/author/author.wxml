@@ -17,30 +17,32 @@
     <image src="/images/add.png" class="addIcon"/>  
 </view> -->
 
+
+
+<template is="searchBar" data="{{search,authorPhotoUrl:currentUser['usericon']}}" />
 <movable-area class="movableArea" style="z-index:500;height:{{scrollViewHeight}}px;width:100%;" >
     <movable-view class="add" bindtap="startEdit" hidden="{{isEdit}}" direction="all" x="{{addIconX}}" y="{{addIconY}}">
         <image src="/images/add.png" class="addIcon"/>
     </movable-view>
+    <scroll-view scroll-y="true" style="height:{{scrollViewHeight}}px;width:100%;" class="scrollView">
+        <view class="{{item.username==currentUser['username']?'current':'notCurrent'}} authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" >
+            <view class="author" style="{{item.txtStyle}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}" data-username="{{item.username}}" bindtap="onTouchTap">
+                    <image src="{{item.usericon}}" class="photo"/>
+                    <view class="info">
+                        <view class="realName">{{item.real_name}}</view>
+                        <view class="userName">{{item.username}}</view>
+                    </view>
+            </view> 
+            <view class="viewDetail" data-username="{{item.username}}" bindtap="gotoAuthorDetail" data-index="{{index}}">
+                    查看
+            </view>
+            <view class="delete" data-username="{{item.username}}" bindtap="onDeleteAuthor" data-index="{{index}}">
+                    删除
+            </view>
+        </view>
+    </scroll-view>
 </movable-area>
 
-<template is="searchBar" data="{{search,authorPhotoUrl:currentUser['usericon']}}" />
-<scroll-view scroll-y="true" style="height:{{scrollViewHeight}}px;width:100%;" class="scrollView">
-    <view class="{{item.username==currentUser['username']?'current':'notCurrent'}} authorLine"  wx:key="{{item.username}}" wx:for="{{authors}}" data-username="{{item.username}}" >
-        <view class="author" style="{{item.txtStyle}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"  data-index="{{index}}" data-username="{{item.username}}" bindtap="onTouchTap">
-                <image src="{{item.usericon}}" class="photo"/>
-                <view class="info">
-                    <view class="realName">{{item.real_name}}</view>
-                    <view class="userName">{{item.username}}</view>
-                </view>
-        </view> 
-        <view class="viewDetail" data-username="{{item.username}}" bindtap="gotoAuthorDetail" data-index="{{index}}">
-                查看
-        </view>
-        <view class="delete" data-username="{{item.username}}" bindtap="onDeleteAuthor" data-index="{{index}}">
-                删除
-        </view>
-    </view>
-</scroll-view>
 
 
               

@@ -149,7 +149,7 @@ justify-content:center;
 
 .scrollView{
 	position: absolute;
-	top:80rpx;
+	/* top:80rpx; */
 }
 
 .movableArea{
