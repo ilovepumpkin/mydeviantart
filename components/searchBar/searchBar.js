@@ -3,6 +3,45 @@ var util = require("../../utils/util.js");
 let caller=null;
 let isEnterSearch;
 
+let touchStart = 0;
+let touchEnd = 0;
+
+function onPhotoTouchStart(e) {
+    touchStart = e.timeStamp;
+    console.log("touchStart:" + touchStart);
+}
+
+function onPhotoTouchEnd(e) {
+    touchEnd = e.timeStamp;
+    console.log("touchStart:" + touchStart);
+}
+
+function onPhotoTouchTap(e) {
+    const touchTime = touchEnd - touchStart;
+    console.log("touchTime:" + touchTime);
+
+    if (touchTime > 350) {
+        /*long tap*/
+        const authorPage="pages/author/author"
+        const pages = getCurrentPages()
+        if(pages[pages.length-1].route!==authorPage){
+            wx.navigateTo({
+                    url:"/"+authorPage
+                })
+        }
+    } else {
+        // tap
+        // const url = "/pages/deviation/deviation?deviationid=" + deviationid
+        // wx.navigateTo({
+        //     url
+        // })
+        // wx.previewImage({
+        //     current: dataset.fullsizeurl, 
+        //     urls: getApp().globalData.imageUrls
+        // })
+    }
+}
+
 const searchActiveChangeinput = function (e) {
     const val = e.detail.value;
     this.setData({
@@ -38,9 +77,13 @@ function init(that,enterSearch) {
     // that["authorPhotoUrl"]=util.getCurrentUser()["usericon"]
 };
 
+
 export default {
     init,
     searchActiveChangeinput,
     searchActiveChangeclear,
-    handleEnterSearch
+    handleEnterSearch,
+    onPhotoTouchStart,
+    onPhotoTouchEnd,
+    onPhotoTouchTap
 }

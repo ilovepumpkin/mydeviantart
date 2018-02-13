@@ -32,7 +32,7 @@ Page({
       searchValue: '',
       showClearBtn: false
     },
-    scrollViewHeight:app.globalData["winHeight"]-(80+80)*app.globalData["winWidth"]/750
+    scrollViewHeight:app.globalData["winHeight"]-80*app.globalData["winWidth"]/750
   },
   scroll: function (event) {
     this.setData({
@@ -80,7 +80,7 @@ Page({
         console.log(deviations);
 
         if (deviations) {
-          getApp().globalData.imageUrls = deviations.map(d => d.content.src)
+          getApp().globalData.imageUrls.push.apply( getApp().globalData.imageUrls, deviations.map(d => d.content.src) );  
 
           var images = util.formImages(deviations, self.data.imgWidth)
           let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
@@ -167,6 +167,8 @@ Page({
     // })
   },
   initLoadImages: function () {
+    getApp().globalData.imageUrls=[]
+
     offset = 0;
     this.setData({
       col1: {

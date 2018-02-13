@@ -25,15 +25,19 @@ export const findAuthor=(username)=>{
     return getAuthors().find(author=>author.username===username)
 }
 
-export const deleteAuthor = (userId) => {
+export const deleteAuthor = (username) => {
     let authors = wx.getStorageSync(KEY_AUTHORS)
-    const userIndex=authors.findIndex(author=>author.userId===userId)
+    const userIndex=authors.findIndex(author=>author.username===username)
     authors.splice(userIndex,1)
     wx.setStorageSync(KEY_AUTHORS, authors)
 }
 
 export const loadStatsInfo=function() {
     return wx.getStorageSync(KEY_STATS_INFO)
+}
+
+export const setAuthors=function(authors) {
+    return wx.setStorageSync(KEY_AUTHORS, authors)
 }
 
 export const clearStatsInfo=function() {

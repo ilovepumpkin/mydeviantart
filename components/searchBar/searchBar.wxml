@@ -11,6 +11,6 @@
                 </button>
             </form>
     </view>
-    <image class="authorPhoto" src="{{authorPhotoUrl}}" />
+    <image class="authorPhoto" src="{{authorPhotoUrl}}" bindtouchend="onPhotoTouchEnd" bindtouchstart="onPhotoTouchStart" bindtap="onPhotoTouchTap"/>
     </view>
 </template>

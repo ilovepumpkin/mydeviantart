@@ -10,22 +10,5 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "码农也涂鸦",
     "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "backgroundColor": "#333333",
-    "color": "white",
-    "selectedColor": "#00ba00",
-    "borderStyle": "black",
-    "list": [{
-      "pagePath": "pages/gallery/gallery",
-      "text": "图库",
-      "selectedIconPath": "images/gallery_focus.png",
-      "iconPath": "images/gallery.png"
-    },{
-      "pagePath": "pages/author/author",
-      "text": "艺术家",
-      "selectedIconPath": "images/him_focus.png",
-      "iconPath": "images/him.png"
-    }]
   }
 }

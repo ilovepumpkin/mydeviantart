@@ -1,5 +1,6 @@
 var Promise = require('../libs/bluebird.min')
 var Parser = require('../libs/xmldom/dom-parser')
+import * as authorAPI from './authors'
 
 const KEY_USERNAME = "da_user"
 
@@ -164,6 +165,10 @@ function getCurrentUser() {
 }
 
 function changeCurrentUser(newUser) {
+  authorAPI.deleteAuthor(newUser["username"])
+  let authors=authorAPI.getAuthors()
+  authors.unshift(newUser)
+  authorAPI.setAuthors(authors)
   return wx.setStorageSync(KEY_USERNAME, newUser)
 }
 

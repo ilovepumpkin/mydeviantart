@@ -1,12 +1,12 @@
-var touchStart = 0;
-var touchEnd = 0;
-
 var menuItems = [];
 
 var deleteBookmarkCallback = () => { };
 
 const MI_ADD_BOOKMARK = "add_bookmark"
 const MI_DELETE_BOOKMARK = "delete_bookmark"
+
+var touchStart = 0;
+var touchEnd = 0;
 
 function onTouchStart(e) {
     touchStart = e.timeStamp;
