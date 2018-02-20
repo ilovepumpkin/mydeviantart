@@ -42,6 +42,7 @@
         </view>
     </scroll-view>
 </movable-area>
+<loading hidden="{{!isLoading}}">加载中...</loading>
 
 
 

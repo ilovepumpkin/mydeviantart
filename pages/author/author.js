@@ -120,9 +120,41 @@ Page({
   },
   gotoAuthorDetail: function (e) {
     const username = e.currentTarget.dataset.username;
-    wx.navigateTo({
-      url: "/pages/him/him?username=" + username
-    });
+    // wx.navigateTo({
+    //   url: "/pages/him/him?username=" + username
+    // });
+
+    this.setData({
+      isLoading: true
+    })
+
+    const self = this;
+    dA.whoami(username).then(resp => {
+      console.log(resp)
+
+      const profile_url = resp.profile_url
+      const real_name = resp.real_name
+      const profile_comments = resp.profile_comments
+      const profile_pageviews = resp.profile_pageviews
+      const user_comments = resp.user_comments
+      const user_deviations = resp.stats.user_deviations
+      const user_favourites = resp.stats.user_favourites
+      const joindate = resp.user.details.joindate
+      const friends = resp.user.stats.friends
+      const watchers = resp.user.stats.watchers
+
+      const content=`账号:　${username}\r\n名字:　${real_name}\r\n加入时间:　${util.formatTime(new Date(joindate))}\r\n作品数:　${user_deviations}\r\n粉丝数:　${watchers}`
+      const title="信息"
+      wx.showModal({
+        title,
+        content,
+        showCancel:false
+      })
+
+      this.setData({
+        isLoading: false
+      })
+    })
   },
   onShow: function () {
     this.onLoad();
