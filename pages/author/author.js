@@ -14,10 +14,20 @@ import {
   clearStatsInfo
 } from "../../utils/authors.js";
 
+import {
+  findGroup,
+  getGroups,
+  addGroup,
+  deleteGroup
+} from "../../utils/groups.js";
+
 var touchStart = 0;
 var touchEnd = 0;
 
 let authorsBak;
+
+const LABEL_NEW_GROUP="[新建]"
+const LABEL_ALL="全部"
 
 var app = getApp();
 Page({
@@ -33,6 +43,14 @@ Page({
     scrollViewHeight:app.globalData["winHeight"]-80*app.globalData["winWidth"]/750,
     addIconY:app.globalData["winHeight"]-80*app.globalData["winWidth"]/750-80,
     addIconX:app.globalData["winWidth"]-80,
+    groups:[],
+    currentTab:LABEL_ALL
+  },
+  loadGroups:function(){
+    let groups=getGroups();
+    groups.unshift({name:LABEL_ALL})
+    groups.unshift({name:LABEL_NEW_GROUP})
+    return groups;
   },
   doSearch: function (val) {
     const filteredAuthors=authorsBak.filter(author=>author.username.toLowerCase().includes(val)||author.real_name.toLowerCase().includes(val))
@@ -200,13 +218,18 @@ Page({
     searchBar.init(this)
 
     let authors = getAuthors();
+    const currentGroup=this.data.currentTab
+    if(currentGroup!==LABEL_ALL&&currentGroup!==LABEL_NEW_GROUP){
+      authors=authors.filter(author=>(authors.groups||[]).includes(currentGroup))
+    }
     authorsBak=authors;
 
     this.setData(Object.assign({}, this.data, app.globalData));
 
     this.setData({
       authors,
-      currentUser: util.getCurrentUser()
+      currentUser: util.getCurrentUser(),
+      groups:this.loadGroups()
     });
   },
   touchS: function (e) {
@@ -288,5 +311,62 @@ Page({
         authors: list
       });
     }
+  },
+  // 点击标题切换当前页时改变样式
+  switchNav:function(e){
+      var cur=e.target.dataset.current;
+      if(this.data.currentTab===cur){return false;}
+      else{
+          this.setData({
+              currentTab:cur
+          })
+          this.onLoad();
+      }
+  },
+  //判断当前滚动超过一屏时，设置tab标题滚动条。
+  checkCor:function(){
+    if (this.data.currentTab>4){
+      this.setData({
+        scrollLeft:300
+      })
+    }else{
+      this.setData({
+        scrollLeft:0
+      })
+    }
+  },
+  onGroupnameInput: function (e) {
+    const groupName = e.detail.value;
+    this.setData({
+      groupName
+    });
+  },
+  cancelCreateGroup:function(){
+    this.setData({
+      groupName:"",
+      currentTab:LABEL_ALL
+    });
+  },
+  createGroup:function(){
+    if(!this.data.groupName||this.data.groupName.trim().length===0){
+      wx.showToast({
+        title:"请输入组名"
+      })   
+      return;
+    }else{
+      addGroup(this.data.groupName)
+      this.setData({
+        groupName:"",
+        currentTab:LABEL_ALL
+      })
+      this.onLoad();
+    }
+  },
+  deleteGroup:function(){
+    deleteGroup(this.data.currentTab)
+    this.setData({
+      currentTab:LABEL_ALL
+    })
+    this.onLoad();
   }
 });

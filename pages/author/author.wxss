@@ -149,12 +149,23 @@ justify-content:center;
 
 .scrollView{
 	position: absolute;
-	/* top:80rpx; */
+	top:40px;
 }
 
 .movableArea{
 	position: absolute;
 	top:80rpx;
+}
+
+.tab-h{
+    height: 40px;width: 100%; box-sizing: border-box;overflow: hidden;line-height: 80rpx;background: #F7F7F7; font-size: 16px; white-space: nowrap;position:absolute;top: 0; left: 0; z-index: 0;}
+.tab-item{margin:0 36rpx;display: inline-block;}
+.tab-item.active{color: #00ba00;position: relative;font-weight: bold}
+/* .tab-item.active:after{ content: "";display: block;height: 6px;width: 52rpx;background: #00ba00;position: absolute; bottom: 0;left: 5rpx;border-radius: 16rpx;} */
+.scoll-h{height: 100%;}
+
+.newgroup{
+	padding-top: 20px;
 }
 
 
