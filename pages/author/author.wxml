@@ -75,16 +75,23 @@
 </movable-area>
 <loading hidden="{{!isLoading}}">加载中...</loading>
 
-<view class="editGroupDialog" style="height:{{dialogHeight}}px;width:{{dialogWidth}}px;top:{{dialogTop}}px;left:{{dialogLeft}}px;">
-    <view class="dialogTitle">
-        选择分组
-    </view>
-    <scroll-view scroll-y="true" style="height:{{dialogHeight-80}}px;width:100%;">
-
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">选择分组</view>
+  <view class="modal-content">
+    <scroll-view scroll-y="true" style="height:300rpx;width:100%;">
+        <checkbox-group bindchange="handleGroupChange">
+            <label class="checkbox" wx:for="{{authorGroups}}" wx:key="{{item.name}}">
+                <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
+            </label>
+        </checkbox-group>
     </scroll-view>
-    <view class="buttonBar">
-        <button class="btn" type="primary" size="mini" >完成</button>
-    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancelGroup" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirmGroup" data-status="confirm">确定</view>
+  </view>
 </view>
 
 

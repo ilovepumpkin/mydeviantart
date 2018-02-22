@@ -52,12 +52,25 @@ Page({
     dialogHeight:dialogHeight,
     dialogWidth:dialogWidth,
     dialogTop:(scrollViewHeight-dialogHeight)/2,
-    dialogLeft:(app.globalData["winWidth"]-dialogWidth)/2
+    dialogLeft:(app.globalData["winWidth"]-dialogWidth)/2,
+    showModal:false,
+    authorGroups:[]
   },
   loadGroups:function(){
     let groups=getGroups();
     groups.unshift({name:LABEL_ALL})
     groups.unshift({name:LABEL_NEW_GROUP})
+    return groups;
+  },
+  buildAuthorGroups:function(username){
+    let groups=getGroups();
+    const authorGroups=findAuthor(username)["groups"]||[]
+    groups=groups.map(grp=>{
+      return {
+        name:grp.name,
+        checked:authorGroups.includes(grp.name)
+      }
+    })
     return groups;
   },
   doSearch: function (val) {
@@ -379,5 +392,20 @@ Page({
   },
   onEditIconTap:function(e){
     console.log("edit icon clicked!")
+    const username = e.currentTarget.dataset.username;
+    const groups=this.buildAuthorGroups(username);
+    this.setData({
+      showModal:true,
+      authorGroups:groups
+    })
+  },
+  onCancelGroup:function(){
+    this.setData({
+      showModal:false,
+      authorGroups:[]
+    })
+  },
+  onConfirmGroup:function(){
+
   }
 });
