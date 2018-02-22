@@ -27,7 +27,7 @@
 
 <view >
     <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-        <block wx:for="{{groups}}">
+        <block wx:for="{{groups}}" wx:key="{{item.name}}">
             <view class="tab-item {{currentTab==item.name?'active':''}}"  data-current="{{item.name}}" bindtap="switchNav">{{item.name}}</view>
         </block>
     </scroll-view>
@@ -38,6 +38,9 @@
                     <view class="info">
                         <view class="realName">{{item.real_name}}</view>
                         <view class="userName">{{item.username}}</view>
+                    </view>
+                    <view class="iconArea">
+                        <image src="/images/edit.png" class="editIcon" data-username="{{item.username}}" catchtap="onEditIconTap"/>
                     </view>
             </view> 
             <view class="viewDetail" data-username="{{item.username}}" bindtap="gotoAuthorDetail" data-index="{{index}}">
@@ -71,6 +74,18 @@
 
 </movable-area>
 <loading hidden="{{!isLoading}}">加载中...</loading>
+
+<view class="editGroupDialog" style="height:{{dialogHeight}}px;width:{{dialogWidth}}px;top:{{dialogTop}}px;left:{{dialogLeft}}px;">
+    <view class="dialogTitle">
+        选择分组
+    </view>
+    <scroll-view scroll-y="true" style="height:{{dialogHeight-80}}px;width:100%;">
+
+    </scroll-view>
+    <view class="buttonBar">
+        <button class="btn" type="primary" size="mini" >完成</button>
+    </view>
+</view>
 
 
 

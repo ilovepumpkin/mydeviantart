@@ -30,6 +30,10 @@ const LABEL_NEW_GROUP="[新建]"
 const LABEL_ALL="全部"
 
 var app = getApp();
+const scrollViewHeight=app.globalData["winHeight"]-80*app.globalData["winWidth"]/750;
+const dialogHeight=scrollViewHeight*0.8
+const dialogWidth=app.globalData["winWidth"]*0.9
+
 Page({
   data: {
     done: false,
@@ -40,11 +44,15 @@ Page({
       searchValue: '',
       showClearBtn: false
     },
-    scrollViewHeight:app.globalData["winHeight"]-80*app.globalData["winWidth"]/750,
-    addIconY:app.globalData["winHeight"]-80*app.globalData["winWidth"]/750-80,
+    scrollViewHeight:scrollViewHeight,
+    addIconY:scrollViewHeight-80,
     addIconX:app.globalData["winWidth"]-80,
     groups:[],
-    currentTab:LABEL_ALL
+    currentTab:LABEL_ALL,
+    dialogHeight:dialogHeight,
+    dialogWidth:dialogWidth,
+    dialogTop:(scrollViewHeight-dialogHeight)/2,
+    dialogLeft:(app.globalData["winWidth"]-dialogWidth)/2
   },
   loadGroups:function(){
     let groups=getGroups();
@@ -368,5 +376,8 @@ Page({
       currentTab:LABEL_ALL
     })
     this.onLoad();
+  },
+  onEditIconTap:function(e){
+    console.log("edit icon clicked!")
   }
 });
