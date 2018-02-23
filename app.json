@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/author/author",
     "pages/gallery/gallery",
+    "pages/author/author",
     "pages/him/him",
     "pages/deviation/deviation"
   ],
