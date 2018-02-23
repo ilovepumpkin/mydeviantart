@@ -263,4 +263,9 @@ justify-content:center;
 	text-align: center;
   }
 
+  .groupCheckbox{
+	  display: block;
+	  padding-bottom: 10px;
+  }
+
 

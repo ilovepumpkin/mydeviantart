@@ -78,11 +78,11 @@
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">选择分组</view>
+  <view class="modal-title">选择所属分组</view>
   <view class="modal-content">
     <scroll-view scroll-y="true" style="height:300rpx;width:100%;">
-        <checkbox-group bindchange="handleGroupChange">
-            <label class="checkbox" wx:for="{{authorGroups}}" wx:key="{{item.name}}">
+        <checkbox-group bindchange="handleGroupChange" data-index="{{index}}" data-checks="{{item.checks}}" >
+            <label class="groupCheckbox" wx:for="{{authorGroups}}" wx:key="{{item.name}}">
                 <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
             </label>
         </checkbox-group>

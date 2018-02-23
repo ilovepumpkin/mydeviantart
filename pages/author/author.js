@@ -6,7 +6,8 @@ import {
   findAuthor,
   getAuthors,
   addAuthor,
-  deleteAuthor
+  deleteAuthor,
+  updateAuthorGroups
 } from "../../utils/authors.js";
 import {
   saveStatsInfo,
@@ -20,6 +21,9 @@ import {
   addGroup,
   deleteGroup
 } from "../../utils/groups.js";
+
+let inEditAuthor;
+let selectedGroups;
 
 var touchStart = 0;
 var touchEnd = 0;
@@ -65,6 +69,7 @@ Page({
   buildAuthorGroups:function(username){
     let groups=getGroups();
     const authorGroups=findAuthor(username)["groups"]||[]
+    selectedGroups=authorGroups;
     groups=groups.map(grp=>{
       return {
         name:grp.name,
@@ -241,7 +246,7 @@ Page({
     let authors = getAuthors();
     const currentGroup=this.data.currentTab
     if(currentGroup!==LABEL_ALL&&currentGroup!==LABEL_NEW_GROUP){
-      authors=authors.filter(author=>(authors.groups||[]).includes(currentGroup))
+      authors=authors.filter(author=>(author.groups||[]).includes(currentGroup))
     }
     authorsBak=authors;
 
@@ -393,7 +398,11 @@ Page({
   onEditIconTap:function(e){
     console.log("edit icon clicked!")
     const username = e.currentTarget.dataset.username;
+
+    inEditAuthor=username;
+
     const groups=this.buildAuthorGroups(username);
+    
     this.setData({
       showModal:true,
       authorGroups:groups
@@ -404,8 +413,15 @@ Page({
       showModal:false,
       authorGroups:[]
     })
+    inEditAuthor=null;
+    selectedGroups=null;
   },
   onConfirmGroup:function(){
-
+    updateAuthorGroups(inEditAuthor,selectedGroups)
+    this.onCancelGroup();
+    this.onLoad();
+  },
+  handleGroupChange:function(evt){
+     selectedGroups=evt.detail.value;
   }
 });

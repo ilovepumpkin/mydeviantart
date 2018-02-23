@@ -2,6 +2,22 @@ const KEY_AUTHORS = "authors"
 
 const KEY_STATS_INFO = "stats_info"
 
+export const updateAuthorGroups=(username,groups)=>{
+    let author=findAuthor(username)
+    author["groups"]=groups
+
+    let authors=getAuthors()
+
+    for(let author of authors){
+        if(author.username===username){
+            author["groups"]=groups;
+            break;
+        }
+    }
+
+    wx.setStorageSync(KEY_AUTHORS, authors)
+}
+
 export const addAuthor = (username,real_name,usericon) => {
     let authors = wx.getStorageSync(KEY_AUTHORS)
     if(authors===""){
