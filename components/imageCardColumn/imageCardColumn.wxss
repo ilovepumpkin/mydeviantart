@@ -7,6 +7,14 @@
   background-color: white;
 }
 
+.imageWrapper:active{
+  border-radius:2%; 
+  overflow:hidden;
+  margin-bottom: 5px;
+  background-color: white;
+  opacity: 0.7;
+}
+
 .img_item {
   width: 48%;
   margin:1%;
