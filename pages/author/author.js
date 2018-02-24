@@ -63,7 +63,7 @@ Page({
   loadGroups:function(){
     let groups=getGroups();
     groups.unshift({name:LABEL_ALL})
-    groups.unshift({name:LABEL_NEW_GROUP})
+    groups.push({name:LABEL_NEW_GROUP})
     return groups;
   },
   buildAuthorGroups:function(username){
@@ -92,7 +92,8 @@ Page({
   bindPickerChange: function (e) { },
   startEdit: function () {
     this.setData({
-      isEdit: true
+      isEdit: true,
+      username:""
     });
   },
   cancelChangeUser: function () {
@@ -127,7 +128,12 @@ Page({
             title: "艺术家[" + username + "]已存在！"
           });
         } else {
-          const author = addAuthor(username, resp.real_name, resp.user.usericon);
+          let groups=[]
+          const group=this.data.currentTab
+          if(group!==LABEL_ALL){
+            groups.push(group)
+          }
+          const author = addAuthor(username, resp.real_name, resp.user.usericon,groups);
           const authors = this.data.authors
           authors.push(author)
           authorsBak=authors;
@@ -364,25 +370,28 @@ Page({
   onGroupnameInput: function (e) {
     const groupName = e.detail.value;
     this.setData({
-      groupName
+      groupName,
+      isGroupNameValid:!(!groupName||groupName.trim().length===0)
     });
   },
   cancelCreateGroup:function(){
     this.setData({
       groupName:"",
+      isGroupNameValid:false,
       currentTab:LABEL_ALL
     });
   },
   createGroup:function(){
-    if(!this.data.groupName||this.data.groupName.trim().length===0){
+    if(this.data.groups.find(group=>group.name===this.data.groupName)){
       wx.showToast({
-        title:"请输入组名"
+        title:"该组名已存在！"
       })   
       return;
     }else{
       addGroup(this.data.groupName)
       this.setData({
         groupName:"",
+        isGroupNameValid:false,
         currentTab:LABEL_ALL
       })
       this.onLoad();

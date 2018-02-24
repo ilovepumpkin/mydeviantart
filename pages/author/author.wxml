@@ -21,7 +21,7 @@
 
 <template is="searchBar" data="{{search,authorPhotoUrl:currentUser['usericon']}}" />
 <movable-area class="movableArea" style="z-index:500;height:{{scrollViewHeight}}px;width:100%;" >
-    <movable-view class="add" bindtap="startEdit" hidden="{{isEdit}}" direction="all" x="{{addIconX}}" y="{{addIconY}}">
+    <movable-view class="add" bindtap="startEdit" hidden="{{isEdit||currentTab==='[新建]'}}" direction="all" x="{{addIconX}}" y="{{addIconY}}">
         <image src="/images/add.png" class="addIcon"/>
     </movable-view>
 
@@ -58,7 +58,7 @@
         <view class="saveButton">
             <view style="width:150px" class="saveButton">
                 <button class="btn,btn-secondary" size="mini" bindtap="cancelCreateGroup">取消</button>
-                <button class="btn" type="primary" size="mini" bindtap="createGroup" disabled="{{!groupName||groupName.trim().length===0}}">创建</button>
+                <button class="btn" type="primary" size="mini" bindtap="createGroup" disabled="{{!isGroupNameValid}}">创建</button>
             </view>
         </view>
     </view>

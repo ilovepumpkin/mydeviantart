@@ -18,12 +18,12 @@ export const updateAuthorGroups=(username,groups)=>{
     wx.setStorageSync(KEY_AUTHORS, authors)
 }
 
-export const addAuthor = (username,real_name,usericon) => {
+export const addAuthor = (username,real_name,usericon,groups) => {
     let authors = wx.getStorageSync(KEY_AUTHORS)
     if(authors===""){
         authors=[]
     }
-    const author={username,real_name,usericon}
+    const author={username,real_name,usericon,groups}
     authors.push(author)
     wx.setStorageSync(KEY_AUTHORS, authors)
     return author;
