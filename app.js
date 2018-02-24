@@ -1,4 +1,5 @@
-import {addAuthor,getAuthors} from './utils/authors'
+import {addAuthor,getAuthors,setAuthors} from './utils/authors'
+import {setGroups} from './utils/groups'
 const util = require('./utils/util.js')
 
 //app.js
@@ -23,14 +24,15 @@ App({
             }
         });
 
+        //initialize data
         let authors = getAuthors();
         if (authors.length === 0) {
-          const author=addAuthor(
-            "ilovepumpkin2014",
-            "Rui",
-            "https://a.deviantart.net/avatars/i/l/ilovepumpkin2014.jpg"
-          );
-          util.changeCurrentUser(author)
+          const authorsData=[{"username":"ilovepumpkin2014","real_name":"Rui","usericon":"https://a.deviantart.net/avatars/i/l/ilovepumpkin2014.jpg?6","groups":["最爱"]},{"username":"superschool48","real_name":"XiaoJi","usericon":"https://a.deviantart.net/avatars/s/u/superschool48.jpg?1","groups":["最爱"]},{"username":"wlop","real_name":"Wang Ling","usericon":"https://a.deviantart.net/avatars/w/l/wlop.jpg?7","groups":["最爱"]},{"username":"rossdraws","real_name":"Ross Tran","usericon":"https://a.deviantart.net/avatars/r/o/rossdraws.jpg?5","groups":["最爱"]}] 
+          setAuthors(authorsData)  
+          const defaultAuthor=authorsData.find(author=>author.username==="ilovepumpkin2014")
+          util.changeCurrentUser(defaultAuthor)
+
+          setGroups([{name:"最爱"}])  
         }
     },
     globalData: {

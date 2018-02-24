@@ -19,6 +19,10 @@ export const getGroups = () => {
     return groups;
 }
 
+export const setGroups=(groups)=>{
+    wx.setStorageSync(KEY_GROUPS, groups)
+}
+
 export const findGroup=(name)=>{
     return getGroups().find(group=>group.name===name)
 }
