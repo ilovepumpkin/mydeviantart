@@ -6,7 +6,7 @@ var offset = 0;
 
 var app = getApp()
 
-const infoAreaHeight=250;
+const infoAreaHeight=300;
 
 Page({
   data: {
@@ -63,11 +63,11 @@ Page({
       value: dev.stats.favourites
     });
     details.push({
-      name: "文件大小（单位：字节）",
+      name: "原图大小（单位：字节）",
       value: dev.content.filesize
     });
     details.push({
-      name: "文件尺寸（宽x高，单位：像素）",
+      name: "原图尺寸（宽x高，单位：像素）",
       value: dev.content.width + "x" + dev.content.height
     });
     return details;
@@ -201,6 +201,66 @@ Page({
     });
 
     wx.hideNavigationBarLoading()
+  },
+  downloadImage:function(){
+
+    const url = this.data.deviation.content.src.replace("http://", "https://").replace(/orig\d+/, "orig01").replace(/img\d+/, "img01")
+    console.log(url)
+
+    const saveToAlbum = (savedFilePath) => {
+      wx.saveImageToPhotosAlbum({
+        filePath: savedFilePath,
+        success(res) {
+          wx.showToast({
+            title: "保存成功啦！",
+            icon: "success"
+          })
+        },
+        fail() {
+          wx.showToast({
+            title: "哎呦，保存出错了！"
+          })
+        },
+        complete() {}
+      })
+    }
+
+    wx.downloadFile({
+      url,
+      success: function(res) {
+        wx.saveFile({
+          tempFilePath: res.tempFilePath,
+          success: function(res) {
+            const savedFilePath = res.savedFilePath;
+            console.log(savedFilePath)
+
+            wx.getSetting({
+              success(res) {
+                if (!res.authSetting['scope.writePhotosAlbum']) {
+                  wx.authorize({
+                    scope: 'scope.writePhotosAlbum',
+                    success() {
+                      saveToAlbum(savedFilePath)
+                    }
+                  })
+                } else {
+                  saveToAlbum(savedFilePath)
+                }
+              }
+            })
+          },
+          fail: function(error) {
+            console.log(error)
+          },
+          complete: function() {}
+        })
+      },
+      fail: function(error) {
+        console.log(error)
+      },
+      complete: function() {}
+    })
+
   },
   showActionSheet: function() {
     const self = this;

@@ -154,7 +154,7 @@ function formImages(deviations, imgWidth) {
       commentCount: d.stats.comments,
       favouriteCount: d.stats.favourites,
       titleWidth,
-      "fullSizeUrl":d.content.src
+      "fullSizeUrl":d.preview.src
     }
   });
   return images;

@@ -11,6 +11,7 @@
 				</view>
 			</view>
 		</view>
+		<button type="primary" size="mini" class="downloadBtn" bindtap="downloadImage">下载原图</button>
 	</view>
 	<view class="commmentInfoArea" hidden="{{comments.length===0}}" style="top:{{infoAreaHeight}}rpx">
 		<view class="titleComments">

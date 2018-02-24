@@ -80,7 +80,7 @@ Page({
         console.log(deviations);
 
         if (deviations) {
-          getApp().globalData.imageUrls.push.apply( getApp().globalData.imageUrls, deviations.map(d => d.content.src) );  
+          getApp().globalData.imageUrls.push.apply( getApp().globalData.imageUrls, deviations.map(d => d.preview.src) );  
 
           var images = util.formImages(deviations, self.data.imgWidth)
           let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
@@ -230,7 +230,7 @@ Page({
         offset = resp["next_offset"]
         console.log(deviations);
 
-        getApp().globalData.imageUrls = deviations.map(d => d.content.src)
+        getApp().globalData.imageUrls = deviations.map(d => d.preview.src)
 
         const totalCount = resp.estimated_total
         if (totalCount === 0) {

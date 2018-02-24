@@ -149,3 +149,7 @@
 	width:100%;
 	display: inline-block;
 }
+
+.downloadBtn{
+	margin-top: 5px;
+}
