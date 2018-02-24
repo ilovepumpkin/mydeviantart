@@ -4,6 +4,10 @@ var wxParse = require('../../wxParse/wxParse.js');
 
 var offset = 0;
 
+var app = getApp()
+
+const infoAreaHeight=250;
+
 Page({
   data: {
     imageSrc: "",
@@ -19,7 +23,9 @@ Page({
     winHeight: 0,
     viewCommentsButtonVisible: false,
     isCommentLoading: false,
-    currentSwipperItemIndex: 0
+    currentSwipperItemIndex: 0,
+    infoAreaHeight:infoAreaHeight,
+    commentScrollHeight:app.globalData["winHeight"]-(infoAreaHeight+80)*app.globalData["winWidth"]/750
   },
   onShareAppMessage: function() {
     const dev = this.data.deviation;
@@ -76,50 +82,46 @@ Page({
     var deviationid = option.deviationid
     var self = this;
 
-    wx.getSystemInfo({
-      success: (res) => {
-        let ww = res.windowWidth;
-        let wh = res.windowHeight;
+    const ww = app.globalData["winWidth"];
+    const wh = app.globalData["winHeight"];
 
-        dA.getDeviation(deviationid).then(function(res) {
+    dA.getDeviation(deviationid).then(function(res) {
 
-          var image = res.preview
+      var image = res.preview
 
-          //construct detail array
-          let details = self.buildDetails(res);
+      //construct detail array
+      let details = self.buildDetails(res);
 
-          let viewCommentsButtonVisible = (res.stats.comments + 0) > 0
+      let viewCommentsButtonVisible = (res.stats.comments + 0) > 0
 
-          let commentScrollHeight = wh * 0.6
+      // const infoHeight=200
+      // const commentScrollHeight = wh-infoHeight
 
-          wx.setNavigationBarTitle({
-            title: res.title
-          })
+      wx.setNavigationBarTitle({
+        title: res.title
+      })
 
-          const [imagewidth, imageheight] = util.calImageSize(image.width, image.height, ww, wh - 30)
+      const [imagewidth, imageheight] = util.calImageSize(image.width, image.height, ww, wh - 30)
 
-          self.setData({
-            deviation: res,
-            imageSrc: image.src,
-            imagewidth,
-            imageheight,
-            deviationid: deviationid,
-            winWidth: ww,
-            winHeight: wh,
-            details,
-            viewCommentsButtonVisible,
-            commentScrollHeight
-          })
+      self.setData({
+        deviation: res,
+        imageSrc: image.src,
+        imagewidth,
+        imageheight,
+        deviationid: deviationid,
+        winWidth: ww,
+        winHeight: wh,
+        details,
+        viewCommentsButtonVisible
+      })
 
-          //reset offset value to zero
-          offset = 0;
+      //reset offset value to zero
+      offset = 0;
 
-          if(viewCommentsButtonVisible){
-            self.loadComments();
-          }else{
-            self.handleLoadSuccess();
-          }
-        });
+      if(viewCommentsButtonVisible){
+        self.loadComments();
+      }else{
+        self.handleLoadSuccess();
       }
     });
   },
@@ -140,13 +142,15 @@ Page({
       //   isCommentLoading: true
       // });
 
+      this.setData({
+        isLoading: true,
+        isCommentLoading: true
+      })
+
       const self = this;
       dA.getComments(this.data.deviationid, {
         offset: offset
       }).then(resp => {
-
-        console.log(resp)
-
         let newComments = resp.data["thread"];
 
         offset = resp.data["next_offset"];
@@ -164,9 +168,9 @@ Page({
           viewCommentsButtonVisible: false
         })
 
-        // this.setData({
-        //   isCommentLoading: false
-        // });
+        this.setData({
+          isCommentLoading: false
+        });
 
         self.handleLoadSuccess();
 

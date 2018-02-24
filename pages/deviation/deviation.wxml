@@ -1,63 +1,39 @@
 <import src="../../wxParse/wxParse.wxml"/>
 
-<swiper style="height:{{winHeight}}px" current="{{currentSwipperItemIndex}}" circular="true">
-    <!-- <swiper-item class="imageContainer">
-			<image src="{{imageSrc}}" style="width: {{imagewidth}}px; height: {{imageheight}}px;" bindlongtap="showActionSheet" bindload="handleLoadSuccess" binderror="handleLoadError"></image>
-			<view class="infoContainer" hidden="{{!done}}">
-				<text class="title" style="width:{{winWidth-150}}px">{{deviation.title}}</text>
-				<view style="display: inline;float:right;">
-					<image src="../../images/comment.png" class="icon" ></image>
-					<text class="commentCount">{{deviation.stats.comments}}</text>
-					<image src="../../images/favestar.png" class="icon"></image>
-					<text class="favCount">{{deviation.stats.favourites}}</text>
+	<view class="deviationInfoArea">
+		<view>
+			<view wx:for="{{details}}" wx:key="{{name}}" class="detailLine">
+				<view class="fieldName">
+					{{item.name}}:
+				</view>
+				<view class="fieldValue">
+					{{item.value}}
 				</view>
 			</view>
-    </swiper-item> -->
-    <swiper-item>
-    	<view class="deviationInfoArea">
-			<view class="deviationInfoTitle">
-	    		作品信息
-	    	</view>
-	    	<view>
-	    		<view wx:for="{{details}}" wx:key="{{name}}" class="detailLine">
-	    			<view class="fieldName">
-	    				{{item.name}}:
-	    			</view>
-	    			<view class="fieldValue">
-	    				{{item.value}}
-	    			</view>
-	    		</view>
-	    	</view>
-    	</view>
-    	<!-- <view style="text-align:center" hidden="{{!viewCommentsButtonVisible}}">
-    		<button type="primary" size="mini" bindtap="loadComments"> 查看评论 </button>
-    	</view> -->
-    	<view class="commmentInfoArea" hidden="{{comments.length===0}}">
-			<view class="titleComments">
-				评论
-			</view>
-			<view>
-				<scroll-view scroll-y="true" bindscrolltolower="loadComments" style="height:{{commentScrollHeight}}px">
-					<view style="width:100%;">
-						<view wx:for="{{comments}}" wx:key="commentid" class="commentView">	
-								<image src="{{item.user.usericon}}" class="userIcon"></image>
-								<view class="commentInfoContainer">
-									<view class="commentInfo">
-										<view class="userName">{{item.user.username}}</view>
-										<view class="commentTime">{{item.formattedDate}}</view>
-									</view>
-									<view class="commentBody">
-										<template is="wxParse" data="{{wxParseData:item.parsedComment.nodes}}"/>
-									</view>
-								</view>							
-						</view>
-					</view>
-				</scroll-view>
-			</view>
 		</view>
-    </swiper-item>
-</swiper>
-<loading hidden="{{!isCommentLoading}}">评论加载中...</loading>
+	</view>
+	<view class="commmentInfoArea" hidden="{{comments.length===0}}" style="top:{{infoAreaHeight}}rpx">
+		<view class="titleComments">
+			评论
+		</view>
+		<view>
+			<scroll-view scroll-y="true" bindscrolltolower="loadComments" style="height:{{commentScrollHeight}}px">
+					<view wx:for="{{comments}}" wx:key="commentid" class="commentView">	
+							<image src="{{item.user.usericon}}" class="userIcon"></image>
+							<view class="commentInfoContainer">
+								<view class="commentInfo">
+									<view class="userName">{{item.user.username}}</view>
+									<view class="commentTime">{{item.formattedDate}}</view>
+								</view>
+								<view class="commentBody">
+									<template is="wxParse" data="{{wxParseData:item.parsedComment.nodes}}"/>
+								</view>
+							</view>							
+					</view>
+			</scroll-view>
+		</view>
+	</view>
+<!-- <loading hidden="{{!isCommentLoading}}">评论加载中...</loading> -->
 <loading hidden="{{!isLoading}}">加载中...</loading>
 
 
