@@ -9,7 +9,7 @@
     <view class="saveButton">
         <view style="width:150px" class="saveButton">
         <button class="btn,btn-secondary" size="mini" bindtap="cancelChangeUser">取消</button>
-        <button class="btn" type="primary" size="mini" bindtap="saveUser" disabled="{{!username||username.trim().length===0}}">保存</button>
+        <button class="btn" type="primary" size="mini" bindtap="saveUser" disabled="{{!isUsernameValid}}">保存</button>
         </view>
     </view>
 </view>

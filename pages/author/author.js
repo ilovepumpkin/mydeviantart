@@ -99,7 +99,8 @@ Page({
   cancelChangeUser: function () {
     this.setData({
       username: "",
-      isEdit: false
+      isEdit: false,
+      isUsernameValid:false
     });
   },
   saveUser: function () {
@@ -144,7 +145,9 @@ Page({
 
         wx.hideLoading();
         this.setData({
-          isEdit: false
+          isEdit: false,
+          isUsernameValid:false,
+          username:""
         });
       }
     });
@@ -243,7 +246,8 @@ Page({
   onUsernameInput: function (e) {
     const username = e.detail.value;
     this.setData({
-      username
+      username,
+      isUsernameValid:!(!username||username.trim().length===0)
     });
   },
   onLoad: function () {
