@@ -1,9 +1,13 @@
-var dA = require('../../utils/deviantArt.js')
-var util = require('../../utils/util')
-import imageCard from '../../components/imageCard/imageCard'
-import searchBar from '../../components/searchBar/searchBar'
+var dA = require('../../utils/deviantArt.js');
+var util = require('../../utils/util');
+import imageCard from '../../components/imageCard/imageCard';
+import searchBar from '../../components/searchBar/searchBar';
 
-var app = getApp()
+import { findAuthor, getAuthors } from '../../utils/authors.js';
+
+import { findGroup, getGroups } from '../../utils/groups.js';
+
+var app = getApp();
 
 var col1H = 0;
 var col2H = 0;
@@ -32,37 +36,74 @@ Page({
       searchValue: '',
       showClearBtn: false
     },
-    scrollViewHeight:app.globalData["winHeight"]-80*app.globalData["winWidth"]/750
+    scrollViewHeight:
+      app.globalData['winHeight'] - 80 * app.globalData['winWidth'] / 750,
+    showModal: false
   },
-  scroll: function (event) {
+  switchAuthor: function(e) {
+    const username = e.currentTarget.dataset.username;
+    const newAuthor = this.data.authors.find(
+      author => author.username === username
+    );
+    util.changeCurrentUser(newAuthor);
+    this.setData({
+      showModal: false,
+      authorPhotoUrl: newAuthor['usericon']
+    });
+    this.reload();
+  },
+  hideModal: function(event) {
+    this.setData({
+      showModal: false
+    });
+  },
+  showAuthorPicker: function(event) {
+    const groups = getGroups();
+    const authors = getAuthors();
+
+    const groupsWithAuthors = groups.map(grp => {
+      const groupAuthors = authors.filter(author =>
+        (author.groups || []).includes(grp.name)
+      );
+      grp['authors'] = groupAuthors;
+      return grp;
+    });
+
+    this.setData({
+      showModal: true,
+      groupsWithAuthors,
+      authors
+    });
+  },
+  scroll: function(event) {
     this.setData({
       scrollTop: event.detail.scrollTop
     });
   },
-  loadMore:function(){
-    if(keyword){
+  loadMore: function() {
+    if (keyword) {
       this.searchMore();
-    }else{
+    } else {
       this.loadImages();
     }
   },
-  reload:function(){
-    if(keyword){
-      const keywordBak=keyword;
+  reload: function() {
+    if (keyword) {
+      const keywordBak = keyword;
       this.resetData();
-      keyword=keywordBak;
+      keyword = keywordBak;
       this.searchMore();
-    }else{
+    } else {
       this.initLoadImages();
     }
   },
-  loadImages: function () {
+  loadImages: function() {
     if (offset === null) {
-      console.log("all images are loaded already");
+      console.log('all images are loaded already');
       wx.showToast({
         title: '已经到最后了噢！',
         duration: 1500
-      })
+      });
       return null;
     }
 
@@ -70,77 +111,93 @@ Page({
       this.setData({
         isLoading: true
       });
-      var self = this
+      var self = this;
       // dA.getFolderDeviations("1713A913-31B1-5B0D-2538-94BF1B6B7CC7", {
-      dA.getFolderDeviations("all", {
-        offset: offset
-      }).then(function (resp) {
-        let deviations = resp["results"]
-        offset = resp["next_offset"]
-        console.log(deviations);
+      dA
+        .getFolderDeviations('all', {
+          offset: offset
+        })
+        .then(function(resp) {
+          let deviations = resp['results'];
+          offset = resp['next_offset'];
+          console.log(deviations);
 
-        if (deviations) {
-          getApp().globalData.imageUrls.push.apply( getApp().globalData.imageUrls, deviations.map(d => d.preview.src) );  
+          if (deviations) {
+            getApp().globalData.imageUrls.push.apply(
+              getApp().globalData.imageUrls,
+              deviations.map(d => d.preview.src)
+            );
 
-          var images = util.formImages(deviations, self.data.imgWidth)
-          let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
-          let totalCount = colData.col1.data.length + colData.col2.data.length;
-          self.setData(Object.assign({}, colData, {
-            isLoading: false,
-            totalCount
-          }))
-        } else {
-          wx.showToast({
-            title: '服务器忙，请稍后再试',
-            duration: 2000
-          })
-          self.setData({
-            isLoading: false
-          });
-        }
-      });
+            var images = util.formImages(deviations, self.data.imgWidth);
+            let colData = util.decideColumns(
+              images,
+              self.data.imgWidth,
+              self.data.col1,
+              self.data.col2
+            );
+            let totalCount =
+              colData.col1.data.length + colData.col2.data.length;
+            self.setData(
+              Object.assign({}, colData, {
+                isLoading: false,
+                totalCount
+              })
+            );
+          } else {
+            wx.showToast({
+              title: '服务器忙，请稍后再试',
+              duration: 2000
+            });
+            self.setData({
+              isLoading: false
+            });
+          }
+        });
     } else {
-      console.log("still in the process of fetching data ...");
+      console.log('still in the process of fetching data ...');
     }
   },
-  onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
-    this.initLoadImages()
+  onPullDownRefresh: function() {
+    wx.stopPullDownRefresh();
+    this.initLoadImages();
   },
-  doSearch: function (val) {
+  doSearch: function(val) {
     this.resetData();
-    keyword=val;
-    console.log("keyword:" + keyword)
+    keyword = val;
+    console.log('keyword:' + keyword);
     this.searchMore();
   },
-  doSearchClear: function () {
+  doSearchClear: function() {
     this.resetData();
-    this.initLoadImages()
+    this.initLoadImages();
   },
-  initComponents: function () {
+  initComponents: function() {
     imageCard.init(this, {
       [imageCard.MI_ADD_BOOKMARK]: true
     });
 
-    searchBar.init(this, true)
+    searchBar.init(this, true);
   },
-  onShow: function () {
+  onShow: function() {
     this.initComponents();
     const newCurrentUser = util.getCurrentUser();
     if (!currentUser) {
       currentUser = newCurrentUser;
-    } else if (currentUser["username"] !== newCurrentUser["username"]) {
+    } else if (currentUser['username'] !== newCurrentUser['username']) {
       this.initLoadImages();
       currentUser = newCurrentUser;
     }
     this.setData({
-      authorPhotoUrl:currentUser["usericon"]
-    })
+      authorPhotoUrl: currentUser['usericon']
+    });
   },
-  onLoad: function () {
-    this.setData(Object.assign({}, this.data, app.globalData))
+  onLoad: function() {
+    this.setData(Object.assign({}, this.data, app.globalData));
     this.initComponents();
     this.initLoadImages();
+
+    app.globalData.showAuthorPicker = this.showAuthorPicker;
+
     // let self = this;
     // wx.getNetworkType({
     //     success: function(res) {
@@ -166,8 +223,8 @@ Page({
     //     }
     // })
   },
-  initLoadImages: function () {
-    getApp().globalData.imageUrls=[]
+  initLoadImages: function() {
+    getApp().globalData.imageUrls = [];
 
     offset = 0;
     this.setData({
@@ -179,23 +236,23 @@ Page({
         colH: 0,
         data: []
       }
-    })
+    });
 
     this.loadImages();
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: '码农也涂鸦',
       path: '/pages/gallery/gallery',
-      success: function (res) {
+      success: function(res) {
         // 分享成功
       },
-      fail: function (res) {
+      fail: function(res) {
         // 分享失败
       }
-    }
+    };
   },
-  resetData: function () {
+  resetData: function() {
     offset = 0;
     keyword = null;
     this.setData({
@@ -208,55 +265,63 @@ Page({
         colH: 0,
         data: []
       }
-    })
+    });
   },
-  searchMore: function () {
+  searchMore: function() {
     if (offset === null) {
-      console.log("all images are loaded already");
+      console.log('all images are loaded already');
       wx.showToast({
         title: '别拉了，已经到头啦！'
-      })
+      });
       return null;
     }
 
     if (!this.data.isLoading) {
-      this.setData({ isLoading: true })
-      var self = this
-      dA.search(keyword, {
-        offset: offset
-      }).then(function (resp) {
-        console.log("resp:", resp);
-        let deviations = resp["results"]
-        offset = resp["next_offset"]
-        console.log(deviations);
+      this.setData({ isLoading: true });
+      var self = this;
+      dA
+        .search(keyword, {
+          offset: offset
+        })
+        .then(function(resp) {
+          console.log('resp:', resp);
+          let deviations = resp['results'];
+          offset = resp['next_offset'];
+          console.log(deviations);
 
-        getApp().globalData.imageUrls = deviations.map(d => d.preview.src)
+          getApp().globalData.imageUrls = deviations.map(d => d.preview.src);
 
-        const totalCount = resp.estimated_total
-        if (totalCount === 0) {
-          const scrollViewHeight = self.data.winHeight - 40
-          wx.showToast({
-            title:"未搜索到任何相关作品"
-          })
-          self.setData({
-            message: "很抱歉，未搜索到任何相关作品",
-            scrollViewHeight
-          })
-        } else {
-          var images = util.formImages(deviations, self.data.imgWidth)
-          let colData = util.decideColumns(images, self.data.imgWidth, self.data.col1, self.data.col2)
-          const scrollViewHeight = self.data.winHeight - 40 - 25
-          self.setData(Object.assign({}, colData, {
-            totalCount,
-            scrollViewHeight
-          }))
-        }
+          const totalCount = resp.estimated_total;
+          if (totalCount === 0) {
+            const scrollViewHeight = self.data.winHeight - 40;
+            wx.showToast({
+              title: '未搜索到任何相关作品'
+            });
+            self.setData({
+              message: '很抱歉，未搜索到任何相关作品',
+              scrollViewHeight
+            });
+          } else {
+            var images = util.formImages(deviations, self.data.imgWidth);
+            let colData = util.decideColumns(
+              images,
+              self.data.imgWidth,
+              self.data.col1,
+              self.data.col2
+            );
+            const scrollViewHeight = self.data.winHeight - 40 - 25;
+            self.setData(
+              Object.assign({}, colData, {
+                totalCount,
+                scrollViewHeight
+              })
+            );
+          }
 
-
-        self.setData({ isLoading: false })
-      });
+          self.setData({ isLoading: false });
+        });
     } else {
-      console.log("still in the process of fetching data ...");
+      console.log('still in the process of fetching data ...');
     }
   }
-})
+});

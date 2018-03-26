@@ -1,6 +1,6 @@
-var dA = require("../../utils/deviantArt.js");
-var util = require("../../utils/util.js");
-import searchBar from '../../components/searchBar/searchBar'
+var dA = require('../../utils/deviantArt.js');
+var util = require('../../utils/util.js');
+import searchBar from '../../components/searchBar/searchBar';
 
 import {
   findAuthor,
@@ -8,19 +8,19 @@ import {
   addAuthor,
   deleteAuthor,
   updateAuthorGroups
-} from "../../utils/authors.js";
+} from '../../utils/authors.js';
 import {
   saveStatsInfo,
   loadStatsInfo,
   clearStatsInfo
-} from "../../utils/authors.js";
+} from '../../utils/authors.js';
 
 import {
   findGroup,
   getGroups,
   addGroup,
   deleteGroup
-} from "../../utils/groups.js";
+} from '../../utils/groups.js';
 
 let inEditAuthor;
 let selectedGroups;
@@ -30,13 +30,14 @@ var touchEnd = 0;
 
 let authorsBak;
 
-const LABEL_NEW_GROUP="[新建]"
-const LABEL_ALL="全部"
+const LABEL_NEW_GROUP = '[新建]';
+const LABEL_ALL = '全部';
 
 var app = getApp();
-const scrollViewHeight=app.globalData["winHeight"]-80*app.globalData["winWidth"]/750;
-const dialogHeight=scrollViewHeight*0.8
-const dialogWidth=app.globalData["winWidth"]*0.9
+const scrollViewHeight =
+  app.globalData['winHeight'] - 80 * app.globalData['winWidth'] / 750;
+const dialogHeight = scrollViewHeight * 0.8;
+const dialogWidth = app.globalData['winWidth'] * 0.9;
 
 Page({
   data: {
@@ -48,62 +49,66 @@ Page({
       searchValue: '',
       showClearBtn: false
     },
-    scrollViewHeight:scrollViewHeight,
-    addIconY:scrollViewHeight-80,
-    addIconX:app.globalData["winWidth"]-80,
-    groups:[],
-    currentTab:LABEL_ALL,
-    dialogHeight:dialogHeight,
-    dialogWidth:dialogWidth,
-    dialogTop:(scrollViewHeight-dialogHeight)/2,
-    dialogLeft:(app.globalData["winWidth"]-dialogWidth)/2,
-    showModal:false,
-    authorGroups:[]
+    scrollViewHeight: scrollViewHeight,
+    addIconY: scrollViewHeight - 80,
+    addIconX: app.globalData['winWidth'] - 80,
+    groups: [],
+    currentTab: LABEL_ALL,
+    dialogHeight: dialogHeight,
+    dialogWidth: dialogWidth,
+    dialogTop: (scrollViewHeight - dialogHeight) / 2,
+    dialogLeft: (app.globalData['winWidth'] - dialogWidth) / 2,
+    showModal: false,
+    authorGroups: []
   },
-  loadGroups:function(){
-    let groups=getGroups();
-    groups.unshift({name:LABEL_ALL})
-    groups.push({name:LABEL_NEW_GROUP})
+  loadGroups: function() {
+    let groups = getGroups();
+    groups.unshift({ name: LABEL_ALL });
+    groups.push({ name: LABEL_NEW_GROUP });
     return groups;
   },
-  buildAuthorGroups:function(username){
-    let groups=getGroups();
-    const authorGroups=findAuthor(username)["groups"]||[]
-    selectedGroups=authorGroups;
-    groups=groups.map(grp=>{
+  buildAuthorGroups: function(username) {
+    let groups = getGroups();
+    const authorGroups = findAuthor(username)['groups'] || [];
+    selectedGroups = authorGroups;
+    groups = groups.map(grp => {
       return {
-        name:grp.name,
-        checked:authorGroups.includes(grp.name)
-      }
-    })
+        name: grp.name,
+        checked: authorGroups.includes(grp.name)
+      };
+    });
     return groups;
   },
-  doSearch: function (val) {
-    const filteredAuthors=authorsBak.filter(author=>author.username.toLowerCase().includes(val)||author.real_name.toLowerCase().includes(val))
+  doSearch: function(val) {
+    const filteredAuthors = authorsBak.filter(
+      author =>
+        author.username.toLowerCase().includes(val) ||
+        author.real_name.toLowerCase().includes(val)
+    );
     this.setData({
-      authors:filteredAuthors
-    })
+      authors: filteredAuthors
+    });
   },
-  doSearchClear: function () {
+  doSearchClear: function() {
     this.setData({
-      authors:authorsBak
-    })
+      authors: authorsBak
+    });
   },
-  bindPickerChange: function (e) { },
-  startEdit: function () {
+  bindPickerChange: function(e) {},
+  startEdit: function() {
     this.setData({
       isEdit: true,
-      username:""
+      username: ''
     });
   },
-  cancelChangeUser: function () {
+  cancelChangeUser: function() {
     this.setData({
-      username: "",
+      username: '',
       isEdit: false,
-      isUsernameValid:false
+      isUsernameValid: false
     });
   },
-  saveUser: function () {
+  saveUser: function() {
     const username = this.data.username;
     // if (username === util.getCurrentUser()) {
     //   this.setData({
@@ -112,32 +117,37 @@ Page({
     //   return;
     // }
     wx.showLoading({
-      title: "操作中..."
+      title: '操作中...'
     });
     dA.whoami(username).then(resp => {
       if (
-        resp.error_description === "user not found." ||
-        resp.real_name === ""
+        resp.error_description === 'user not found.' ||
+        resp.real_name === ''
       ) {
         wx.showToast({
-          title: "艺术家[" + username + "]不存在！",
+          title: '艺术家[' + username + ']不存在！',
           duration: 2000
         });
       } else {
         if (findAuthor(username)) {
           wx.showToast({
-            title: "艺术家[" + username + "]已存在！"
+            title: '艺术家[' + username + ']已存在！'
           });
         } else {
-          let groups=[]
-          const group=this.data.currentTab
-          if(group!==LABEL_ALL){
-            groups.push(group)
+          let groups = [];
+          const group = this.data.currentTab;
+          if (group !== LABEL_ALL) {
+            groups.push(group);
           }
-          const author = addAuthor(username, resp.real_name, resp.user.usericon,groups);
-          const authors = this.data.authors
-          authors.push(author)
-          authorsBak=authors;
+          const author = addAuthor(
+            username,
+            resp.real_name,
+            resp.user.usericon,
+            groups
+          );
+          const authors = this.data.authors;
+          authors.push(author);
+          authorsBak = authors;
           this.setData({
             authors
           });
@@ -146,15 +156,15 @@ Page({
         wx.hideLoading();
         this.setData({
           isEdit: false,
-          isUsernameValid:false,
-          username:""
+          isUsernameValid: false,
+          username: ''
         });
       }
     });
   },
-  onTouchTap: function (e) {
+  onTouchTap: function(e) {
     const touchTime = touchEnd - touchStart;
-    console.log("touchTime:" + touchTime);
+    console.log('touchTime:' + touchTime);
 
     const username = e.currentTarget.dataset.username;
 
@@ -171,7 +181,7 @@ Page({
     this.switchAuthor(newAuthor);
     // }
   },
-  gotoAuthorDetail: function (e) {
+  gotoAuthorDetail: function(e) {
     const username = e.currentTarget.dataset.username;
     // wx.navigateTo({
     //   url: "/pages/him/him?username=" + username
@@ -179,100 +189,107 @@ Page({
 
     this.setData({
       isLoading: true
-    })
+    });
 
     const self = this;
     dA.whoami(username).then(resp => {
-      console.log(resp)
+      console.log(resp);
 
-      const profile_url = resp.profile_url
-      const real_name = resp.real_name
-      const profile_comments = resp.profile_comments
-      const profile_pageviews = resp.profile_pageviews
-      const user_comments = resp.user_comments
-      const user_deviations = resp.stats.user_deviations
-      const user_favourites = resp.stats.user_favourites
-      const joindate = resp.user.details.joindate
-      const friends = resp.user.stats.friends
-      const watchers = resp.user.stats.watchers
+      const profile_url = resp.profile_url;
+      const real_name = resp.real_name;
+      const profile_comments = resp.profile_comments;
+      const profile_pageviews = resp.profile_pageviews;
+      const user_comments = resp.user_comments;
+      const user_deviations = resp.stats.user_deviations;
+      const user_favourites = resp.stats.user_favourites;
+      const joindate = resp.user.details.joindate;
+      const friends = resp.user.stats.friends;
+      const watchers = resp.user.stats.watchers;
 
-      const content=`账号:　${username}\r\n名字:　${real_name}\r\n加入时间:　${util.formatTime(new Date(joindate))}\r\n作品数:　${user_deviations}\r\n粉丝数:　${watchers}`
-      const title="信息"
+      const content = `账号:　${username}\r\n名字:　${real_name}\r\n加入时间:　${util.formatTime(
+        new Date(joindate)
+      )}\r\n作品数:　${user_deviations}\r\n粉丝数:　${watchers}`;
+      const title = '信息';
       wx.showModal({
         title,
         content,
-        showCancel:false
-      })
+        showCancel: false
+      });
 
       this.setData({
         isLoading: false
-      })
-    })
+      });
+    });
   },
-  onShow: function () {
+  onShow: function() {
     this.onLoad();
   },
-  switchAuthor: function (author) {
+  switchAuthor: function(author) {
     util.changeCurrentUser(author);
     clearStatsInfo();
     wx.reLaunch({
-      url: "/pages/gallery/gallery"
+      url: '/pages/gallery/gallery'
     });
   },
-  onDeleteAuthor: function (e) {
+  onDeleteAuthor: function(e) {
     const username = e.currentTarget.dataset.username;
 
-    if (username === this.data.currentUser["username"]) {
+    if (username === this.data.currentUser['username']) {
       wx.showToast({
-        title: "不能删除当前用户！"
+        title: '不能删除当前用户！'
       });
 
       var index = e.currentTarget.dataset.index;
       var list = this.data.authors;
-      list[index].txtStyle = "left:0px";
+      list[index].txtStyle = 'left:0px';
       this.setData({
         authors: list
       });
     } else {
       deleteAuthor(username);
-      const authors = this.data.authors
-      authors.splice(authors.findIndex(author => author.username === username), 1)
-      authorsBak=authors;
+      const authors = this.data.authors;
+      authors.splice(
+        authors.findIndex(author => author.username === username),
+        1
+      );
+      authorsBak = authors;
       this.setData({
         authors
       });
     }
   },
-  onUsernameInput: function (e) {
+  onUsernameInput: function(e) {
     const username = e.detail.value;
     this.setData({
       username,
-      isUsernameValid:!(!username||username.trim().length===0)
+      isUsernameValid: !(!username || username.trim().length === 0)
     });
   },
-  onLoad: function () {
-    searchBar.init(this)
+  onLoad: function() {
+    searchBar.init(this);
 
     let authors = getAuthors();
-    const currentGroup=this.data.currentTab
-    if(currentGroup!==LABEL_ALL&&currentGroup!==LABEL_NEW_GROUP){
-      authors=authors.filter(author=>(author.groups||[]).includes(currentGroup))
+    const currentGroup = this.data.currentTab;
+    if (currentGroup !== LABEL_ALL && currentGroup !== LABEL_NEW_GROUP) {
+      authors = authors.filter(author =>
+        (author.groups || []).includes(currentGroup)
+      );
     }
-    authorsBak=authors;
+    authorsBak = authors;
 
     this.setData(Object.assign({}, this.data, app.globalData));
 
     this.setData({
       authors,
       currentUser: util.getCurrentUser(),
-      groups:this.loadGroups()
+      groups: this.loadGroups()
     });
   },
-  touchS: function (e) {
-    console.log("touchS" + e);
+  touchS: function(e) {
+    console.log('touchS' + e);
 
     touchStart = e.timeStamp;
-    console.log("touchStart:" + touchStart);
+    console.log('touchStart:' + touchStart);
 
     //判断是否只有一个触摸点
     if (e.touches.length == 1) {
@@ -284,8 +301,8 @@ Page({
     }
   },
   //触摸时触发，手指在屏幕上每移动一次，触发一次
-  touchM: function (e) {
-    console.log("touchM:" + e);
+  touchM: function(e) {
+    console.log('touchM:' + e);
     var that = this;
     if (e.touches.length == 1) {
       //记录触摸点位置的X坐标
@@ -298,16 +315,16 @@ Page({
         var disX = that.data.startX - moveX;
         //delBtnWidth 为右侧按钮区域的宽度
         var delBtnWidth = that.data.delBtnWidth;
-        var txtStyle = "";
+        var txtStyle = '';
         if (disX == 0 || disX < 0) {
           //如果移动距离小于等于0，文本层位置不变
-          txtStyle = "left:0px";
+          txtStyle = 'left:0px';
         } else if (disX > 0) {
           //移动距离大于0，文本层left值等于手指移动距离
-          txtStyle = "left:-" + disX + "px";
+          txtStyle = 'left:-' + disX + 'px';
           if (disX >= delBtnWidth) {
             //控制手指移动距离最大值为删除按钮的宽度
-            txtStyle = "left:-" + delBtnWidth + "px";
+            txtStyle = 'left:-' + delBtnWidth + 'px';
           }
         }
         //获取手指触摸的是哪一个item
@@ -322,11 +339,11 @@ Page({
       }
     }
   },
-  touchE: function (e) {
-    console.log("touchE" + e);
+  touchE: function(e) {
+    console.log('touchE' + e);
 
     touchEnd = e.timeStamp;
-    console.log("touchEnd:" + touchEnd);
+    console.log('touchEnd:' + touchEnd);
 
     var that = this;
     if (e.changedTouches.length == 1) {
@@ -337,7 +354,7 @@ Page({
       var delBtnWidth = that.data.delBtnWidth;
       //如果距离小于删除按钮的1/2，不显示删除按钮
       var txtStyle =
-        disX > delBtnWidth * 0.75 ? "left:-" + delBtnWidth + "px" : "left:0px";
+        disX > delBtnWidth * 0.75 ? 'left:-' + delBtnWidth + 'px' : 'left:0px';
       //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
       var list = that.data.authors;
@@ -349,92 +366,93 @@ Page({
     }
   },
   // 点击标题切换当前页时改变样式
-  switchNav:function(e){
-      var cur=e.target.dataset.current;
-      if(this.data.currentTab===cur){return false;}
-      else{
-          this.setData({
-              currentTab:cur
-          })
-          this.onLoad();
-      }
-  },
-  //判断当前滚动超过一屏时，设置tab标题滚动条。
-  checkCor:function(){
-    if (this.data.currentTab>4){
+  switchNav: function(e) {
+    var cur = e.target.dataset.current;
+    if (this.data.currentTab === cur) {
+      return false;
+    } else {
       this.setData({
-        scrollLeft:300
-      })
-    }else{
-      this.setData({
-        scrollLeft:0
-      })
-    }
-  },
-  onGroupnameInput: function (e) {
-    const groupName = e.detail.value;
-    this.setData({
-      groupName,
-      isGroupNameValid:!(!groupName||groupName.trim().length===0)
-    });
-  },
-  cancelCreateGroup:function(){
-    this.setData({
-      groupName:"",
-      isGroupNameValid:false,
-      currentTab:LABEL_ALL
-    });
-  },
-  createGroup:function(){
-    if(this.data.groups.find(group=>group.name===this.data.groupName)){
-      wx.showToast({
-        title:"该组名已存在！"
-      })   
-      return;
-    }else{
-      addGroup(this.data.groupName)
-      this.setData({
-        groupName:"",
-        isGroupNameValid:false,
-        currentTab:LABEL_ALL
-      })
+        currentTab: cur
+      });
       this.onLoad();
     }
   },
-  deleteGroup:function(){
-    deleteGroup(this.data.currentTab)
+  //判断当前滚动超过一屏时，设置tab标题滚动条。
+  checkCor: function() {
+    if (this.data.currentTab > 4) {
+      this.setData({
+        scrollLeft: 300
+      });
+    } else {
+      this.setData({
+        scrollLeft: 0
+      });
+    }
+  },
+  onGroupnameInput: function(e) {
+    const groupName = e.detail.value;
     this.setData({
-      currentTab:LABEL_ALL
-    })
+      groupName,
+      isGroupNameValid: !(!groupName || groupName.trim().length === 0)
+    });
+  },
+  cancelCreateGroup: function() {
+    this.setData({
+      groupName: '',
+      isGroupNameValid: false,
+      currentTab: LABEL_ALL
+    });
+  },
+  createGroup: function() {
+    if (this.data.groups.find(group => group.name === this.data.groupName)) {
+      wx.showToast({
+        title: '该组名已存在！'
+      });
+      return;
+    } else {
+      addGroup(this.data.groupName);
+      this.setData({
+        groupName: '',
+        isGroupNameValid: false,
+        currentTab: LABEL_ALL
+      });
+      this.onLoad();
+    }
+  },
+  deleteGroup: function() {
+    deleteGroup(this.data.currentTab);
+    this.setData({
+      currentTab: LABEL_ALL
+    });
     this.onLoad();
   },
-  onEditIconTap:function(e){
-    console.log("edit icon clicked!")
+  onEditIconTap: function(e) {
+    console.log('edit icon clicked!');
     const username = e.currentTarget.dataset.username;
 
-    inEditAuthor=username;
+    inEditAuthor = username;
 
-    const groups=this.buildAuthorGroups(username);
-    
+    const groups = this.buildAuthorGroups(username);
+
     this.setData({
-      showModal:true,
-      authorGroups:groups
-    })
+      showModal: true,
+      authorGroups: groups
+    });
   },
-  onCancelGroup:function(){
+  onCancelGroup: function() {
     this.setData({
-      showModal:false,
-      authorGroups:[]
-    })
-    inEditAuthor=null;
-    selectedGroups=null;
+      showModal: false,
+      authorGroups: []
+    });
+    inEditAuthor = null;
+    selectedGroups = null;
   },
-  onConfirmGroup:function(){
-    updateAuthorGroups(inEditAuthor,selectedGroups)
+  onConfirmGroup: function() {
+    updateAuthorGroups(inEditAuthor, selectedGroups);
     this.onCancelGroup();
     this.onLoad();
   },
-  handleGroupChange:function(evt){
-     selectedGroups=evt.detail.value;
+  handleGroupChange: function(evt) {
+    selectedGroups = evt.detail.value;
   }
 });

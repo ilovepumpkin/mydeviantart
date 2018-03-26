@@ -2,9 +2,29 @@
 <import src="../../components/searchBar/searchBar"/>
 
 <!-- <view class="resultCount" hidden="{{totalCount===0}}">已加载 {{totalCount}} 幅作品</view> -->
-<template is="searchBar" data="{{search,authorPhotoUrl}}" />
+<template is="searchBar" data="{{search,authorPhotoUrl,showAuthorPicker}}" />
 <scroll-view class="scrollView" scroll-y="true" style="height:{{scrollViewHeight}}px;width:100%;" bindscrolltolower="loadMore" bindscrolltoupper="reload">
     <template is="imageCardColumn" data="{{columnData:col1.data}}"/>
     <template is="imageCardColumn" data="{{columnData:col2.data}}"/>
 </scroll-view>
 <loading hidden="{{!isLoading}}">加载中...</loading>
+
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <!-- <view class="modal-title">切换艺术家</view> -->
+  <view class="modal-content">
+    <scroll-view scroll-y="true" style="height:600rpx;width:100%;">
+        <view  wx:for="{{groupsWithAuthors}}" wx:key="{{item.name}}">
+            <view class="group-headline">{{item.name}}</view>
+            <view>
+             <image wx:for="{{item.authors}}" wx:for-item="author" wx:key="{{author.username}}" src="{{author.usericon}}" class="photo" bindtap="switchAuthor" data-username="{{author.username}}"/>
+            </view>
+        </view>
+    </scroll-view>
+  </view>
+  <!-- <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancelPickAuthor" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirmGroup" data-status="confirm">确定</view>
+  </view> -->
+</view>
