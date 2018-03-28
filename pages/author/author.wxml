@@ -62,7 +62,7 @@
             </view>
         </view>
     </view>
-    <view hidden="{{authors.length!==0}}" style="height:{{scrollViewHeight-40}}px;width:100%;" class="scrollView newgroup">
+    <view hidden="{{authors.length!==0||currentTab==='全部'||currentTab==='未分组'}}" style="height:{{scrollViewHeight-40}}px;width:100%;" class="scrollView newgroup">
         <view class="saveButton">
             <view style="width:150px" class="saveButton">
                 <button class="btn" type="warn" size="mini" bindtap="deleteGroup">删除</button>

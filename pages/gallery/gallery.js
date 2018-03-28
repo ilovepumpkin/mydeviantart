@@ -69,6 +69,15 @@ Page({
       return grp;
     });
 
+    const nogroupAuthors = authors.filter(
+      author => !author.groups || author.groups.length === 0
+    );
+
+    groupsWithAuthors.push({
+      name: '未分组',
+      authors: nogroupAuthors
+    });
+
     this.setData({
       showModal: true,
       groupsWithAuthors,

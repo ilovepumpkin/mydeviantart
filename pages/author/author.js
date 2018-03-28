@@ -32,6 +32,7 @@ let authorsBak;
 
 const LABEL_NEW_GROUP = '[新建]';
 const LABEL_ALL = '全部';
+const LABEL_NOGROUP = '未分组';
 
 var app = getApp();
 const scrollViewHeight =
@@ -63,6 +64,7 @@ Page({
   },
   loadGroups: function() {
     let groups = getGroups();
+    groups.unshift({ name: LABEL_NOGROUP });
     groups.unshift({ name: LABEL_ALL });
     groups.push({ name: LABEL_NEW_GROUP });
     return groups;
@@ -270,7 +272,12 @@ Page({
 
     let authors = getAuthors();
     const currentGroup = this.data.currentTab;
-    if (currentGroup !== LABEL_ALL && currentGroup !== LABEL_NEW_GROUP) {
+
+    if (currentGroup === LABEL_NOGROUP) {
+      authors = authors.filter(
+        author => !author.groups || author.groups.length === 0
+      );
+    } else if (currentGroup !== LABEL_ALL && currentGroup !== LABEL_NEW_GROUP) {
       authors = authors.filter(author =>
         (author.groups || []).includes(currentGroup)
       );
